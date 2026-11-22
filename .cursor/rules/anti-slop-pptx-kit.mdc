@@ -1,13 +1,14 @@
 ---
-description: Anti-AI-Slop Presentation & PPTX Design Engineering Rules (v2.0)
-globs: ["**/*.py", "**/*.ts", "**/*.js", "**/*.tsx", "**/*.jsx", "**/*.pptx", "**/*.md"]
+description: Anti-AI-Slop PPTX & Editorial PDF Design Engineering Rules (v5.0)
+globs: ["**/*.py", "**/*.ts", "**/*.js", "**/*.mjs", "**/*.tsx", "**/*.jsx", "**/*.html", "**/*.css"]
 alwaysApply: true
 ---
 
-# anti-slop-pptx-kit Active Rules (v2.0)
+# anti-slop-pptx-kit v5.0 Active Rules
 
-1. **Ban Card-Grid Loops**: Max 1 card-grid slide per entire deck. Never stamp 3/4/6/7 identical boxes across consecutive slides. Rotate archetypes using `templates/pptxgenjs-studio-kit.mjs` or `templates/python_pptx_studio.py`.
-2. **Ban Eyebrows & Repeated Chrome**: Never put `02 · SECTION`, `PASO 01`, `BLOQUEO X`, pill badges, or heading emojis (`🚀`, `✨`). Never repeat a full company/subtitle bar on every slide.
-3. **Word Budget**: Max 35–50 words per narrative/visual slide (`6–14` words per text block), leaving 35–55% negative space.
-4. **Typography & Color**: Ban `Inter`, `Arial`, `Calibri`, `Roboto`, `Space Grotesk`, `Geist`, and purple-blue gradients. Use 60-30-10 palettes + 4-step opacity ramps (`100%/60%/30%/10%`), 5x–10x scale contrast, and alternating dark/warm-off-white slides.
-5. **Mandatory Verification**: Run `node scripts/audit-pptx-code.mjs .` (must exit 0) and inspect rendered PNGs before finishing.
+1. **Must Import Studio Templates**: Never write raw `addShape` loops or custom `triangle`/`trapezoid` illustrations. Import `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py`, or `templates/editorial-pdf-studio.html`.
+2. **Zero Drop Shadows & Zero Vertical Accent Bars**: PowerPoint shapes must have shadows explicitly disabled; never paste vertical colored bars beside text blocks.
+3. **Zero Uppercase Eyebrows & Zero Repeated Footers**: No `ALL CAPS EYEBROW` above titles and no repeated `Company · Deck · 3 / 10` footer banners.
+4. **Word Budget & Separation**: 15–45 words per visible slide; put dense context into `speakerNotes`.
+5. **PDF Support**: Use `editorial-pdf-design/SKILL.md` and `@page` print CSS for crisp A4/Letter/16:9 PDFs.
+6. **Mandatory Gate**: Run `node scripts/audit-pptx-code.mjs .` (must exit `0`) before finishing.

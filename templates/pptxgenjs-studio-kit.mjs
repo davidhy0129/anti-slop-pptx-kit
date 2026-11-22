@@ -1,5 +1,5 @@
-/**
- * anti-slop-pptx-kit — PptxGenJS Studio Component Library (v2.1)
+﻿/**
+ * anti-slop-pptx-kit â€” PptxGenJS Studio Component Library (v2.1)
  * Includes:
  * - 8 Color-Harmony Palettes (60-30-10 + Warm-vs-Cool contrast)
  * - 4 Curated Font Systems (non-AI typography)
@@ -97,6 +97,11 @@ export const FONT_SYSTEMS = {
 };
 
 export const FONTS = FONT_SYSTEMS.BOLD_PRODUCT;
+const NO_SHADOW = { type: "none" };
+
+function flatShape(slide, shapeType, opts) {
+  return slide.addShape(shapeType, { shadow: NO_SHADOW, ...opts });
+}
 
 function addTurnTitle(slide, parts, { x, y, w, h, fontSize = 30, ink, accent, fonts = FONTS }) {
   const runs = parts.map((p) => ({
@@ -122,14 +127,14 @@ function addQuietPageNumber(slide, pageNum, mutedColor, fonts = FONTS) {
 
 /** Vector Motif: CAD/Figma Selection Box with 4px corner handles */
 export function addCadCallout(slide, pptx, { x, y, w, h, label, accent, ink, fonts = FONTS }) {
-  slide.addShape(pptx.ShapeType.rect, {
+  flatShape(slide, pptx.ShapeType.rect, {
     x, y, w, h,
     fill: { color: "FFFFFF", transparency: 100 },
     line: { color: accent, width: 0.75 },
   });
   const hs = 0.07;
   [[x - hs / 2, y - hs / 2], [x + w - hs / 2, y - hs / 2], [x - hs / 2, y + h - hs / 2], [x + w - hs / 2, y + h - hs / 2]].forEach(([hx, hy]) => {
-    slide.addShape(pptx.ShapeType.rect, { x: hx, y: hy, w: hs, h: hs, fill: { color: accent }, line: { color: accent, width: 0 } });
+    flatShape(slide, pptx.ShapeType.rect, { x: hx, y: hy, w: hs, h: hs, fill: { color: accent }, line: { color: accent, width: 0 } });
   });
   slide.addText(label.toUpperCase(), {
     x: x + 0.08, y: y + 0.03, w: w - 0.16, h: h - 0.06,
@@ -141,7 +146,7 @@ export function addCadCallout(slide, pptx, { x, y, w, h, label, accent, ink, fon
 export function addConcentricTarget(slide, pptx, { cx, cy, outerR = 0.45, color }) {
   [1, 0.62, 0.28].forEach((scale, idx) => {
     const d = outerR * 2 * scale;
-    slide.addShape(pptx.ShapeType.ellipse, {
+    flatShape(slide, pptx.ShapeType.ellipse, {
       x: cx - d / 2,
       y: cy - d / 2,
       w: d,
@@ -159,7 +164,7 @@ export function renderCoverSlide(pptx, palette, { titleParts, subtitle, metaLine
 
   if (imagePath) {
     slide.addImage({ path: imagePath, x: 7.4, y: 0, w: 5.933, h: SLIDE.h, sizing: { type: "cover", w: 5.933, h: SLIDE.h } });
-    slide.addShape(pptx.ShapeType.rect, {
+    flatShape(slide, pptx.ShapeType.rect, {
       x: 7.4, y: 0, w: 5.933, h: SLIDE.h,
       fill: { color: palette.darkBg, transparency: 55 },
       line: { color: palette.darkBg, width: 0 },
@@ -179,7 +184,7 @@ export function renderCoverSlide(pptx, palette, { titleParts, subtitle, metaLine
     x: SLIDE.mx, y: 1.95, w: imagePath ? 6.2 : 9.2, h: 2.6, fontSize: 46, ink: palette.inkOnDark, accent: palette.accent, fonts,
   });
 
-  slide.addShape(pptx.ShapeType.line, {
+  flatShape(slide, pptx.ShapeType.line, {
     x: SLIDE.mx, y: 4.95, w: 1.4, h: 0, line: { color: palette.accent, width: 2.5 },
   });
 
@@ -222,7 +227,7 @@ export function renderEditorialSplit(pptx, palette, { titleParts, leadText, rows
   rows.forEach((row, i) => {
     const y = SLIDE.my + 0.15 + i * rowH;
     if (i > 0) {
-      slide.addShape(pptx.ShapeType.line, { x: rightX, y: y - 0.12, w: rightW, h: 0, line: { color: rule, width: 1 } });
+      flatShape(slide, pptx.ShapeType.line, { x: rightX, y: y - 0.12, w: rightW, h: 0, line: { color: rule, width: 1 } });
     }
     slide.addText(row.label, { x: rightX, y, w: rightW, h: 0.34, fontFace: fonts.display, fontSize: 14, bold: true, color: ink });
     slide.addText(row.detail, { x: rightX, y: y + 0.36, w: rightW, h: rowH - 0.48, fontFace: fonts.body, fontSize: 12, color: muted, wrap: true });
@@ -256,7 +261,7 @@ export function renderDotMatrixSlide(pptx, palette, { titleParts, bigPercent, fi
   const cols = 10, dotSize = 0.36, dotGap = 0.16, startX = 6.2, startY = 2.45;
   for (let i = 0; i < totalDots; i++) {
     const r = Math.floor(i / cols), c = i % cols;
-    slide.addShape(pptx.ShapeType.ellipse, {
+    flatShape(slide, pptx.ShapeType.ellipse, {
       x: startX + c * (dotSize + dotGap), y: startY + r * (dotSize + dotGap), w: dotSize, h: dotSize,
       fill: { color: i < filledDots ? palette.accent : palette.darkSurface },
       line: { color: i < filledDots ? palette.accent : palette.ruleOnDark, width: 1 },
@@ -288,12 +293,12 @@ export function renderMilestoneCurve(pptx, palette, { titleParts, points, dark =
     y: baseBottomY - (p.value / maxVal) * maxH,
   }));
 
-  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY + 0.3, w: SLIDE.w - SLIDE.mx * 2, h: 0, line: { color: rule, width: 1 } });
+  flatShape(slide, pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY + 0.3, w: SLIDE.w - SLIDE.mx * 2, h: 0, line: { color: rule, width: 1 } });
 
   coords.forEach((pt, i) => {
     if (i < coords.length - 1) {
       const next = coords[i + 1];
-      slide.addShape(pptx.ShapeType.line, {
+      flatShape(slide, pptx.ShapeType.line, {
         x: Math.min(pt.x, next.x),
         y: Math.min(pt.y, next.y),
         w: Math.abs(next.x - pt.x),
@@ -303,7 +308,7 @@ export function renderMilestoneCurve(pptx, palette, { titleParts, points, dark =
       });
     }
     const isLast = i === coords.length - 1;
-    slide.addShape(pptx.ShapeType.ellipse, {
+    flatShape(slide, pptx.ShapeType.ellipse, {
       x: pt.x - 0.11, y: pt.y - 0.11, w: 0.22, h: 0.22,
       fill: { color: isLast ? palette.accent : bg },
       line: { color: palette.accent, width: 2 },
@@ -336,14 +341,14 @@ export function renderArchitectureGateDiagram(pptx, palette, { titleParts, gates
   const spineX = 1.65;
   const topY = 2.3;
   const rowH = 1.12;
-  slide.addShape(pptx.ShapeType.line, {
+  flatShape(slide, pptx.ShapeType.line, {
     x: spineX, y: topY + 0.15, w: 0, h: (gates.length - 1) * rowH, line: { color: rule, width: 1.5 },
   });
 
   gates.slice(0, 4).forEach((g, i) => {
     const cy = topY + i * rowH;
     addConcentricTarget(slide, pptx, { cx: spineX, cy: cy + 0.15, outerR: 0.2, color: palette.accent });
-    slide.addShape(pptx.ShapeType.line, { x: spineX + 0.25, y: cy + 0.15, w: 0.75, h: 0, line: { color: rule, width: 1 } });
+    flatShape(slide, pptx.ShapeType.line, { x: spineX + 0.25, y: cy + 0.15, w: 0.75, h: 0, line: { color: rule, width: 1 } });
     slide.addText(g.domain.toUpperCase(), {
       x: 2.8, y: cy - 0.02, w: 2.6, h: 0.34, fontFace: fonts.mono, fontSize: 10, bold: true, color: palette.accent,
     });
@@ -368,12 +373,12 @@ export function renderNodeTimeline(pptx, palette, { titleParts, steps, activeInd
   addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 10.5, h: 1.2, fontSize: 28, ink, accent: palette.accent, fonts });
 
   const lineY = 3.2, lineW = SLIDE.w - SLIDE.mx * 2;
-  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: lineY, w: lineW, h: 0, line: { color: rule, width: 1.5 } });
+  flatShape(slide, pptx.ShapeType.line, { x: SLIDE.mx, y: lineY, w: lineW, h: 0, line: { color: rule, width: 1.5 } });
 
   const stepW = lineW / steps.length;
   steps.forEach((step, i) => {
     const x = SLIDE.mx + i * stepW, isActive = i === activeIndex;
-    slide.addShape(pptx.ShapeType.ellipse, {
+    flatShape(slide, pptx.ShapeType.ellipse, {
       x, y: lineY - 0.14, w: 0.28, h: 0.28,
       fill: { color: isActive ? palette.accent : bg },
       line: { color: isLastOrActive(isActive) ? palette.accent : ink, width: 2 },
@@ -432,7 +437,7 @@ export function renderAsymmetricBento(pptx, palette, { titleParts, heroBlock, si
   addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11, h: 1.05, fontSize: 26, ink: palette.inkOnLight, accent: palette.accent, fonts });
 
   const topY = 2.0, totalH = 4.65, leftW = 6.7, rightX = SLIDE.mx + leftW + 0.3, rightW = SLIDE.w - rightX - SLIDE.mx;
-  slide.addShape(pptx.ShapeType.rect, { x: SLIDE.mx, y: topY, w: leftW, h: totalH, fill: { color: palette.darkBg }, line: { color: palette.darkBg, width: 0 } });
+  flatShape(slide, pptx.ShapeType.rect, { x: SLIDE.mx, y: topY, w: leftW, h: totalH, fill: { color: palette.darkBg }, line: { color: palette.darkBg, width: 0 } });
   slide.addText(heroBlock.stat || "", { x: SLIDE.mx + 0.45, y: topY + 0.45, w: leftW - 0.9, h: 1.1, fontFace: fonts.display, fontSize: 54, bold: true, color: palette.accent });
   slide.addText(heroBlock.title, { x: SLIDE.mx + 0.45, y: topY + 1.8, w: leftW - 0.9, h: 0.7, fontFace: fonts.display, fontSize: 20, bold: true, color: palette.inkOnDark });
   slide.addText(heroBlock.detail, { x: SLIDE.mx + 0.45, y: topY + 2.55, w: leftW - 0.9, h: 1.6, fontFace: fonts.body, fontSize: 13, color: palette.mutedOnDark, wrap: true, lineSpacingMultiple: 1.3 });
@@ -440,7 +445,7 @@ export function renderAsymmetricBento(pptx, palette, { titleParts, heroBlock, si
   const halfH = (totalH - 0.3) / 2;
   sideBlocks.slice(0, 2).forEach((blk, idx) => {
     const y = topY + idx * (halfH + 0.3);
-    slide.addShape(pptx.ShapeType.rect, { x: rightX, y, w: rightW, h: halfH, fill: { color: palette.lightSurface }, line: { color: palette.ruleOnLight, width: 1 } });
+    flatShape(slide, pptx.ShapeType.rect, { x: rightX, y, w: rightW, h: halfH, fill: { color: palette.lightSurface }, line: { color: palette.ruleOnLight, width: 1 } });
     slide.addText(blk.title, { x: rightX + 0.35, y: y + 0.3, w: rightW - 0.7, h: 0.45, fontFace: fonts.display, fontSize: 15, bold: true, color: palette.inkOnLight });
     slide.addText(blk.detail, { x: rightX + 0.35, y: y + 0.85, w: rightW - 0.7, h: halfH - 1.05, fontFace: fonts.body, fontSize: 12, color: palette.mutedOnLight, wrap: true, lineSpacingMultiple: 1.25 });
   });
@@ -462,14 +467,14 @@ export function renderQuoteBreather(pptx, palette, { quote, author, imagePath = 
   const qx = imagePath ? 5.0 : 1.6;
   const qw = imagePath ? 7.4 : 10.1;
 
-  slide.addText("“", { x: qx - 0.45, y: 1.45, w: 0.8, h: 1.0, fontFace: fonts.display, fontSize: 84, bold: true, color: palette.accent });
+  slide.addText("â€œ", { x: qx - 0.45, y: 1.45, w: 0.8, h: 1.0, fontFace: fonts.display, fontSize: 84, bold: true, color: palette.accent });
   slide.addText(quote, { x: qx, y: 2.35, w: qw, h: 2.3, fontFace: fonts.display, fontSize: 26, bold: true, color: ink, wrap: true, lineSpacingMultiple: 1.2 });
   slide.addText(author, { x: qx, y: 4.95, w: qw, h: 0.4, fontFace: fonts.mono, fontSize: 11, color: muted });
   addQuietPageNumber(slide, pageNum, muted, fonts);
   return slide;
 }
 
-/** 11. Consulting Pyramid Columns (McKinsey/BCG style — hairline headers, keyword bolding, ZERO boxes) */
+/** 11. Consulting Pyramid Columns (McKinsey/BCG style â€” hairline headers, keyword bolding, ZERO boxes) */
 export function renderConsultingColumns(pptx, palette, { titleParts, columns, dark = false, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   const bg = dark ? palette.darkBg : palette.lightBg;
@@ -488,13 +493,13 @@ export function renderConsultingColumns(pptx, palette, { titleParts, columns, da
 
   cols.forEach((col, i) => {
     const x = SLIDE.mx + i * (colW + gap);
-    slide.addShape(pptx.ShapeType.line, { x, y: topY, w: colW, h: 0, line: { color: col.highlight ? palette.accent : ink, width: col.highlight ? 2.5 : 1.5 } });
+    flatShape(slide, pptx.ShapeType.line, { x, y: topY, w: colW, h: 0, line: { color: col.highlight ? palette.accent : ink, width: col.highlight ? 2.5 : 1.5 } });
     slide.addText(col.heading, { x, y: topY + 0.18, w: colW, h: 0.5, fontFace: fonts.display, fontSize: 16, bold: true, color: col.highlight ? palette.accent : ink, wrap: true });
 
     (col.points || []).slice(0, 3).forEach((pt, pIdx) => {
       const py = topY + 0.85 + pIdx * 1.15;
       if (pIdx > 0) {
-        slide.addShape(pptx.ShapeType.line, { x, y: py - 0.12, w: colW, h: 0, line: { color: rule, width: 0.75 } });
+        flatShape(slide, pptx.ShapeType.line, { x, y: py - 0.12, w: colW, h: 0, line: { color: rule, width: 0.75 } });
       }
       slide.addText(
         [
@@ -532,7 +537,7 @@ export function renderSingleFocusBarChart(pptx, palette, { titleParts, bars, dar
     const y = startY + i * rowH;
     const bw = Math.max(0.25, (b.value / maxVal) * barMaxW);
     slide.addText(b.label, { x: SLIDE.mx, y, w: labelW, h: 0.38, fontFace: fonts.body, fontSize: 12.5, bold: Boolean(b.highlight), color: b.highlight ? ink : muted, valign: "middle" });
-    slide.addShape(pptx.ShapeType.rect, {
+    flatShape(slide, pptx.ShapeType.rect, {
       x: SLIDE.mx + labelW + 0.25, y: y + 0.06, w: bw, h: 0.26,
       fill: { color: b.highlight ? palette.accent : neutralBar },
       line: { color: b.highlight ? palette.accent : neutralBar, width: 0 },
@@ -547,7 +552,7 @@ export function renderSingleFocusBarChart(pptx, palette, { titleParts, bars, dar
   return slide;
 }
 
-/** 13. Split-Slide Color Swap (Figma Idea 13 — 50/50 contrasting panels that swap sides on callouts) */
+/** 13. Split-Slide Color Swap (Figma Idea 13 â€” 50/50 contrasting panels that swap sides on callouts) */
 export function renderSplitColorSwap(pptx, palette, { leftTitle, leftBody, rightTitle, rightBody, swap = false, pageNum, speakerNotes = "", fonts = FONTS }) {
   const slide = pptx.addSlide();
   const halfW = SLIDE.w / 2;
@@ -558,8 +563,8 @@ export function renderSplitColorSwap(pptx, palette, { leftTitle, leftBody, right
   const rightInk = swap ? palette.inkOnDark : palette.inkOnLight;
   const rightMuted = swap ? palette.mutedOnDark : palette.mutedOnLight;
 
-  slide.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: halfW, h: SLIDE.h, fill: { color: leftBg }, line: { color: leftBg, width: 0 } });
-  slide.addShape(pptx.ShapeType.rect, { x: halfW, y: 0, w: halfW, h: SLIDE.h, fill: { color: rightBg }, line: { color: rightBg, width: 0 } });
+  flatShape(slide, pptx.ShapeType.rect, { x: 0, y: 0, w: halfW, h: SLIDE.h, fill: { color: leftBg }, line: { color: leftBg, width: 0 } });
+  flatShape(slide, pptx.ShapeType.rect, { x: halfW, y: 0, w: halfW, h: SLIDE.h, fill: { color: rightBg }, line: { color: rightBg, width: 0 } });
 
   slide.addText(leftTitle, { x: SLIDE.mx, y: 1.9, w: halfW - SLIDE.mx * 1.6, h: 1.5, fontFace: fonts.display, fontSize: 28, bold: true, color: swap ? leftInk : palette.accent, wrap: true });
   slide.addText(leftBody, { x: SLIDE.mx, y: 3.6, w: halfW - SLIDE.mx * 1.6, h: 2.2, fontFace: fonts.body, fontSize: 14, color: leftMuted, wrap: true, lineSpacingMultiple: 1.35 });
@@ -602,7 +607,7 @@ export function renderWaterfallBridge(pptx, palette, { titleParts, steps, source
   const slotW = areaW / Math.max(computed.length, 1);
   const barW = Math.min(1.15, slotW * 0.56);
 
-  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY, w: areaW, h: 0, line: { color: rule, width: 1 } });
+  flatShape(slide, pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY, w: areaW, h: 0, line: { color: rule, width: 1 } });
 
   computed.forEach((c, i) => {
     const x = SLIDE.mx + i * slotW + (slotW - barW) / 2;
@@ -610,7 +615,7 @@ export function renderWaterfallBridge(pptx, palette, { titleParts, steps, source
     const hBar = Math.max(0.18, ((c.high - c.low) / maxV) * maxH);
     const fill = c.type === "total" ? ink : c.value < 0 ? palette.accent : (dark ? palette.darkSurface : rule);
 
-    slide.addShape(pptx.ShapeType.rect, { x, y: yTop, w: barW, h: hBar, fill: { color: fill }, line: { color: fill, width: 0 } });
+    flatShape(slide, pptx.ShapeType.rect, { x, y: yTop, w: barW, h: hBar, fill: { color: fill }, line: { color: fill, width: 0 } });
     slide.addText(c.displayValue, {
       x: x - 0.2, y: yTop - 0.42, w: barW + 0.4, h: 0.34, align: "center",
       fontFace: fonts.display, fontSize: 12, bold: true, color: c.value < 0 ? palette.accent : ink,

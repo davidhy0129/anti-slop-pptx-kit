@@ -1,5 +1,5 @@
-"""
-anti-slop-pptx-kit — python-pptx Studio Component Library (v3.0)
+﻿"""
+anti-slop-pptx-kit â€” python-pptx Studio Component Library (v3.0)
 Full parity with pptxgenjs-studio-kit.mjs:
 - 8 Color-Harmony Palettes (60-30-10 + Warm-vs-Cool contrast)
 - 4 Curated Font Systems
@@ -117,6 +117,12 @@ def create_studio_presentation() -> Presentation:
     return prs
 
 
+def _flat_shape(slide, shape_type, x, y, w, h):
+    shp = slide.shapes.add_shape(shape_type, x, y, w, h)
+    shp.shadow.inherit = False
+    return shp
+
+
 def _set_bg(slide, hex_color: str):
     fill = slide.background.fill
     fill.solid()
@@ -159,7 +165,7 @@ def _quiet_page_num(slide, page_num: int | None, muted_hex: str, mono_font="Cons
 def add_concentric_target(slide, cx, cy, outer_r_in: float, color_hex: str):
     for idx, scale in enumerate((1.0, 0.62, 0.28)):
         d = Inches(outer_r_in * 2 * scale)
-        dot = slide.shapes.add_shape(MSO_SHAPE.OVAL, cx - d / 2, cy - d / 2, d, d)
+        dot = _flat_shape(slide, MSO_SHAPE.OVAL, cx - d / 2, cy - d / 2, d, d)
         if idx == 2:
             dot.fill.solid()
             dot.fill.fore_color.rgb = rgb(color_hex)
@@ -184,7 +190,7 @@ def render_cover_slide(prs, pal, title_parts, subtitle="", meta_line="", speaker
 
     _add_turn_title(slide, title_parts, MX, Inches(1.95), Inches(8.8), Inches(2.6), 46, pal["ink_dark"], pal["accent"], fonts["display"])
 
-    bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX, Inches(4.95), Inches(1.4), Inches(0.04))
+    bar = _flat_shape(slide, MSO_SHAPE.RECTANGLE, MX, Inches(4.95), Inches(1.4), Inches(0.04))
     bar.fill.solid()
     bar.fill.fore_color.rgb = rgb(pal["accent"])
     bar.line.fill.background()
@@ -237,7 +243,7 @@ def render_editorial_split(prs, pal, title_parts, lead_text, rows, dark=False, p
     for i, row in enumerate(rows):
         y = MY + i * row_h
         if i > 0:
-            line = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, right_x, y - Inches(0.1), right_w, Inches(0.015))
+            line = _flat_shape(slide, MSO_SHAPE.RECTANGLE, right_x, y - Inches(0.1), right_w, Inches(0.015))
             line.fill.solid()
             line.fill.fore_color.rgb = rgb(rule)
             line.line.fill.background()
@@ -321,7 +327,7 @@ def render_dot_matrix_slide(prs, pal, title_parts, big_percent: str, filled_dots
     cols, dot_s, gap, sx, sy = 10, Inches(0.36), Inches(0.16), Inches(6.2), Inches(2.45)
     for i in range(total_dots):
         r_idx, c_idx = divmod(i, cols)
-        dot = slide.shapes.add_shape(MSO_SHAPE.OVAL, sx + c_idx * (dot_s + gap), sy + r_idx * (dot_s + gap), dot_s, dot_s)
+        dot = _flat_shape(slide, MSO_SHAPE.OVAL, sx + c_idx * (dot_s + gap), sy + r_idx * (dot_s + gap), dot_s, dot_s)
         dot.fill.solid()
         dot.fill.fore_color.rgb = rgb(pal["accent"] if i < filled_dots else pal["dark_surface"])
         dot.line.color.rgb = rgb(pal["accent"] if i < filled_dots else pal["rule_dark"])
@@ -357,7 +363,7 @@ def render_single_focus_bar_chart(prs, pal, title_parts, bars, dark=False, page_
         rl.font.bold = hi
         rl.font.color.rgb = rgb(ink if hi else muted)
 
-        rect = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX + label_w + Inches(0.25), y + Inches(0.06), bw, Inches(0.26))
+        rect = _flat_shape(slide, MSO_SHAPE.RECTANGLE, MX + label_w + Inches(0.25), y + Inches(0.06), bw, Inches(0.26))
         rect.fill.solid()
         rect.fill.fore_color.rgb = rgb(pal["accent"] if hi else neutral_bar)
         rect.line.fill.background()
@@ -386,7 +392,7 @@ def render_architecture_gate_diagram(prs, pal, title_parts, gates, dark=True, pa
     _add_turn_title(slide, title_parts, MX, MY, Inches(10.8), Inches(1.15), 26, ink, pal["accent"], fonts["display"])
     spine_x, top_y, row_h = Inches(1.65), Inches(2.3), Inches(1.12)
     items = gates[:4]
-    spine = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, spine_x, top_y + Inches(0.15), Inches(0.02), row_h * max(len(items) - 1, 1))
+    spine = _flat_shape(slide, MSO_SHAPE.RECTANGLE, spine_x, top_y + Inches(0.15), Inches(0.02), row_h * max(len(items) - 1, 1))
     spine.fill.solid()
     spine.fill.fore_color.rgb = rgb(rule)
     spine.line.fill.background()
@@ -394,7 +400,7 @@ def render_architecture_gate_diagram(prs, pal, title_parts, gates, dark=True, pa
     for i, g in enumerate(items):
         cy = top_y + i * row_h
         add_concentric_target(slide, spine_x, cy + Inches(0.15), 0.2, pal["accent"])
-        branch = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, spine_x + Inches(0.25), cy + Inches(0.15), Inches(0.75), Inches(0.015))
+        branch = _flat_shape(slide, MSO_SHAPE.RECTANGLE, spine_x + Inches(0.25), cy + Inches(0.15), Inches(0.75), Inches(0.015))
         branch.fill.solid()
         branch.fill.fore_color.rgb = rgb(rule)
         branch.line.fill.background()
@@ -438,7 +444,7 @@ def render_consulting_columns(prs, pal, title_parts, columns, dark=False, page_n
     for i, col in enumerate(cols):
         x = MX + i * (col_w + gap)
         hi = bool(col.get("highlight"))
-        bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, top_y, col_w, Inches(0.03 if hi else 0.02))
+        bar = _flat_shape(slide, MSO_SHAPE.RECTANGLE, x, top_y, col_w, Inches(0.03 if hi else 0.02))
         bar.fill.solid()
         bar.fill.fore_color.rgb = rgb(pal["accent"] if hi else ink)
         bar.line.fill.background()
@@ -455,7 +461,7 @@ def render_consulting_columns(prs, pal, title_parts, columns, dark=False, page_n
         for p_idx, pt in enumerate(col.get("points", [])[:3]):
             py = top_y + Inches(0.85) + p_idx * Inches(1.15)
             if p_idx > 0:
-                sep = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, py - Inches(0.12), col_w, Inches(0.01))
+                sep = _flat_shape(slide, MSO_SHAPE.RECTANGLE, x, py - Inches(0.12), col_w, Inches(0.01))
                 sep.fill.solid()
                 sep.fill.fore_color.rgb = rgb(rule)
                 sep.line.fill.background()
@@ -490,7 +496,7 @@ def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=Fals
 
     _add_turn_title(slide, title_parts, MX, MY, Inches(10.5), Inches(1.2), 28, ink, pal["accent"], fonts["display"])
     line_y, line_w = Inches(3.2), SLIDE_W - MX * 2
-    hair = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX, line_y, line_w, Inches(0.02))
+    hair = _flat_shape(slide, MSO_SHAPE.RECTANGLE, MX, line_y, line_w, Inches(0.02))
     hair.fill.solid()
     hair.fill.fore_color.rgb = rgb(rule)
     hair.line.fill.background()
@@ -499,7 +505,7 @@ def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=Fals
     for i, step in enumerate(steps):
         x = MX + i * step_w
         is_active = i == active_index
-        dot = slide.shapes.add_shape(MSO_SHAPE.OVAL, x, line_y - Inches(0.13), Inches(0.28), Inches(0.28))
+        dot = _flat_shape(slide, MSO_SHAPE.OVAL, x, line_y - Inches(0.13), Inches(0.28), Inches(0.28))
         dot.fill.solid()
         dot.fill.fore_color.rgb = rgb(pal["accent"] if is_active else bg)
         dot.line.color.rgb = rgb(pal["accent"] if is_active else ink)
@@ -579,7 +585,7 @@ def render_split_color_swap(prs, pal, left_title: str, left_body: str, right_tit
     right_muted = pal["muted_dark"] if swap else pal["muted_light"]
 
     for x0, w0, c0 in ((Inches(0), half_w, left_bg), (half_w, half_w, right_bg)):
-        panel = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x0, Inches(0), w0, SLIDE_H)
+        panel = _flat_shape(slide, MSO_SHAPE.RECTANGLE, x0, Inches(0), w0, SLIDE_H)
         panel.fill.solid()
         panel.fill.fore_color.rgb = rgb(c0)
         panel.line.fill.background()
@@ -638,7 +644,7 @@ def render_waterfall_bridge(prs, pal, title_parts, steps, source_line: str = "",
     slot_w = area_w / max(len(computed), 1)
     bar_w = min(Inches(1.15), slot_w * 0.56)
 
-    axis = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX, base_y, area_w, Inches(0.015))
+    axis = _flat_shape(slide, MSO_SHAPE.RECTANGLE, MX, base_y, area_w, Inches(0.015))
     axis.fill.solid()
     axis.fill.fore_color.rgb = rgb(rule)
     axis.line.fill.background()
@@ -649,7 +655,7 @@ def render_waterfall_bridge(prs, pal, title_parts, steps, source_line: str = "",
         h_bar = max(Inches(0.18), max_h * ((c["high"] - c["low"]) / max_v))
         fill_col = ink if c.get("type") == "total" else (pal["accent"] if c["value"] < 0 else (pal["dark_surface"] if dark else rule))
 
-        bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, y_top, bar_w, h_bar)
+        bar = _flat_shape(slide, MSO_SHAPE.RECTANGLE, x, y_top, bar_w, h_bar)
         bar.fill.solid()
         bar.fill.fore_color.rgb = rgb(fill_col)
         bar.line.fill.background()

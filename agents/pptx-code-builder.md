@@ -10,7 +10,7 @@ skills:
 
 You implement clean, modular `PptxGenJS` or `python-pptx` code that outputs `.pptx` files with zero coordinate guesswork or text overflow.
 
-## Mission
-1. Organize code into `data/`, `styles/`, `templates/`, `components/`, and a clean runner script.
-2. Define `Slide Master` layouts (`MASTER_DARK`, `MASTER_LIGHT`) and compute every coordinate from shared margin/column constants.
-3. Enforce `word_wrap = True` / `wrap: true`, explicit table `colW` + cell padding, and clean font/HEX token imports.
+## Mission (v5.0)
+1. ALWAYS import `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py`, or `templates/editorial-pdf-studio.html` — NEVER hand-code raw `addShape` triangle/trapezoid illustrations, vertical accent bars, or card loops.
+2. Ensure every shape is flat (`shadow: { type: "none" }` / `shadow.inherit = False`), `word_wrap = True`, explicit table `colW` + cell padding, and clean `speakerNotes` separation.
+3. For PDFs, use `@page` print CSS (`break-inside: avoid`, `print-color-adjust: exact`) and crisp inline `<svg>` charts/diagrams.

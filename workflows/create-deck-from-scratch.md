@@ -22,7 +22,7 @@ Lee `skills/data-viz-hero-metrics/SKILL.md`:
 2. Sustituye gráficos por defecto con ejes/cuadrículas por **Dot-Matrix (`10×4`)**, curvas Bezier con hitos, barras horizontales con etiqueta directa o líneas de tiempo nodales.
 
 ## Paso 4 — Generación Modular y QA Visual (`pptx-code-builder` + `visual-slide-qa`)
-Lee `skills/pptx-code-architecture/SKILL.md`:
-1. Crea `styles/tokens`, `templates/masters`, `components/` y `data/`.
-2. Ejecuta `node scripts/audit-pptx-code.mjs .` para verificar cero clichés de IA.
-3. Renderiza el `.pptx` a PDF/PNG (`workflows/visual-qa-render-loop.md`) e inspecciona cada slide para confirmar cero solapamientos.
+Lee `skills/pptx-code-architecture/SKILL.md` (y `skills/editorial-pdf-design/SKILL.md` si el entregable es PDF):
+1. **Importa obligatoriamente** `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py` o `templates/editorial-pdf-studio.html` (prohibido dibujar polígonos `triangle`/`trapezoid`, barras verticales con sombra o tarjetas manuales).
+2. Mueve el detalle denso a `speakerNotes` / `speaker_notes`, dejando 15–45 palabras visibles por slide.
+3. Ejecuta `node scripts/audit-pptx-code.mjs .` (**debe salir en `exit 0`**) y renderiza vista previa (`workflows/visual-qa-render-loop.md`) para confirmar cero solapamientos.

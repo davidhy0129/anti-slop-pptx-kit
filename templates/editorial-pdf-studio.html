@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Executive Editorial PDF — anti-slop-pptx-kit v5.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Familjen+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --dark-bg: #0b0c0e;
+      --light-bg: #f4f5f3;
+      --surface: #ffffff;
+      --ink-dark: #f7f7f5;
+      --muted-dark: #8f949e;
+      --ink-light: #121316;
+      --muted-light: #5c616b;
+      --rule: #e0e2df;
+      --accent: #c8d636;
+      --ink-accent: #0b0c0e;
+    }
+
+    @page {
+      size: A4;
+      margin: 18mm 18mm 20mm 18mm;
+      @bottom-right {
+        content: counter(page, decimal-leading-zero);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 9pt;
+        color: #5c616b;
+      }
+    }
+
+    @page :first {
+      margin: 0;
+      @bottom-right { content: none; }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink-light);
+      background: var(--light-bg);
+      font-size: 10.5pt;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3 {
+      font-family: "Familjen Grotesk", sans-serif;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 0;
+      break-after: avoid;
+    }
+
+    .tabular { font-variant-numeric: tabular-nums; }
+
+    /* Full-bleed dark editorial cover */
+    .cover {
+      height: 297mm;
+      background: var(--dark-bg);
+      color: var(--ink-dark);
+      padding: 24mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      break-after: page;
+    }
+
+    .cover-meta {
+      font-family: ui-monospace, monospace;
+      font-size: 9pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+    }
+
+    .cover h1 {
+      font-size: 40pt;
+      max-width: 145mm;
+    }
+
+    .cover h1 .turn { color: var(--accent); }
+
+    .cover-rule {
+      width: 32mm;
+      height: 2.5pt;
+      background: var(--accent);
+      margin: 8mm 0;
+    }
+
+    .cover-sub {
+      font-size: 13pt;
+      color: var(--muted-dark);
+      max-width: 125mm;
+    }
+
+    /* Editorial body pages */
+    .section { margin-bottom: 12mm; break-inside: avoid; }
+
+    .action-title {
+      font-size: 20pt;
+      margin-bottom: 5mm;
+    }
+
+    .action-title .turn {
+      background: var(--accent);
+      color: var(--ink-accent);
+      padding: 0 2mm;
+    }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6mm;
+      border-top: 1.5pt solid var(--ink-light);
+      border-bottom: 1pt solid var(--rule);
+      padding: 6mm 0;
+      margin: 6mm 0 10mm;
+      break-inside: avoid;
+    }
+
+    .kpi-value {
+      font-family: "Familjen Grotesk", sans-serif;
+      font-size: 26pt;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .kpi-label {
+      font-size: 9.5pt;
+      color: var(--muted-light);
+      margin-top: 2mm;
+    }
+
+    /* Hairline-only table (zero vertical borders, zero shadows) */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4mm;
+      font-size: 9.5pt;
+      break-inside: avoid;
+    }
+
+    th {
+      text-align: left;
+      font-family: "Familjen Grotesk", sans-serif;
+      background: var(--dark-bg);
+      color: var(--ink-dark);
+      padding: 3.5mm 4mm;
+    }
+
+    th.win {
+      background: var(--accent);
+      color: var(--ink-accent);
+    }
+
+    td {
+      padding: 3.2mm 4mm;
+      border-bottom: 1pt solid var(--rule);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: var(--surface); }
+    td.num, th.num { text-align: right; }
+    td.win { font-weight: 700; }
+
+    .source-line {
+      font-family: ui-monospace, monospace;
+      font-size: 8.5pt;
+      color: var(--muted-light);
+      margin-top: 3mm;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="cover-meta">Executive Brief · 2026</div>
+    <div>
+      <h1>Unified Operations: <span class="turn">Full Control Without Lock-In</span></h1>
+      <div class="cover-rule"></div>
+      <p class="cover-sub">Five-year TCO analysis, operational architecture, and 30-day rollout plan.</p>
+    </div>
+    <div class="cover-meta">Prepared for Executive Committee</div>
+  </section>
+
+  <section class="section">
+    <h2 class="action-title">Proprietary platform cuts 5-year TCO by <span class="turn">85% to 94%</span></h2>
+    <div class="kpi-strip tabular">
+      <div>
+        <div class="kpi-value">~250 h/mo</div>
+        <div class="kpi-label">Rework eliminated across 45 users</div>
+      </div>
+      <div>
+        <div class="kpi-value">$350M–$1.8B</div>
+        <div class="kpi-label">Projected 5-year net savings</div>
+      </div>
+      <div>
+        <div class="kpi-value">20 Years</div>
+        <div class="kpi-label">Immutable cloud audit retention</div>
+      </div>
+    </div>
+
+    <table class="tabular">
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th class="win">In-House Platform</th>
+          <th>Odoo Enterprise</th>
+          <th>SAP / Oracle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Deployment Time</td>
+          <td class="win">Live Today</td>
+          <td>6–12 months</td>
+          <td>12–24 months</td>
+        </tr>
+        <tr>
+          <td>5-Year License Cost</td>
+          <td class="win">$0 / seat</td>
+          <td>High per-seat USD</td>
+          <td>Highest + partner</td>
+        </tr>
+        <tr>
+          <td>Code Ownership</td>
+          <td class="win">100% Owned</td>
+          <td>Partner Lock-In</td>
+          <td>Zero</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="source-line">Source: Internal TCO model · 45 active users · 5-year projection.</div>
+  </section>
+</body>
+</html>

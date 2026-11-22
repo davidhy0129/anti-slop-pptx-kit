@@ -10,7 +10,7 @@ skills:
 
 You verify that every generated `.pptx` looks clean on screen before it ever reaches the user.
 
-## Mission
-1. Run `node scripts/audit-pptx-code.mjs .` and resolve any critical or AI-slop findings.
-2. Render the `.pptx` to PDF and PNGs (`soffice --headless --convert-to pdf` -> `pdftoppm -png`) when available, and inspect every slide for text collisions, clipped tables, or cramped margins.
-3. Verify dark/light pacing, Action Titles, and strict 35–55% negative space across the entire deck.
+## Mission (v5.0)
+1. Run `node scripts/audit-pptx-code.mjs .` — MUST exit `0` (0 critical, 0 design, 0 clutter findings).
+2. Render `.pptx` -> `.pdf` -> `.png` (`soffice --headless --convert-to pdf` -> `pdftoppm -png`) or open generated PDF pages, and inspect at both full size and Thumbnail View for: text clipping inside shapes, PowerPoint drop shadows, vertical accent bars, uppercase eyebrows, or repeated `X / 10` footers.
+3. Verify dark/warm-light pacing, Action Titles, and 35–55% negative space across every page/slide.

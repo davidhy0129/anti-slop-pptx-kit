@@ -1,7 +1,8 @@
-# Gemini CLI & Antigravity Instructions — `anti-slop-pptx-kit`
+# Gemini CLI & Antigravity Instructions — `anti-slop-pptx-kit` v5.0
 
 @AGENTS.md
 
-## Execution Rules
-- Treat `skills/*/SKILL.md` as authoritative specifications for slide art direction, narrative, data visualization, and programmatic PPTX code.
-- Never deliver a `.pptx` without running `node scripts/audit-pptx-code.mjs .` and completing a visual render QA check (`workflows/visual-qa-render-loop.md`) when LibreOffice/renderer tools are available.
+## Execution Protocol
+- Treat `AGENTS.md` and `skills/*/SKILL.md` as non-negotiable engineering and art-direction contracts for both `.pptx` presentations and `.pdf` documents.
+- Always build from `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py`, or `templates/editorial-pdf-studio.html` — never invent raw `triangle`/`trapezoid` illustrations or vertical accent bars.
+- Always pass `node scripts/audit-pptx-code.mjs .` (`exit 0`) and inspect rendered output (`workflows/visual-qa-render-loop.md`) before delivering.
