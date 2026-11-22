@@ -20,11 +20,13 @@ Read `skills/creative-art-direction/SKILL.md` and `skills/domain-art-direction-r
    - Zero ALL-CAPS eyebrows above titles, zero repeated `Company · 3 / 10` footer banners, zero heading emojis (`🚀`), zero `Inter`/`Arial`/`Calibri`/`Roboto`/`Space Grotesk` defaults, zero purple-blue gradients, zero UTF-8 mojibake.
 4. **RICH, COMPLETE & RHYTHMIC SLIDES:**
    - Avoid empty, half-blank slides AND avoid bullet walls. Alternate layouts across the deck (Cover -> Statement -> Giant Data -> Native Editable `addChart` -> Editorial Comparison -> Process -> Quote -> Closing) and put dense Q&A notes in `speakerNotes`.
-5. **10-QUESTION QUALITY FILTER + AUDITOR:**
-   - Pass all 10 questions in `skills/creative-art-direction/SKILL.md` and pass `node scripts/audit-pptx-code.mjs .` (`exit 0`).
+5. **10-QUESTION QUALITY FILTER, VISUAL QA & AUDITOR:**
+   - Pass all 10 questions in `skills/creative-art-direction/SKILL.md`.
+   - Use `skills/real-imagery-and-visual-qa/SKILL.md`: include cohesive industry photography/visuals where appropriate, run `node scripts/audit-pptx-code.mjs .` (`exit 0`), and render visual previews (`node scripts/render-html-slides.mjs` for HTML/PDF or LibreOffice for PPTX) whenever available.
 
 ## Skill Routing
 - `skills/creative-art-direction/SKILL.md`
+- `skills/real-imagery-and-visual-qa/SKILL.md`
 - `skills/domain-art-direction-router/SKILL.md`
 - `skills/graphic-design-fundamentals/SKILL.md`
 - `skills/slide-color-pacing/SKILL.md`

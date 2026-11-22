@@ -94,5 +94,6 @@ Copy-DirContents (Join-Path $KitRoot "templates") (Join-Path $DestRoot "template
 Copy-DirContents (Join-Path $KitRoot "helpers") (Join-Path $DestRoot "helpers")
 Copy-DirContents (Join-Path $KitRoot "references") (Join-Path $DestRoot "references")
 Copy-FileSafe (Join-Path $KitRoot "scripts\audit-pptx-code.mjs") (Join-Path $DestRoot "scripts\audit-pptx-code.mjs") -Overwrite:$true
+Copy-FileSafe (Join-Path $KitRoot "scripts\render-html-slides.mjs") (Join-Path $DestRoot "scripts\render-html-slides.mjs") -Overwrite:$true
 
 Write-Host "`nDone! Run 'node scripts/audit-pptx-code.mjs .' in $DestRoot`n" -ForegroundColor Cyan

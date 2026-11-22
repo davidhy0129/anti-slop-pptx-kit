@@ -95,6 +95,7 @@ copy_dir "$KIT_ROOT/helpers" "$DEST/helpers"
 copy_dir "$KIT_ROOT/references" "$DEST/references"
 mkdir -p "$DEST/scripts"
 cp "$KIT_ROOT/scripts/audit-pptx-code.mjs" "$DEST/scripts/audit-pptx-code.mjs"
+cp "$KIT_ROOT/scripts/render-html-slides.mjs" "$DEST/scripts/render-html-slides.mjs"
 
 echo ""
 echo "Done! Run 'node scripts/audit-pptx-code.mjs .' in $DEST"
