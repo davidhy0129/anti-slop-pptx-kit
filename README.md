@@ -1,33 +1,31 @@
-# `anti-slop-pptx-kit` (v5.0 — PPTX & Editorial PDF Studio Kit)
+# `anti-slop-pptx-kit` (v8.0 — Zero-Template Creative Art Direction Kit)
 
-> **Kit universal de dirección de arte, diseño editorial, narrativa ejecutiva e ingeniería de código para generar presentaciones `.pptx` (`PptxGenJS` / `python-pptx`) y documentos `PDF` (HTML/CSS `@page` / LibreOffice) con acabado de estudio gráfico — jamás hechos con estética genérica de IA.**
+> **Sistema universal de dirección de arte, diseño gráfico, narrativa ejecutiva e ingeniería PPTX/PDF para que cualquier IA cree presentaciones y PDFs únicos, vivos y personalizados al prompt — sin plantillas repetitivas ni estética genérica de IA.**
 
-Compatible desde el minuto cero con **Antigravity**, **Claude Code**, **OpenAI Codex**, **Cursor**, **Windsurf** y **Gemini CLI**.  
-**100% agnóstico de industria:** sirve para *pitch decks*, reportes de junta directiva, propuestas comerciales, documentos ejecutivos en PDF, restaurantes, clubes, SaaS o ERPs.
-
----
-
-## Qué prohíbe y qué exige `v5.0` (Cero Estética IA)
-
-- **Prohibido dibujar ilustraciones con formas básicas (`triangle`, `trapezoid`, icebergs, embudos):** Las IAs desalinean polígonos y desbordan el texto. Usa componentes matemáticos probados (`renderWaterfallBridge`, `renderSplitColorSwap`, `renderArchitectureGateDiagram`, `renderConsultingColumns`).
-- **Cero sombras por defecto de PowerPoint:** Todas las líneas, barras y contenedores son planos y nítidos (`shadow.inherit = False` / `shadow: { type: "none" }`).
-- **Cero barras verticales de acento junto al texto** y **cero eyebrows en MAYÚSCULAS** (`DIAGNÓSTICO DE RIESGO`) encima de los títulos.
-- **Cero pies de página largos repetidos** (`EMPRESA · TÍTULO · 3 / 10`) en cada diapositiva: solo un número discreto (`03`).
-- **Soporte dual PPTX + PDF:** Incluye librería JS (`PptxGenJS`), librería Python (`python-pptx`) y **sistema editorial HTML/CSS `@page` para PDFs** (A4 / Letter / 16:9).
-- **Auditor estricto (`scripts/audit-pptx-code.mjs`):** Falla con `exit 1` si el código no importa los templates del kit, si dibuja triángulos/trapecios o barras verticales a mano, si mete eyebrows en mayúsculas o fuentes cliché (`Inter`, `Arial`, `Calibri`, `Roboto`, `Space Grotesk`).
+Compatible desde el minuto cero con **Antigravity**, **Claude Code**, **OpenAI Codex**, **Cursor**, **Windsurf** y **Gemini CLI**.
 
 ---
 
-## Orden de Diseño y Arquitectura del Repositorio (7 Pilares)
+## Filosofía v8.0: Cero Plantillas Fijas, 100% Diseño a Medida
 
-El repositorio estructura el flujo profesional exactamente en el orden en que trabaja un diseñador gráfico senior:
-1. **Fundamentos del Diseño** (`skills/graphic-design-fundamentals/`) — Jerarquía, Contraste, Alineación, Proximidad/Contiguidad Espacial, Repetición, Balance y Espacio en Blanco.
-2. **Teoría del Color y Paletas** (`skills/slide-color-pacing/` + `references/color-typography-systems.md`) — Círculo cromático (complementarios, análogos, tríadas, monocromáticos), Matiz/Saturación/Valor, accesibilidad WCAG y psicología del color por industria.
-3. **Tipografía y Jerarquía** (`skills/slide-grid-typography/`) — Serif vs. Sans-Serif, máximo 2 familias, tamaños legibles en sala (`14–16pt+` cuerpo, `28–40pt` títulos), peso, interlineado y tracking.
-4. **Imágenes, Iconos, Gráficos y Diagramas** (`skills/editorial-imagery-motifs/` + `skills/data-viz-hero-metrics/`) — Diferenciación clara entre foto, ilustración, icono, diagrama, gráfico nativo editable (`addChart`) y captura de pantalla.
-5. **Retículas, Márgenes y Layouts** (`skills/domain-art-direction-router/` + `references/industry-design-matrix.md`) — Selección automática de paleta, fuentes y composición según la industria del prompt.
-6. **Ritmo Visual y Anti-AI-Slop** (`skills/anti-ai-slop-slides/` + `skills/narrative-storytelling-decks/`) — SCQA, Minto Pyramid, 1 elemento dominante, asimetría controlada, bloques de color y `speakerNotes`.
-7. **Ingeniería PPTX y PDF Editorial** (`skills/pptx-code-architecture/` + `skills/editorial-pdf-design/` + `templates/`) — Librerías listas en `PptxGenJS`, `python-pptx` y HTML/CSS `@page` para PDFs, más el auditor `scripts/audit-pptx-code.mjs`.
+Las presentaciones de IA se ven iguales cuando el código usa funciones de plantilla fijas para todo. **`anti-slop-pptx-kit` no impone plantillas**: le entrega a la IA las leyes reales del diseño gráfico, teoría del color, tipografía, composición, visualización de datos y herramientas técnicas para que **construya una propuesta visual distinta para cada tema**:
+
+- **Ranking Corporativo / Economía** (ej. *Top 5 Empresas de Colombia*): Estética editorial financiera (*Financial Times / The Economist*), tipografía con carácter, gráficos nativos comparativos, tablas limpias y aire asimétrico.
+- **Gastronomía / Restaurantes**: Fotografía protagonista a sangre, armonía cálida, tipografía editorial *serif + sans*, recortes y bloques de color orgánicos.
+- **Moda / Lanzamiento de Marca**: Lookbook minimalista de alto contraste, espacio negativo dramático, asimetría y titulares de gran escala.
+- **Ingeniería / SaaS / Industria**: Retícula suiza precisa, diagramas de arquitectura, datos limpios y contraste técnico.
+
+---
+
+## Estructura (Los 7 Pilares del Diseño)
+
+1. **`skills/domain-art-direction-router/`** — Paso 0: lee el prompt del usuario y define un *Creative Brief* único (paleta, tipografías, estrategia de fotos/íconos/diagramas y ritmo de láminas).
+2. **`skills/graphic-design-fundamentals/`** — Jerarquía, Contraste, Alineación, Proximidad (contiguidad espacial), Repetición, Balance simétrico/asimétrico, Peso Visual y diferenciación de los 6 recursos visuales (Foto, Ilustración, Icono, Diagrama, Gráfico, Captura).
+3. **`skills/slide-color-pacing/`** — Círculo cromático (complementarios, análogos, tríadas, monocromáticos), Matiz/Saturación/Valor, accesibilidad WCAG/APCA y psicología del color.
+4. **`skills/slide-grid-typography/`** — Retícula modular (Suiza / Tercios 3×3), *Serif vs. Sans-Serif*, máximo 2 familias, tamaños legibles en sala (`14–16pt+` cuerpo, `28–44pt` títulos), interlineado, tracking y ancho de línea.
+5. **`skills/editorial-imagery-motifs/` & `skills/data-viz-hero-metrics/`** — Fotos a sangre sin *efecto pegote*, B&N + acento, recorte/superposición controlada, gráficos nativos editables de PowerPoint y regla `<2 segundos`.
+6. **`skills/narrative-storytelling-decks/` & `skills/anti-ai-slop-slides/`** — SCQA, Pirámide de Minto, *Action Titles*, Regla 5×5 / 6×6, `speakerNotes` y purga total de clichés IA.
+7. **`skills/pptx-code-architecture/` & `skills/editorial-pdf-design/`** — Primitivas técnicas sin sombras (`helpers/`), PDFs editoriales (`@page` print CSS) y auditor estático (`scripts/audit-pptx-code.mjs`).
 
 ---
 

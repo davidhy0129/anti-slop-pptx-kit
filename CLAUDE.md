@@ -1,14 +1,8 @@
-# Claude Code Instructions — `anti-slop-pptx-kit` v5.0
+# Claude Code Instructions — `anti-slop-pptx-kit` v8.0
 
 @AGENTS.md
 
 ## Execution Protocol
-1. Read `AGENTS.md` and the relevant `skills/*/SKILL.md` + `references/*.md` before writing a single line of deck or PDF code.
-2. You MUST import `templates/pptxgenjs-studio-kit.mjs` (Node), `templates/python_pptx_studio.py` (Python), or `templates/editorial-pdf-studio.html` (PDF). Never hand-roll custom polygon diagrams (`triangle`/`trapezoid` icebergs), drop-shadowed shapes, vertical accent bars, uppercase eyebrows, or repeated footer banners.
-3. Coordinate specialized reviews using `agents/`:
-   - `agents/deck-narrative-strategist.md`
-   - `agents/slide-art-director.md`
-   - `agents/data-viz-specialist.md`
-   - `agents/pptx-code-builder.md`
-   - `agents/visual-slide-qa.md`
-4. Run `node scripts/audit-pptx-code.mjs .` (must exit `0`) and visually verify rendered PNG/PDF pages before reporting completion.
+1. Run Step 0 (`skills/domain-art-direction-router/SKILL.md`): craft a bespoke Creative Brief (color harmony, 2-font pairing, imagery/chart plan, unique per-slide layouts) tailored directly to the prompt — **never** reuse a rigid template across different topics.
+2. Use `helpers/pptx-primitives.mjs` / `helpers/pptx_primitives.py` for shadow-free flat shapes, SVG icon URIs, and clean native charts, or `templates/editorial-pdf-studio.html` for `@page` PDFs.
+3. Run `node scripts/audit-pptx-code.mjs .` (must exit `0`) before reporting completion.
