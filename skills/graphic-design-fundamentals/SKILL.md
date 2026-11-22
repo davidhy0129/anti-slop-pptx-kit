@@ -7,15 +7,18 @@ description: Foundational graphic design principles for presentations and PDFs: 
 
 Before picking colors or charts, every slide and PDF page must obey the 7 foundational laws of graphic composition (CRAP + Visual Balance + Multimedia Learning).
 
-## 1. The 7 Core Design Principles
+## 1. The 7 Core Elements & 7 Design Principles (DesignForce + Canva)
 
-1. **Hierarchy (Jerarquía):** Dictate the exact order the eye travels (`1st: Action Title or Hero Figure -> 2nd: Focal Visual/Chart -> 3rd: Supporting Detail`). Never give 4 elements equal visual weight.
+**7 Core Visual Elements:** **Line** (guides eye/divides), **Shape** (geometric = logic/stability; organic = human warmth), **Color** (mood + hierarchy), **Texture** (paper grain/subtle depth), **Space** (active breathing pause), **Form** (depth via adjacent tints/layering), **Typography** (voice + scale).
+
+**7 Core Design Principles:**
+1. **Hierarchy (Jerarquía):** Map a clear **3-point visual flow** (*F-pattern* for text-dense slides, *Z-pattern* for visual spreads) across **3 typographic tiers** (`Headline -> Subhead/Quote -> Body`).
 2. **Contrast (Contraste):** Create unmistakable separation via **size (5x–10x)**, **weight (Bold vs Regular)**, **value (Dark vs Light)**, and **temperature**. Two hues with the same luminance/value become unreadable together.
-3. **Alignment (Alineación):** Every object must snap to an invisible 16:9 grid (Rule of Thirds 3×3 or 12-column). Never place elements arbitrarily or mix random left/center alignments on the same slide.
-4. **Proximity & Spatial Contiguity (Proximidad):** Group related items tightly and separate unrelated groups with generous whitespace. Keep explanatory text **physically next to** the chart, photo, or icon it describes.
-5. **Repetition (Repetición):** Repeat consistent margins, corner style, icon stroke weight, and palette roles across the entire deck so every slide belongs to the same brand system.
-6. **Balance & Visual Weight (Balance):** Balance asymmetrically—a heavy dark panel or large photograph on one side balances crisp, airy typography on the other.
-7. **Intentional Whitespace (Espacio en Blanco):** Whitespace is active breathing room (35–55%), **not** an empty void at the bottom of a slide. Frame content deliberately.
+3. **Alignment & Golden Ratio (`1.618`):** Snap every object to an invisible **Rule of Thirds (3×3)** or **12-column grid** (`6–8%` outer margins). Divide major split ratios near `1.618` (~62/38) for natural visual harmony.
+4. **Proximity & Spatial Contiguity (Proximidad):** Group related items tightly and keep explanatory text **physically next to** the chart, photo, or icon it describes.
+5. **Repetition & Set-Level Coherence:** Repeat consistent margins, corner style, **1 single icon style**, and palette roles across all slides (verify 5 slides side-by-side).
+6. **Balance, Visual Weight & Rule of Odds:** Group visual elements in **odd numbers (3 or 5)** for natural dynamism; balance heavy dark/photo blocks asymmetrically against airy typography.
+7. **Intentional Whitespace (Espacio en Blanco):** Active breathing room (35–55%), **not** an empty void at the bottom of a slide.
 
 ---
 

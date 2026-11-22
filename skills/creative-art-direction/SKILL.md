@@ -10,12 +10,13 @@ Synthesized from Dribbble, Behance, Canva Visual Hierarchy/Composition, Adobe, T
 ## 1. Create a Concept & Moodboard First (Step 0)
 
 Before coding any slide:
-1. **Generate 3 Distinct Creative Concepts** (visual metaphor + emotional tone + art direction idea) and pick the strongest.
-2. **Lock a Textual Moodboard:**
-   - Editorial/brand references & 3–5 visual keywords.
-   - **Industry-Tailored Color Story** with Value/Temperature/Saturation contrast and **chapter color shifts** (never dark-on-slightly-darker!).
-   - **Cohesive Typography:** 1 multi-weight family (`Montserrat` or `DM Sans`) OR 1 expressive display + 1 neutral body that genuinely harmonize (`>= 14pt` body, `>= 13pt` tables).
-   - **Visual Assets Plan:** Real photography (hard-bounded inside `13.333" × 7.5"`), `1.5–2px` uniform outline icons inside consistent squircle/circle badges, and native editable PowerPoint charts (`bar`, `doughnut`, `line`).
+1. **Generate 3 Distinct Creative Concepts** (visual metaphor + emotional tone + art direction idea), **reject your 1st–4th obvious cliché ideas**, and pick the strongest.
+2. **Lock a Textual Moodboard & 6-Decision Visual Brief (`references/visual-storytelling-playbook.md`):**
+   - Editorial/brand references, 3–5 visual keywords, and a **single extended visual metaphor** (never mix metaphors).
+   - **Story-First & 3-Second Rule:** Start at the ending/desired action (never open with "About Us"), and ensure each slide's core message lands within **3 seconds**.
+   - **Industry-Tailored Color Strategy:** Value/Temperature/Saturation contrast, **chapter color shifts**, and optional **2-stop adjacent-tint depth gradients** (never dark-on-slightly-darker or multi-hue AI rainbow gradients!).
+   - **Cohesive Typography & 1 Icon Style:** 1 multi-weight family (`Montserrat` or `DM Sans`) OR 2 harmonious fonts (`>= 14pt` body, `>= 13pt` tables); **strictly 1 uniform icon style** across the entire deck (never mix outline, filled, and 3D).
+   - **Hard-Bounded Visual Assets:** Real photography (strictly bounded inside `13.333" × 7.5"`), background-removed portraits/flat-lays with natural negative space, and native editable PowerPoint charts (`bar`, `doughnut`, `line`). Hold back loud logos until the story lands.
 
 ---
 
