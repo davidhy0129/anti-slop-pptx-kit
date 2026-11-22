@@ -91,6 +91,7 @@ copy_dir "$KIT_ROOT/workflows" "$DEST/workflows"
 copy_dir "$KIT_ROOT/prompts" "$DEST/prompts"
 copy_dir "$KIT_ROOT/agents" "$DEST/agents"
 copy_dir "$KIT_ROOT/templates" "$DEST/templates"
+copy_dir "$KIT_ROOT/references" "$DEST/references"
 mkdir -p "$DEST/scripts"
 cp "$KIT_ROOT/scripts/audit-pptx-code.mjs" "$DEST/scripts/audit-pptx-code.mjs"
 

@@ -57,6 +57,36 @@ export const PALETTES = {
     inkOnLight: "183145", mutedOnLight: "4C6B82", ruleOnLight: "F0E2B6",
     accent: "4282AA", inkOnAccent: "FFFFFF",
   },
+  OFFWHITE_TEAL_INTRO: {
+    darkBg: "1A365D", darkSurface: "254B80", lightBg: "F7FAFC", lightSurface: "FFFFFF",
+    inkOnDark: "F7FAFC", mutedOnDark: "A0C4DF", ruleOnDark: "315C96",
+    inkOnLight: "1A365D", mutedOnLight: "4A5568", ruleOnLight: "DCE6F0",
+    accent: "38B2AC", inkOnAccent: "0F2928",
+  },
+  NAVY_CORAL_PROPOSAL: {
+    darkBg: "0F2A44", darkSurface: "193D61", lightBg: "FAF8F3", lightSurface: "FFFFFF",
+    inkOnDark: "FAF8F3", mutedOnDark: "9FB7CC", ruleOnDark: "26517A",
+    inkOnLight: "0F2A44", mutedOnLight: "52657A", ruleOnLight: "E6E0D3",
+    accent: "F06A3A", inkOnAccent: "FFFFFF",
+  },
+  WARM_CORAL_TEACH: {
+    darkBg: "2D3748", darkSurface: "3E4C63", lightBg: "FFF8F0", lightSurface: "FFFFFF",
+    inkOnDark: "FFF8F0", mutedOnDark: "CBD5E0", ruleOnDark: "4A5568",
+    inkOnLight: "2D3748", mutedOnLight: "5A6577", ruleOnLight: "EFE3D4",
+    accent: "E53E3E", inkOnAccent: "FFFFFF",
+  },
+  CHARCOAL_MINT_TECH: {
+    darkBg: "1A202C", darkSurface: "252E3F", lightBg: "F4F6F8", lightSurface: "FFFFFF",
+    inkOnDark: "F7FAFC", mutedOnDark: "A0AEC0", ruleOnDark: "344054",
+    inkOnLight: "1A202C", mutedOnLight: "4A5568", ruleOnLight: "DDE3EA",
+    accent: "48BB78", inkOnAccent: "0F291A",
+  },
+  BLACK_YELLOW_MORPH: {
+    darkBg: "111111", darkSurface: "1F1F1F", lightBg: "F2F2F0", lightSurface: "FFFFFF",
+    inkOnDark: "FFFFFF", mutedOnDark: "9E9E9E", ruleOnDark: "2E2E2E",
+    inkOnLight: "111111", mutedOnLight: "555555", ruleOnLight: "DCDCD8",
+    accent: "F5D000", inkOnAccent: "111111",
+  },
 };
 
 export const FONT_SYSTEMS = {
@@ -517,7 +547,102 @@ export function renderSingleFocusBarChart(pptx, palette, { titleParts, bars, dar
   return slide;
 }
 
-/** 13. Minimalist Closing Slide */
+/** 13. Split-Slide Color Swap (Figma Idea 13 — 50/50 contrasting panels that swap sides on callouts) */
+export function renderSplitColorSwap(pptx, palette, { leftTitle, leftBody, rightTitle, rightBody, swap = false, pageNum, speakerNotes = "", fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const halfW = SLIDE.w / 2;
+  const leftBg = swap ? palette.lightBg : palette.darkBg;
+  const leftInk = swap ? palette.inkOnLight : palette.inkOnDark;
+  const leftMuted = swap ? palette.mutedOnLight : palette.mutedOnDark;
+  const rightBg = swap ? palette.darkBg : palette.lightBg;
+  const rightInk = swap ? palette.inkOnDark : palette.inkOnLight;
+  const rightMuted = swap ? palette.mutedOnDark : palette.mutedOnLight;
+
+  slide.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: halfW, h: SLIDE.h, fill: { color: leftBg }, line: { color: leftBg, width: 0 } });
+  slide.addShape(pptx.ShapeType.rect, { x: halfW, y: 0, w: halfW, h: SLIDE.h, fill: { color: rightBg }, line: { color: rightBg, width: 0 } });
+
+  slide.addText(leftTitle, { x: SLIDE.mx, y: 1.9, w: halfW - SLIDE.mx * 1.6, h: 1.5, fontFace: fonts.display, fontSize: 28, bold: true, color: swap ? leftInk : palette.accent, wrap: true });
+  slide.addText(leftBody, { x: SLIDE.mx, y: 3.6, w: halfW - SLIDE.mx * 1.6, h: 2.2, fontFace: fonts.body, fontSize: 14, color: leftMuted, wrap: true, lineSpacingMultiple: 1.35 });
+
+  slide.addText(rightTitle, { x: halfW + SLIDE.mx * 0.8, y: 1.9, w: halfW - SLIDE.mx * 1.6, h: 1.5, fontFace: fonts.display, fontSize: 28, bold: true, color: swap ? palette.accent : rightInk, wrap: true });
+  slide.addText(rightBody, { x: halfW + SLIDE.mx * 0.8, y: 3.6, w: halfW - SLIDE.mx * 1.6, h: 2.2, fontFace: fonts.body, fontSize: 14, color: rightMuted, wrap: true, lineSpacingMultiple: 1.35 });
+
+  addQuietPageNumber(slide, pageNum, rightMuted, fonts);
+  if (speakerNotes) slide.addNotes(speakerNotes);
+  return slide;
+}
+
+/** 14. Waterfall Bridge Chart (native vector bridge bars, direct labels, optional source line) */
+export function renderWaterfallBridge(pptx, palette, { titleParts, steps, sourceLine = "", dark = false, pageNum, speakerNotes = "", fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
+  slide.background = { color: bg };
+
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11.2, h: 1.15, fontSize: 26, ink, accent: palette.accent, fonts });
+
+  let running = 0;
+  const computed = steps.map((s) => {
+    if (s.type === "total") {
+      running = s.value;
+      return { ...s, low: 0, high: s.value };
+    }
+    const low = Math.min(running, running + s.value);
+    const high = Math.max(running, running + s.value);
+    running += s.value;
+    return { ...s, low, high };
+  });
+
+  const maxV = Math.max(...computed.map((c) => c.high), 1);
+  const baseBottomY = 5.65;
+  const maxH = 2.85;
+  const areaW = SLIDE.w - SLIDE.mx * 2;
+  const slotW = areaW / Math.max(computed.length, 1);
+  const barW = Math.min(1.15, slotW * 0.56);
+
+  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY, w: areaW, h: 0, line: { color: rule, width: 1 } });
+
+  computed.forEach((c, i) => {
+    const x = SLIDE.mx + i * slotW + (slotW - barW) / 2;
+    const yTop = baseBottomY - (c.high / maxV) * maxH;
+    const hBar = Math.max(0.18, ((c.high - c.low) / maxV) * maxH);
+    const fill = c.type === "total" ? ink : c.value < 0 ? palette.accent : (dark ? palette.darkSurface : rule);
+
+    slide.addShape(pptx.ShapeType.rect, { x, y: yTop, w: barW, h: hBar, fill: { color: fill }, line: { color: fill, width: 0 } });
+    slide.addText(c.displayValue, {
+      x: x - 0.2, y: yTop - 0.42, w: barW + 0.4, h: 0.34, align: "center",
+      fontFace: fonts.display, fontSize: 12, bold: true, color: c.value < 0 ? palette.accent : ink,
+    });
+    slide.addText(c.label, {
+      x: x - 0.25, y: baseBottomY + 0.14, w: barW + 0.5, h: 0.5, align: "center",
+      fontFace: fonts.body, fontSize: 10.5, color: muted, wrap: true,
+    });
+  });
+
+  if (sourceLine) {
+    slide.addText(sourceLine, { x: SLIDE.mx, y: SLIDE.h - 0.52, w: 9.0, h: 0.3, fontFace: fonts.mono, fontSize: 9, color: muted });
+  }
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  if (speakerNotes) slide.addNotes(speakerNotes);
+  return slide;
+}
+
+/** 15. Statement Breather Slide (Ines Montani bold 1-sentence impact) */
+export function renderStatementSlide(pptx, palette, { titleParts, dark = true, pageNum, speakerNotes = "", fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  slide.background = { color: bg };
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: 2.2, w: SLIDE.w - SLIDE.mx * 2, h: 3.0, fontSize: 42, ink, accent: palette.accent, fonts });
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  if (speakerNotes) slide.addNotes(speakerNotes);
+  return slide;
+}
+
+/** 16. Minimalist Closing Slide */
 export function renderClosingSlide(pptx, palette, { headline, contactLine = "", fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };

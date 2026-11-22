@@ -43,10 +43,11 @@ const colX = (colIndex, totalCols = 12) =>
 - **python-pptx:** Always set `tf.word_wrap = True` and explicit `margin_left / margin_right / margin_top / margin_bottom`. Estimate line count from character length vs box width and cap bullets (`<= 15 words`) so text never collides with lower elements.
 - **PptxGenJS:** Always specify `w`, `h`, `valign: "top"`, `wrap: true`, and `shrinkText: false` (adjust copy instead of letting PowerPoint auto-shrink body text below `12pt`).
 - **Tables:** Always pass explicit `colW` arrays (`[2.8, 3.2, 2.0, 2.0]`) and explicit `margin` padding inside every cell.
+- **Read-vs-Speak & Source Grounding:** Pass `speakerNotes` / `speaker_notes` (60–100 word talking points, legal citations, Q&A) into PowerPoint's native notes slide, and pass `sourceLine` on data slides so every chart cites its exact origin.
 
 ---
 
-## 3. Mandatory Headless Visual QA Loop
+## 3. Mandatory Headless Visual QA & Pre-Send Gate
 
 Because code cannot show visual overlaps in stdout, **always render and inspect** before delivering:
 1. Run static code audit: `node scripts/audit-pptx-code.mjs .`
@@ -55,8 +56,9 @@ Because code cannot show visual overlaps in stdout, **always render and inspect*
    soffice --headless --convert-to pdf output.pptx
    pdftoppm -png -r 150 output.pdf slide_preview
    ```
-3. Inspect the rendered PNGs for:
-   - Text overlapping shapes or overflowing slide margins.
-   - Missing fonts falling back to Arial/Calibri.
-   - Cramped margins or broken table alignment.
-4. Fix any visual defect in `styles/` or `components/` and re-render until clean.
+3. **Thumbnail View Test & Visual Inspection:** Check all rendered PNGs together at thumbnail scale for:
+   - Text overlapping shapes, truncated labels (`"..."`), or overflowing slide margins.
+   - Visually identical consecutive slides (break up any 2+ identical layouts in a row).
+   - Missing custom fonts falling back to Arial/Calibri or unexpected line-wrap shifts.
+   - Cramped margins (`< 0.6"`), missing axis-break markers on non-zero baselines, or ungrounded stats.
+4. **Data Governance:** Never send unapproved PII, confidential financials, or client secrets to public AI web tools. Fix any visual defect in `styles/` or `components/` and re-render until clean.

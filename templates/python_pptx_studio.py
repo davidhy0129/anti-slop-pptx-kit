@@ -66,6 +66,36 @@ PALETTES = {
         "ink_light": "183145", "muted_light": "4C6B82", "rule_light": "F0E2B6",
         "accent": "4282AA", "ink_accent": "FFFFFF",
     },
+    "OFFWHITE_TEAL_INTRO": {
+        "dark_bg": "1A365D", "dark_surface": "254B80", "light_bg": "F7FAFC", "light_surface": "FFFFFF",
+        "ink_dark": "F7FAFC", "muted_dark": "A0C4DF", "rule_dark": "315C96",
+        "ink_light": "1A365D", "muted_light": "4A5568", "rule_light": "DCE6F0",
+        "accent": "38B2AC", "ink_accent": "0F2928",
+    },
+    "NAVY_CORAL_PROPOSAL": {
+        "dark_bg": "0F2A44", "dark_surface": "193D61", "light_bg": "FAF8F3", "light_surface": "FFFFFF",
+        "ink_dark": "FAF8F3", "muted_dark": "9FB7CC", "rule_dark": "26517A",
+        "ink_light": "0F2A44", "muted_light": "52657A", "rule_light": "E6E0D3",
+        "accent": "F06A3A", "ink_accent": "FFFFFF",
+    },
+    "WARM_CORAL_TEACH": {
+        "dark_bg": "2D3748", "dark_surface": "3E4C63", "light_bg": "FFF8F0", "light_surface": "FFFFFF",
+        "ink_dark": "FFF8F0", "muted_dark": "CBD5E0", "rule_dark": "4A5568",
+        "ink_light": "2D3748", "muted_light": "5A6577", "rule_light": "EFE3D4",
+        "accent": "E53E3E", "ink_accent": "FFFFFF",
+    },
+    "CHARCOAL_MINT_TECH": {
+        "dark_bg": "1A202C", "dark_surface": "252E3F", "light_bg": "F4F6F8", "light_surface": "FFFFFF",
+        "ink_dark": "F7FAFC", "muted_dark": "A0AEC0", "rule_dark": "344054",
+        "ink_light": "1A202C", "muted_light": "4A5568", "rule_light": "DDE3EA",
+        "accent": "48BB78", "ink_accent": "0F291A",
+    },
+    "BLACK_YELLOW_MORPH": {
+        "dark_bg": "111111", "dark_surface": "1F1F1F", "light_bg": "F2F2F0", "light_surface": "FFFFFF",
+        "ink_dark": "FFFFFF", "muted_dark": "9E9E9E", "rule_dark": "2E2E2E",
+        "ink_light": "111111", "muted_light": "555555", "rule_light": "DCDCD8",
+        "accent": "F5D000", "ink_accent": "111111",
+    },
 }
 
 FONT_SYSTEMS = {
@@ -534,6 +564,125 @@ def render_clean_table(prs, pal, title_parts, headers, rows, col_widths_in, high
             r.font.color.rgb = rgb(pal["ink_light"])
 
     _quiet_page_num(slide, page_num, pal["muted_light"], fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_split_color_swap(prs, pal, left_title: str, left_body: str, right_title: str, right_body: str, swap: bool = False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    half_w = SLIDE_W / 2
+    left_bg = pal["light_bg"] if swap else pal["dark_bg"]
+    left_ink = pal["ink_light"] if swap else pal["ink_dark"]
+    left_muted = pal["muted_light"] if swap else pal["muted_dark"]
+    right_bg = pal["dark_bg"] if swap else pal["light_bg"]
+    right_ink = pal["ink_dark"] if swap else pal["ink_light"]
+    right_muted = pal["muted_dark"] if swap else pal["muted_light"]
+
+    for x0, w0, c0 in ((Inches(0), half_w, left_bg), (half_w, half_w, right_bg)):
+        panel = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x0, Inches(0), w0, SLIDE_H)
+        panel.fill.solid()
+        panel.fill.fore_color.rgb = rgb(c0)
+        panel.line.fill.background()
+
+    for x0, title, body, t_col, b_col in (
+        (MX, left_title, left_body, left_ink if swap else pal["accent"], left_muted),
+        (half_w + MX * 0.8, right_title, right_body, pal["accent"] if swap else right_ink, right_muted),
+    ):
+        tb_t = slide.shapes.add_textbox(x0, Inches(1.9), half_w - MX * 1.6, Inches(1.5))
+        tb_t.text_frame.word_wrap = True
+        rt = tb_t.text_frame.paragraphs[0].add_run()
+        rt.text = title
+        rt.font.name = fonts["display"]
+        rt.font.size = Pt(28)
+        rt.font.bold = True
+        rt.font.color.rgb = rgb(t_col)
+
+        tb_b = slide.shapes.add_textbox(x0, Inches(3.6), half_w - MX * 1.6, Inches(2.2))
+        tb_b.text_frame.word_wrap = True
+        rb = tb_b.text_frame.paragraphs[0].add_run()
+        rb.text = body
+        rb.font.name = fonts["body"]
+        rb.font.size = Pt(14)
+        rb.font.color.rgb = rgb(b_col)
+
+    _quiet_page_num(slide, page_num, right_muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_waterfall_bridge(prs, pal, title_parts, steps, source_line: str = "", dark: bool = False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    rule = pal["rule_dark"] if dark else pal["rule_light"]
+    _set_bg(slide, bg)
+
+    _add_turn_title(slide, title_parts, MX, MY, Inches(11.2), Inches(1.15), 26, ink, pal["accent"], fonts["display"])
+
+    running = 0.0
+    computed = []
+    for s in steps:
+        val = float(s["value"])
+        if s.get("type") == "total":
+            running = val
+            computed.append({**s, "low": 0.0, "high": val})
+        else:
+            low, high = min(running, running + val), max(running, running + val)
+            running += val
+            computed.append({**s, "low": low, "high": high})
+
+    max_v = max((c["high"] for c in computed), default=1.0) or 1.0
+    base_y, max_h = Inches(5.65), Inches(2.85)
+    area_w = SLIDE_W - MX * 2
+    slot_w = area_w / max(len(computed), 1)
+    bar_w = min(Inches(1.15), slot_w * 0.56)
+
+    axis = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX, base_y, area_w, Inches(0.015))
+    axis.fill.solid()
+    axis.fill.fore_color.rgb = rgb(rule)
+    axis.line.fill.background()
+
+    for i, c in enumerate(computed):
+        x = MX + i * slot_w + (slot_w - bar_w) / 2
+        y_top = base_y - max_h * (c["high"] / max_v)
+        h_bar = max(Inches(0.18), max_h * ((c["high"] - c["low"]) / max_v))
+        fill_col = ink if c.get("type") == "total" else (pal["accent"] if c["value"] < 0 else (pal["dark_surface"] if dark else rule))
+
+        bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, y_top, bar_w, h_bar)
+        bar.fill.solid()
+        bar.fill.fore_color.rgb = rgb(fill_col)
+        bar.line.fill.background()
+
+        tb_v = slide.shapes.add_textbox(x - Inches(0.2), y_top - Inches(0.42), bar_w + Inches(0.4), Inches(0.34))
+        p_v = tb_v.text_frame.paragraphs[0]
+        p_v.alignment = PP_ALIGN.CENTER
+        rv = p_v.add_run()
+        rv.text = c["display_value"]
+        rv.font.name = fonts["display"]
+        rv.font.size = Pt(12)
+        rv.font.bold = True
+        rv.font.color.rgb = rgb(pal["accent"] if c["value"] < 0 else ink)
+
+        tb_l = slide.shapes.add_textbox(x - Inches(0.25), base_y + Inches(0.14), bar_w + Inches(0.5), Inches(0.5))
+        tb_l.text_frame.word_wrap = True
+        p_l = tb_l.text_frame.paragraphs[0]
+        p_l.alignment = PP_ALIGN.CENTER
+        rl = p_l.add_run()
+        rl.text = c["label"]
+        rl.font.name = fonts["body"]
+        rl.font.size = Pt(10.5)
+        rl.font.color.rgb = rgb(muted)
+
+    if source_line:
+        tb_s = slide.shapes.add_textbox(MX, SLIDE_H - Inches(0.52), Inches(9.0), Inches(0.3))
+        rs = tb_s.text_frame.paragraphs[0].add_run()
+        rs.text = source_line
+        rs.font.name = fonts["mono"]
+        rs.font.size = Pt(9)
+        rs.font.color.rgb = rgb(muted)
+
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
     _add_notes(slide, speaker_notes)
     return slide
 

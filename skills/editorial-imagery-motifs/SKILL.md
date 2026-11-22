@@ -1,26 +1,38 @@
 ---
 name: editorial-imagery-motifs
-description: Applies editorial photography framing, scrims, Merge Shapes typography masking, border-breaking cutouts, monochrome portrait quotes, CAD/Figma selection callouts, and Mondrian color-blocking to slides.
+description: Applies Picture Superiority Effect (full-bleed vs pasted-on photos), Rule of Thirds framing, B&W photo contrast, Split-Slide Color Swap, Merge Shapes masking, crisp code slides, vector recoloring, and the 5-Question Visual Gate.
 ---
 
-# Editorial Imagery & Studio Visual Motifs
+# Editorial Imagery, Vectors & Studio Visual Motifs
 
-Graphic designers make slides feel bespoke through deliberate image framing, tactile accents, and subtle architectural chrome—never stock 3D robots or clipped rectangular JPEGs pasted into a corner.
+Graphic designers make slides feel bespoke through deliberate framing, visual restraint, and system coherence—never stock handshakes, uncanny AI faces, or tiny corner thumbnails (*"efecto pegote"*).
 
-## 1. Editorial Photography & Masking Techniques
+## 1. The "Visual Must Clarify the Headline" 5-Question Gate
 
-- **Full-Bleed Photo + Bottom Scrim:** Place high-resolution photography across 100% of the slide (or 50–60% vertical split) and add a subtle bottom dark/brand scrim (`0% -> 80%` opacity over the bottom 45%) so crisp white display typography reads effortlessly.
-- **`Merge Shapes` Typography Masking (PowerPoint Intersect):** Mask dramatic photography inside oversized display letters (`80–140 pt` Black/Heavy) on cover or chapter divider slides.
-- **Border-Breaking Subject Cutouts:** Remove the background from a product, athlete, dish, or founder portrait and let it slightly overlap the edge of its rounded card or circular ring mask for immediate 3D editorial depth.
-- **Monochrome Cutout Quote Slide:** Place a clean B&W/duotone cutout portrait in the center or left third, flanked by oversized opposing quotation marks (`“ ”`) in your accent color, with a short serif quote and crisp 1-line attribution.
-- **`1px` Translucent Spec Table Over Macro Photo:** On product/real-estate/hospitality slides, place a full-bleed macro shot on one half with a subtle `1px` (`20%` white) tabular spec grid overlaid cleanly near the lower edge.
+Before keeping any photo, icon, vector, or animation:
+1. Does it clarify the headline?
+2. Does it make the message easier to remember?
+3. Does it reduce explanation time?
+4. Does it show evidence, structure, contrast, or sequence?
+5. Would the slide be stronger without it?
+*If no, delete it. Clean typography + whitespace beats decorative filler every time.*
 
 ---
 
-## 2. Bespoke Graphic Designer Motifs
+## 2. Photography & Framing Rules
 
-1. **Zero-Gap Mondrian Color-Blocking:** Butt solid colored tiles directly against each other with `0px` gap and `0` drop shadows—combining a photo tile, a giant KPI tile, and a short statement tile.
-2. **CAD / Figma Selection-Box Callouts:** Frame key question tags (`[WHERE?]`, `[CONTEXT]`) or diagram focal points with a razor-thin `1px` bounding box and tiny `3–4px` square corner handles.
-3. **Hairline Architectural Chrome:** Use a continuous `1px` top/bottom rule with quiet micro-metadata (`DECK 2026`, `04 / 12`) in monospaced uppercase at `35–50%` opacity—never loud 4-line footers.
-4. **Concentric Target Rings & Hairline Connectors:** Connect nodes or focal points with thin converging `1px` lines ending in clean concentric circles rather than fat default PowerPoint block arrows!
-5. **Tactile Imperfection (Used Sparingly):** A single hand-drawn marker underline or loop around 1–2 turning words in a headline instantly breaks sterile AI perfection.
+- **Kill the *"Efecto Pegote"* (Picture Superiority Effect):** Never paste a small rectangular stock photo next to a bullet box. Either size photos **full-bleed** (`13.333" × 7.5"`) with a bottom/side scrim and place concise text inside the photo's **negative space**, or split cleanly (`50/50` or `60/40`) with zero border gap.
+- **Rule of Thirds Guides:** Divide the 16:9 canvas into thirds (`~5.63cm` & `~3.20cm` inner offsets on a `33.8×19cm` grid) and place focal subjects and headlines on intersections.
+- **B&W 0% Saturation Contrast Trick:** When placing colored or white text over a busy photo, convert the photo to **0% saturation (grayscale)** + subtle dark scrim so the colored accent headline pops cleanly.
+- **No Uncanny AI Assets:** Inspect every generated image for garbled text on screens/signs or extra fingers; ban stock handshakes, lightbulbs, puzzle pieces, and glowing 3D blobs.
+- **Technical Code Slides:** Never paste blurry screenshots or tiny 10pt code. Isolate code cleanly using high-contrast blocks (or Carbon / VS Code syntax-preserved exports) in monospace (`Consolas` / `JetBrains Mono` / `Fira Code`).
+
+---
+
+## 3. Bespoke Studio Motifs & Vector Craft
+
+1. **Split-Slide Color Swap (Figma Idea 13):** Divide a slide 50/50 with two contrasting colors; **swap their left/right or top/bottom positions** on key callout slides to signal a turning point.
+2. **Recolor Vectors to Palette:** When using vector icons or illustrations, recolor every shape fill/stroke to match your exact 3-color palette (*"no chile, mole y pozole"*). Match icon style to corners (outlined icons with sharp `0px` corners; solid/soft icons with rounded corners).
+3. **`Merge Shapes` Typography Masking & Cutouts:** Mask high-res photography inside oversized display letters (`80–140 pt`), or let a background-removed subject cutout break slightly outside its card/ring border.
+4. **CAD / Figma Selection-Box Callouts & Concentric Target Rings:** Frame micro-tags (`[CONTEXT]`) with `1px` bounding boxes + `3–4px` corner handles, and connect nodes with `1px` hairlines ending in concentric circles instead of fat PowerPoint block arrows.
+5. **Motion & PDF-Fallback Restraint:** Use **Morph** (`Transformar`) for chapter spotlights or image-focus zooms, and prefer simple **Appear** animations when slides must also export cleanly to PDF.
