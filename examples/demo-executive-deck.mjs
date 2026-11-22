@@ -1,6 +1,6 @@
 /**
  * Reference Example: Executive Deck using anti-slop-pptx-kit v2.2
- * Notice: ZERO drawCard() loops, ZERO "02 · SECTION" eyebrows, ZERO emoji clutter.
+ * Notice: ZERO drawCard() loops, ZERO numbered section eyebrows, ZERO emoji clutter.
  * Usage (in a project with pptxgenjs installed): node examples/demo-executive-deck.mjs
  */
 
