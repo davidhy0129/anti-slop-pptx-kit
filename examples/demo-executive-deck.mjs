@@ -1,7 +1,7 @@
 /**
- * Reference Example: Executive Deck using anti-slop-pptx-kit v2.2
- * Notice: ZERO drawCard() loops, ZERO numbered section eyebrows, ZERO emoji clutter.
- * Usage (in a project with pptxgenjs installed): node examples/demo-executive-deck.mjs
+ * Reference Example (v6.0): Industrial Engineering Executive Deck
+ * Uses INDUSTRIAL_ENGINEERING palette, ENGINEERING_PRO fonts, native PowerPoint chart,
+ * crisp SVG icons, high-contrast >=14pt body copy, and balanced compositions.
  */
 
 import PptxGenJS from "pptxgenjs";
@@ -9,168 +9,161 @@ import {
   PALETTES,
   FONT_SYSTEMS,
   renderCoverSlide,
-  renderEditorialSplit,
-  renderHeroKpiBreather,
-  renderSingleFocusBarChart,
-  renderArchitectureGateDiagram,
-  renderConsultingColumns,
-  renderNodeTimeline,
-  renderCleanTable,
-  renderClosingSlide,
+  renderMetricPlusCards,
+  renderNativeBarChartSlide,
+  renderCleanTableSlide,
+  renderContrastTwoColumn,
+  renderIconFeatureGrid,
+  renderHeroCenteredStatement,
+  renderRoadmapWithActions,
 } from "../templates/pptxgenjs-studio-kit.mjs";
 
 const pptx = new PptxGenJS();
 pptx.layout = "LAYOUT_WIDE";
-const pal = PALETTES.OBSIDIAN_CITRINE;
-const fonts = FONT_SYSTEMS.SWISS_TECH;
+const pal = PALETTES.INDUSTRIAL_ENGINEERING;
+const fonts = FONT_SYSTEMS.ENGINEERING_PRO;
 
-// 1. Cover
 renderCoverSlide(pptx, pal, {
-  metaLine: "Executive Review · 2026",
+  contextPill: "Comité Directivo · Noviembre 2026",
   titleParts: [
-    { text: "Unified Operations: ", accent: false },
-    { text: "Full Control Without Lock-In", accent: true },
+    { text: "Consolidar nuestro sistema ", accent: false },
+    { text: "o alquilar un ERP externo", accent: true },
   ],
-  subtitle: "20-year auditability, real-time field control, and zero per-seat licensing.",
+  subtitle: "Análisis financiero a 5 años (45 usuarios), control operativo en obra y continuidad tecnológica para INTECKNO S.A.S.",
+  statsStrip: [
+    { value: "~250 h/mes", label: "reprocesos eliminables hoy" },
+    { value: "$350M–$1.8B", label: "ahorro proyectado a 5 años" },
+    { value: "100%", label: "propiedad del código y datos" },
+  ],
   fonts,
 });
 
-// 2. Editorial Split (Diagnóstico sin cajas)
-renderEditorialSplit(pptx, pal, {
-  tagLabel: "Current Risk",
+renderMetricPlusCards(pptx, pal, {
   titleParts: [
-    { text: "Spreadsheets fragment ", accent: false },
-    { text: "daily cost control", accent: true },
+    { text: "Operar sin sistema integrado ", accent: false },
+    { text: "cuesta más de un puesto al mes", accent: true },
   ],
-  leadText: "Local files create duplicate versions, blind compliance gaps, and manual rework across teams.",
-  rows: [
-    { label: "Duplicate Versions", detail: "Budget, warehouse, and site logs drift out of sync." },
-    { label: "Compliance Blind Spots", detail: "Expired safety permits slip past manual checks." },
-    { label: "Local File Risk", detail: "Critical project costs live on individual laptops." },
+  heroStat: "~250 h/mes",
+  heroCaption: "perdidas en doble digitación entre Excel, papel y WhatsApp",
+  heroFootnote: "Base conservadora: 25 de 45 usuarios perdiendo 30 min/día.",
+  cards: [
+    { icon: "clock", title: "Tiempo pagado sin valor", detail: "Doble trabajo entre Proyectos, Compras y Bodega." },
+    { icon: "chart", title: "Fugas de margen", detail: "Desviaciones de costo o anticipos detectadas tarde." },
+    { icon: "shield", title: "Exposición legal", detail: "PILA, pólizas y alturas difíciles de rastrear a tiempo." },
   ],
-  dark: false,
   pageNum: 2,
   fonts,
 });
 
-// 3. Hero KPI Breather (10-20 años sin cajas)
-renderHeroKpiBreather(pptx, pal, {
-  figure: "20 Years",
-  caption: "Immutable fiscal & legal retention built in from day one",
-  footnote: "Soft-delete policy, multi-zone cloud backups, and instant CSV/Excel export.",
+renderNativeBarChartSlide(pptx, pal, {
+  titleParts: [
+    { text: "Ahorro de $350M a $1.855M COP ", accent: false },
+    { text: "en 5 años con usuarios ilimitados", accent: true },
+  ],
+  chartData: [
+    { label: "SAP B1 / Oracle", value: 1914, highlight: false },
+    { label: "Odoo Enterprise", value: 660, highlight: false },
+    { label: "Inteckno ERP", value: 59, highlight: true },
+  ],
+  insightStat: ">85% a >94%",
+  insightTitle: "de ahorro neto proyectado",
+  insightDetail: "Con 45 usuarios (TRM $3.300), el costo de licencias por empleado nuevo se mantiene en $0.",
+  sourceLine: "Cifras en millones de COP (techo estimado a 5 años · 45 usuarios · TRM $3.300).",
   pageNum: 3,
   fonts,
 });
 
-// 4. Single-Focus Bar Chart (5-year TCO comparison)
-renderSingleFocusBarChart(pptx, pal, {
+renderCleanTableSlide(pptx, pal, {
   titleParts: [
-    { text: "Proprietary stack cuts 5-year TCO by ", accent: false },
-    { text: "85% vs commercial ERPs", accent: true },
+    { text: "Comparativa financiera y de ", accent: false },
+    { text: "propiedad tecnológica", accent: true },
   ],
-  bars: [
-    { label: "SAP B1 / NetSuite", value: 180, displayValue: "$180K+", highlight: false },
-    { label: "Odoo Enterprise", value: 75, displayValue: "$75K", highlight: false },
-    { label: "In-House Cloud ERP", value: 3, displayValue: "$3K", highlight: true },
+  headers: ["Criterio (45 usuarios)", "Inteckno ERP", "Odoo Enterprise", "SAP / Oracle"],
+  rows: [
+    ["Licencias / Año", "$0 (Ilimitado)", "USD $14k–$19k", "USD $45k–$70k"],
+    ["Implementación Año 1", "$0 (Interno)", "USD $25k–$45k", "USD $65k–$120k"],
+    ["Total 5 Años (COP)", "$26,4M–$59,4M", "$412,5M–$660M", "$1.155M–$1.914M"],
+    ["Crecer a 80 personas", "$0 adicional", "Sube factura mensual", "Sube factura mensual"],
+    ["Cambios internos", "Horas o días", "Semanas + cobro", "Meses + SLA"],
   ],
-  dark: false,
+  colW: [3.2, 2.9, 2.9, 2.8],
+  highlightCol: 1,
+  bottomHighlight: "Ahorro neto a 5 años: $350M – $1.855M COP manteniendo el 100% del código en Inteckno",
   pageNum: 4,
   fonts,
 });
 
-// 5. Architecture Gate Diagram (Hard Gates sin 4 cajas BLOQUEO)
-renderArchitectureGateDiagram(pptx, pal, {
+renderContrastTwoColumn(pptx, pal, {
   titleParts: [
-    { text: "Automated hard gates ", accent: false },
-    { text: "block costly errors before execution", accent: true },
+    { text: "Comprar un ERP comercial ", accent: false },
+    { text: "no evita programar ni pagar de más", accent: true },
   ],
-  gates: [
-    { domain: "Finance Gate", rule: "Blocks purchase orders without available budget or cleared advance." },
-    { domain: "Safety Gate", rule: "Halts height permits if certification expired or wind exceeds 40 km/h." },
-    { domain: "Legal Gate", rule: "Stops contractor payments when social security filings lapse." },
-    { domain: "Technical Gate", rule: "Blocks obsolete blueprints and flags uncalibrated instruments." },
-  ],
-  dark: true,
+  leftCol: {
+    heading: "Lo que te venden al inicio",
+    items: [
+      "Cuota mensual por usuario que parece manejable",
+      "Promesa de arranque estándar sin tocar código",
+      "Dependencia de un partner externo para cada cambio",
+    ],
+  },
+  rightCol: {
+    heading: "Lo que realmente terminas pagando",
+    items: [
+      "6 a 24 meses de consultora para adaptar ingeniería STC",
+      "Desarrollos a medida obligatorios y cobros extra",
+      "Alquiler eterno: si dejas de pagar, pierdes el acceso",
+    ],
+  },
+  bottomQuote: "Con un ERP comercial pagaríamos cientos de millones para adaptarlo igual — pero sin ser dueños de nada.",
   pageNum: 5,
   fonts,
 });
 
-// 6. Consulting Pyramid Columns (McKinsey-style impact by area)
-renderConsultingColumns(pptx, pal, {
+renderIconFeatureGrid(pptx, pal, {
   titleParts: [
-    { text: "Every department gains ", accent: false },
-    { text: "real-time operational clarity", accent: true },
+    { text: "Cuatro cambios inmediatos ", accent: false },
+    { text: "en la operación diaria", accent: true },
   ],
-  columns: [
-    {
-      heading: "Executive & Finance",
-      highlight: true,
-      points: [
-        { lead: "Live margin visibility.", body: "Track EAC and 30/60/90-day cashflow." },
-        { lead: "Zero lock-in.", body: "Full source ownership in corporate GitHub." },
-      ],
-    },
-    {
-      heading: "Project Delivery",
-      highlight: false,
-      points: [
-        { lead: "Connected WBS & cost.", body: "Site logs tied directly to budgets." },
-        { lead: "Current blueprints.", body: "Versioned EDMS stops outdated builds." },
-      ],
-    },
-    {
-      heading: "Supply & HR",
-      highlight: false,
-      points: [
-        { lead: "Multi-warehouse Kardex.", body: "Real-time landed cost and transfers." },
-        { lead: "Pre-payroll accuracy.", body: "Verified labor hours and certifications." },
-      ],
-    },
+  items: [
+    { icon: "layers", title: "Una sola verdad", detail: "Comercial, Proyectos, Compras y Bodega ven el mismo dato al instante." },
+    { icon: "users", title: "Cero persecución", detail: "Lo que pasa en obra o compras actualiza automáticamente a Gerencia." },
+    { icon: "lock", title: "Frenos automáticos", detail: "Bloquea sobrecostos, pagos sin PILA o permisos vencidos antes de ocurrir." },
+    { icon: "zap", title: "IA integrada al equipo", detail: "Lee facturas, analiza documentos y responde consultas en segundos." },
   ],
-  dark: false,
+  dark: true,
   pageNum: 6,
   fonts,
 });
 
-// 7. Comparison Table
-renderCleanTable(pptx, pal, {
-  titleParts: [
-    { text: "Native industry fit ", accent: false },
-    { text: "without 12-month consulting queues", accent: true },
+renderHeroCenteredStatement(pptx, pal, {
+  figure: "10–20 años",
+  headline: "de retención fiscal y legal sin borrado accidental",
+  pillars: [
+    { icon: "shield", title: "100% Nube Google", detail: "0% en equipos locales. Si un PC falla, no se pierde un dato." },
+    { icon: "lock", title: "Bloqueo anti-borrado", detail: "Facturas y actas solo se anulan con motivo y responsable." },
+    { icon: "check", title: "Propiedad y salida libre", detail: "Backups continuos y descarga directa a Excel cuando auditoría pida." },
   ],
-  headers: ["Criterion", "In-House ERP", "Odoo", "SAP / Oracle"],
-  rows: [
-    ["Deployment", "Live Today", "6–12 months", "12–24 months"],
-    ["Code Ownership", "100% Owned", "Partner Lock-In", "Zero"],
-    ["Change Speed", "Hours / Days", "Weeks", "Months"],
-  ],
-  colW: [2.7, 3.0, 3.0, 3.0],
-  highlightCol: 1,
   pageNum: 7,
   fonts,
 });
 
-// 8. Horizontal Node Timeline
-renderNodeTimeline(pptx, pal, {
+renderRoadmapWithActions(pptx, pal, {
   titleParts: [
-    { text: "Three-phase rollout ", accent: false },
-    { text: "without halting daily operations", accent: true },
+    { text: "Plan de arranque en ", accent: false },
+    { text: "30 días y decisiones para hoy", accent: true },
   ],
   steps: [
-    { tag: "PHASE 01", title: "Field Validation", detail: "Confirm real forms and approval rules per area." },
-    { tag: "PHASE 02", title: "Opening Balances", detail: "Migrate active projects, Kardex, and contracts." },
-    { tag: "PHASE 03", title: "Phased Go-Live", detail: "Roll out module by module with direct support." },
+    { tag: "SEMANA 1", title: "Validación por áreas", detail: "15 min con cada área para cerrar topes, aprobaciones y formatos." },
+    { tag: "SEMANA 2–3", title: "Saldos iniciales", detail: "Carga de inventario real, contratos vigentes y consecutivos." },
+    { tag: "SEMANA 4", title: "Primer bloque en vivo", detail: "Puesta en marcha gradual con acompañamiento interno directo." },
   ],
-  activeIndex: 0,
-  dark: false,
+  decisionsTitle: "3 DECISIONES CONCRETAS PARA HOY",
+  decisions: [
+    "Dar luz verde oficial a Inteckno ERP como plataforma de la compañía.",
+    "Asignar 15 minutos esta semana con Administrativa, Proyectos y Comercial.",
+    "Autorizar cotización de proveedor DIAN y definir fecha de corte.",
+  ],
   pageNum: 8,
-  fonts,
-});
-
-// 9. Closing
-renderClosingSlide(pptx, pal, {
-  headline: "Ready for Phase 01.",
-  contactLine: "Approve focal points · Set cut-off date · Confirm e-invoicing quote",
   fonts,
 });
 
