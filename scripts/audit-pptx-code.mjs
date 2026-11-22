@@ -113,6 +113,10 @@ for (const file of allFiles) {
       findings.clutter.push(`${fileRel}:${lineNum} — Decorative AI-slop emoji in slide code`);
     }
 
+    if (/Ã[¡©­³º±]|â€“|â€”/.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — UTF-8 mojibake encoding bug detected (fix file encoding to clean UTF-8)`);
+    }
+
     if (/has_gridlines\s*=\s*True|showGridLines\s*:\s*true/i.test(line)) {
       findings.dataviz.push(`${fileRel}:${lineNum} — Chart gridlines enabled`);
     }

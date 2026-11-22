@@ -114,8 +114,9 @@ export function renderCoverSlide(pptx, palette, { titleParts, subtitle, contextP
     if (statsStrip.length > 0) {
       statsStrip.slice(0, 3).forEach((st, idx) => {
         const sy = 1.65 + idx * 1.65;
-        slide.addText(st.value, { x: 9.05, y: sy, w: 3.8, h: 0.7, fontFace: fonts.display, fontSize: 34, bold: true, color: palette.accent });
-        slide.addText(st.label, { x: 9.05, y: sy + 0.68, w: 3.8, h: 0.55, fontFace: fonts.body, fontSize: 14, color: palette.mutedOnDark, wrap: true });
+        const valSize = st.value.length > 9 ? 26 : 34;
+        slide.addText(st.value, { x: 8.95, y: sy, w: 4.0, h: 0.7, fontFace: fonts.display, fontSize: valSize, bold: true, color: palette.accent });
+        slide.addText(st.label, { x: 8.95, y: sy + 0.68, w: 4.0, h: 0.55, fontFace: fonts.body, fontSize: 14, color: palette.mutedOnDark, wrap: true });
       });
     }
   }
