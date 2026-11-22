@@ -1,43 +1,45 @@
 ---
 name: slide-color-pacing
-description: Defines studio-tested 60-30-10 slide color palettes, 4-step opacity ramps, dark/light alternating slide rhythm, and Morph agenda spotlight transitions.
+description: Color Theory (Color Wheel, Complementary, Analogous, Triadic, Monochromatic), Hue/Saturation/Value contrast, WCAG Accessibility, Psychology of Color, 80/10/10 distribution, and dark/light slide rhythm.
 ---
 
-# Color Systems & Slide Pacing
+# Color Theory, Harmonies & Slide Pacing
 
-Great decks feel like a curated exhibition—alternating quiet, bright reading slides with high-drama dark or full-bleed moments.
+Color is **not decoration**—it creates visual hierarchy, mood, contrast, and brand coherence.
 
-## 1. The 60-30-10 & 3-Color Rule
+## 1. The Color Wheel & 4 Classic Harmonies
 
-- **60% Base Canvas:** Matte Obsidian (`#070707` / `#111111`), Warm Off-White (`#F5F4F0` / `#F4F5F3`), or Editorial Cream (`#F1ECDA` / `#EBEBDF`).
-- **30% Structural Surface:** Slightly elevated card/panel tone or **4-step opacity ramp (`100% / 60% / 30% / 10%`)** of the foreground ink.
-- **10% Protagonist Accent:** **One** sharp accent reserved for the key takeaway, active timeline node, or inline "turn" highlight.
-
-### Studio-Tested HEX Palettes (Anti-AI-Slop)
-| Palette Name | Base Dark | Base Light / Surface | Protagonist Accent |
-|---|---|---|---|
-| **Obsidian & Citrine** | `#070707` | `#F4F5F3` / `#262626` | `#C8D636` (Surgical Citrine) |
-| **International Orange** | `#111111` | `#F5F4F0` (Warm Paper) | `#FF4D00` (Swiss Orange) |
-| **Navy & Steel** | `#26364D` | `#9DB4BE` (Muted Ice) | `#547182` + Crisp `#FFFFFF` |
-| **Plum & Lavender White** | `#4E4074` | `#F7F5FC` | `#4E4074` (Monochrome ink) |
-| **Rich Indigo & Warm Bone** | `#1A1265` | `#EBEBDF` | `#1A1265` + Coral/Gold tint |
-| **Slate & Cream** | `#2D343B` | `#F1ECDA` | `#758695` |
-| **Blush & Olive** | `#2E3320` | `#F9CDD5` | `#7A8450` |
-| **Butter & Cerulean** | `#1B364B` | `#FFEDA2` | `#4282AA` |
-| **Blush & Coral Macro** | `#2B1B18` | `#FFE4DC` | `#FF442B` |
+1. **Complementary (Opposites on the Wheel, e.g., Steel Blue + Signal Orange):** Maximum contrast and energy; ideal for highlighting one protagonist focal point against a calm base. Never place equal-intensity complementary hues side-by-side in text (causes visual vibration).
+2. **Analogous (Adjacent Hues, e.g., Navy + Teal + Slate):** Calm, unified, natural flow; designate **1 dominant hue** and use the other 2 sparingly so contrast doesn't flatten.
+3. **Triadic (3 Evenly Spaced Hues):** Vibrant and balanced; keep 2 hues muted/unsaturated so 1 accent leads.
+4. **Monochromatic (Tints, Shades & Tones of 1 Hue):** Ultra-clean, authoritative, zero visual noise; rely on **Value contrast** (deep dark vs crisp off-white) for legibility.
 
 ---
 
-## 2. Slide Rhythm & Density Pacing
+## 2. Hue, Saturation, Value & Accessibility
 
-**Never make 5 consecutive slides share the same background and layout.** Alternate deliberately:
+- **Hue:** The color family (Blue, Orange, Green).
+- **Saturation:** Purity/intensity. Use **low saturation** for backgrounds/surfaces and **high saturation** strictly for focal callouts.
+- **Value (Luminance) — The Secret to Readability:** Even two completely different hues become illegible if they share the same brightness/value. Always pair dark ink (`#0F172A`) on light bases (`#F8FAFC`) or crisp light ink (`#FFFFFF`) on dark bases (`#0F172A`).
+- **Accessibility Rules:**
+  - Meet WCAG AA (`>= 4.5:1`) contrast on all body text.
+  - Never place **red text on green** (or vice versa).
+  - Never convey meaning by color alone—pair color with labels, icons, or solid vs. dotted lines.
 
-1. **Slide 1 (Cover):** Full-bleed dark or macro-photo with masked/oversized typography.
-2. **Slide 2 (Agenda / Framing):** Dark background with `01–04` chapters where **only Chapter 01** sits inside a bright accent spotlight card (ready for PowerPoint *Morph*).
-3. **Slide 3 (Problem / Context):** Warm off-white (`#F5F4F0`) split layout — short flush-left argument + sparse diagram.
-4. **Slide 4 (Hero Metric Breather):** Deep matte dark slide with **1 giant standalone number** (`63%` or `$5.5T`) and 1-line caption.
-5. **Slide 5 (Data / Comparison):** Light slide with clean axis-free chart or direct-labeled horizontal bars.
-6. **Slide 6 (Product / Solution):** Asymmetric Bento or macro-photo split with `1px` translucent spec table.
-7. **Slide 7 (Quote / Human Moment):** Centered monochrome portrait + oversized opposing quote marks.
-8. **Slide 8–10 (Proof, Roadmap, Table):** Node-and-line timeline + clean zebra table.
-9. **Final Slide (Closing):** Minimalist single-word focal closing (`THANKS` / `NEXT STEPS`) + subtle visual + clean contact line.
+---
+
+## 3. Distribution & Color Psychology
+
+- **80 / 10 / 10 (or 60 / 30 / 10) Budget:** ~80% dominant background canvas, ~10% structural surface/text neutrals, ~10% **single protagonist accent** reserved for the key takeaway.
+- **Color Mood by Industry:**
+  - *Blue / Navy:* Trust, engineering rigor, enterprise reliability.
+  - *Orange / Amber:* Industrial energy, urgency, decisive action.
+  - *Green / Emerald:* Financial growth, sustainability, approval.
+  - *Terracotta / Burgundy / Cream:* Warmth, hospitality, human craft.
+  - *Obsidian / Bone / Crimson:* Luxury, authority, editorial precision.
+
+---
+
+## 4. Visual Rhythm Across the Deck
+
+Alternate **deep matte dark slides** (covers, hero metrics, feature grids) with **clean light/warm off-white slides** (charts, tables, comparisons, timelines) so the audience stays visually engaged from Slide 1 to Slide 10.

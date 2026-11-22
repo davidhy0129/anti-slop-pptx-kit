@@ -18,24 +18,16 @@ Compatible desde el minuto cero con **Antigravity**, **Claude Code**, **OpenAI C
 
 ---
 
-## Estructura del Repositorio
+## Orden de Diseño y Arquitectura del Repositorio (7 Pilares)
 
-- `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` / `.cursor/rules/` — Contratos obligatorios para cualquier agente.
-- `skills/` (**8 Skills**):
-  - `anti-ai-slop-slides` — Purga estructural, prohibición de polígonos DIY, sombras, barras laterales y eyebrows.
-  - `slide-grid-typography` — Retícula 16:9 (Suiza / Tercios), escala 5x–10x y pares tipográficos reales.
-  - `slide-color-pacing` — Regla 80/10/10 y 60/30/10, 13 paletas HEX verificadas, rampas de opacidad y ritmo oscuro/claro.
-  - `data-viz-hero-metrics` — Matriz de selección de gráficos (*Waterfall*, *Single-Focus Bars*, *Dot-Matrix*, *Milestone Curve*) y regla `<2 segundos`.
-  - `editorial-imagery-motifs` — Fotos a sangre sin *efecto pegote*, B&N 0% saturación, *Split Color Swap*, vectores y compuerta de 5 preguntas.
-  - `narrative-storytelling-decks` — SCQA, Pirámide de Minto, Regla 5×5 / 6×6, *Keyword Bolding*, *Action Titles* y *Speaker Notes*.
-  - `pptx-code-architecture` — Arquitectura modular `PptxGenJS` / `python-pptx` y QA visual headless.
-  - `editorial-pdf-design` — Diseño de PDFs ejecutivos, reportes, propuestas y exportación limpia 16:9 / A4 / Letter.
-- `templates/`:
-  - `pptxgenjs-studio-kit.mjs` (16 arquetipos planos sin sombras + 13 paletas + `speakerNotes`)
-  - `python_pptx_studio.py` (paridad completa en Python con `shadow.inherit = False`)
-  - `editorial-pdf-studio.html` (plantilla HTML/CSS `@page` lista para imprimir/exportar a PDF)
-- `references/` — Planos por tipo de deck, sistemas de color/tipografía y flujos de prompts **AC-IOC**.
-- `agents/` (**5 Roles**), `workflows/` (**3 Flujos**), `prompts/`, `examples/` y `scripts/`.
+El repositorio estructura el flujo profesional exactamente en el orden en que trabaja un diseñador gráfico senior:
+1. **Fundamentos del Diseño** (`skills/graphic-design-fundamentals/`) — Jerarquía, Contraste, Alineación, Proximidad/Contiguidad Espacial, Repetición, Balance y Espacio en Blanco.
+2. **Teoría del Color y Paletas** (`skills/slide-color-pacing/` + `references/color-typography-systems.md`) — Círculo cromático (complementarios, análogos, tríadas, monocromáticos), Matiz/Saturación/Valor, accesibilidad WCAG y psicología del color por industria.
+3. **Tipografía y Jerarquía** (`skills/slide-grid-typography/`) — Serif vs. Sans-Serif, máximo 2 familias, tamaños legibles en sala (`14–16pt+` cuerpo, `28–40pt` títulos), peso, interlineado y tracking.
+4. **Imágenes, Iconos, Gráficos y Diagramas** (`skills/editorial-imagery-motifs/` + `skills/data-viz-hero-metrics/`) — Diferenciación clara entre foto, ilustración, icono, diagrama, gráfico nativo editable (`addChart`) y captura de pantalla.
+5. **Retículas, Márgenes y Layouts** (`skills/domain-art-direction-router/` + `references/industry-design-matrix.md`) — Selección automática de paleta, fuentes y composición según la industria del prompt.
+6. **Ritmo Visual y Anti-AI-Slop** (`skills/anti-ai-slop-slides/` + `skills/narrative-storytelling-decks/`) — SCQA, Minto Pyramid, 1 elemento dominante, asimetría controlada, bloques de color y `speakerNotes`.
+7. **Ingeniería PPTX y PDF Editorial** (`skills/pptx-code-architecture/` + `skills/editorial-pdf-design/` + `templates/`) — Librerías listas en `PptxGenJS`, `python-pptx` y HTML/CSS `@page` para PDFs, más el auditor `scripts/audit-pptx-code.mjs`.
 
 ---
 
