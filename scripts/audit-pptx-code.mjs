@@ -68,6 +68,14 @@ for (const file of allFiles) {
       findings.critical.push(`${fileRel}:${lineNum} — UTF-8 mojibake encoding bug detected`);
     }
 
+    if (/rotate\s*:\s*(90|270)/.test(line) && /w\s*:\s*0\.[0-9]/.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — Narrow width (w < 1) on rotated text wraps awkwardly; use w >= 3.0 before rotating`);
+    }
+
+    if (/(addShape|addFlatShape|addTranslucentAccent|addImage)/.test(line) && /(x\s*:\s*-0\.|y\s*:\s*-0\.)/.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — Negative x/y overhangs slide bounds in PowerPoint Online; keep 0 <= x, y`);
+    }
+
     if (DIY_POLYGON_RE.test(line)) {
       findings.critical.push(`${fileRel}:${lineNum} — Hand-drawn polygon illustration (triangle/trapezoid) forbidden`);
     }

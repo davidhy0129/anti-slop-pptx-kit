@@ -1,55 +1,40 @@
 ---
 name: creative-art-direction
-description: Transforms AI presentations from flat templates into bespoke, lively visual storytelling using visual metaphors, 3-concept ideation, textual moodboards, translucent industry background elements, chapter color shifts, controlled overlap, 7 contrast types, and the 10-question quality filter.
+description: Dribbble/Behance-grade visual storytelling & art direction: 3-concept ideation, textual moodboards, hard-bounded photo masking, marker highlights, circular ring gauges, Rule of Odds, Squint Test, mathematical centering, and 10-question quality gate.
 ---
 
-# Creative Art Direction & Visual Storytelling (v9.0)
+# Creative Art Direction & Visual Storytelling (v10.0)
 
-Creativity is **not** adding random icons, separator lines, or extra colors. It is choosing **one strong visual metaphor** and using color, typography, photography/shapes, composition, and rhythm to express it memorably.
+Synthesized from Dribbble, Behance, Canva Visual Hierarchy/Composition, Adobe, Toptal, and DesignForce.
 
-## 1. Create a Concept, NOT a Template (Step 0)
+## 1. Create a Concept & Moodboard First (Step 0)
 
 Before coding any slide:
-1. **Propose 3 Distinct Creative Concepts** (visual metaphor + emotional tone + art direction idea).
-   - *Examples:* *"Ascending staircase of scale"*, *"Precision financial ledger"*, *"Warm editorial magazine spread"*, *"Industrial blueprint in motion"*.
-2. **Pick the Best Concept & Output a Textual Moodboard:**
-   - Style references (editorial, brand, or publication).
-   - Visual keywords (3–5 words).
-   - **Color Strategy:** 1 dominant + 1 support + 1 accent; **shift background/accent polarity when the chapter or emotion changes** (never let dark-on-slightly-darker or low-contrast text happen!).
-   - **Background Treatment:** Solid matte canvas layered with **translucent industry-related geometric shapes** (`80–92%` transparency, `0px` border, zero drop shadow), enlarged photography, or subtle tonal zones.
-   - **Typography:** Either **weights of ONE cohesive family** (`Bold / SemiBold / Regular` — e.g. `Montserrat` or `DM Sans`) OR 1 expressive display + 1 neutral body that genuinely harmonize.
+1. **Generate 3 Distinct Creative Concepts** (visual metaphor + emotional tone + art direction idea) and pick the strongest.
+2. **Lock a Textual Moodboard:**
+   - Editorial/brand references & 3–5 visual keywords.
+   - **Industry-Tailored Color Story** with Value/Temperature/Saturation contrast and **chapter color shifts** (never dark-on-slightly-darker!).
+   - **Cohesive Typography:** 1 multi-weight family (`Montserrat` or `DM Sans`) OR 1 expressive display + 1 neutral body that genuinely harmonize (`>= 14pt` body, `>= 13pt` tables).
+   - **Visual Assets Plan:** Real photography (hard-bounded inside `13.333" × 7.5"`), `1.5–2px` uniform outline icons inside consistent squircle/circle badges, and native editable PowerPoint charts (`bar`, `doughnut`, `line`).
 
 ---
 
-## 2. Six Rules for Lively, Non-AI Slides
+## 2. Dribbble & Behance Studio Composition Rules
 
-1. **Break Symmetry & Layer Depth:** Avoid putting every element inside identical bordered squares or dividing everything with random `1px` lines. Use **borderless rounded color blocks**, **translucent background accents**, **elements bleeding off the slide edge**, and **controlled overlap** (e.g., headline overlapping a tinted zone or photo).
-2. **Use All 7 Forms of Contrast:**
-   - Large vs. Small (`5x–10x` scale)
-   - Photo vs. Flat Color
-   - Serif vs. Sans-Serif (when harmonious) or Bold vs. Light weights
-   - Dense Info vs. Breathing Space
-   - Organic / Translucent Geometry vs. Clean Structure
-   - Giant Data Figure vs. Minimal Explanation
-   - Visual Tension vs. Ordered Grid
-3. **Give the Sequence Rhythm:** Alternate slide types deliberately:
-   *Concept Cover -> Bold Statement -> Full-Bleed Photo/Visual -> Giant Data + Context -> Native Chart -> Asymmetric Comparison -> Process Diagram -> Editorial Quote -> Action Closing.*
-4. **Make Typography Part of the Graphic Design:** Giant hero numbers, single accent keywords inside headlines, **subtle vertical/rotated edge labels (`90°` / `270°`)**, and clean scale hierarchy.
-5. **Meaningful Density (Not Empty Minimalism):** Do not strip slides bare if the audience needs context. Balance rich, scannable facts (`14–16pt+`) with strong focal anchors and clean whitespace.
-6. **Replace Decoration with Meaning:** Ask before keeping any shape, line, or icon: *"Does this explain, emphasize, or evoke emotion?"* If not, remove it.
+1. **Strict Bounds — ZERO Overhanging Shapes:** Every shape, photo, or translucent accent MUST stay strictly inside `0 <= x`, `x + w <= 13.333`, `0 <= y`, `y + h <= 7.5` (PowerPoint Online shows anything outside these bounds hanging off the canvas!). Maintain `6–8%` (`0.75"–0.85"`) outer safe margins for all text and content.
+2. **Mathematical Centering Inside Shapes:** When placing a number or label inside a circle, ring, or card, compute exact coordinates from the container's center and use `align: "center"` + `valign: "middle"` — never eyeball Y-offsets.
+3. **Hard-Bounded Photo Masking + Directional Scrims:** Place real photos inside rounded cards, 50/50 vertical splits, or circular rings; use subtle dark scrims (`35–55%` transparency) when placing white display type over photography.
+4. **High-Impact Studio Patterns (Rotate Across Slides — Never Repeat):**
+   - **Marker Highlight Block:** Place a solid accent rectangle behind 1–2 key words in a headline (*Structa* style) instead of plain colored text.
+   - **Circular Ring / Donut Gauge (`doughnut` chart):** Isolate a key percentage (`52%`, `67%`) inside a clean ring with the big figure centered mathematically inside.
+   - **Hub-and-Spoke Profile:** Center a circular emblem/photo flanked symmetrically by odd/balanced icon callouts (`Rule of Odds`: 3 or 5 focal items).
+   - **Asymmetric Split / Staggered Milestones:** Divide `55/45` or `60/40` with generous negative space, never random `1px` separator lines everywhere.
+   - **Vertical Edge Metadata Safety:** If rotating text (`rotate: 270`), always set `w >= 3.0, h: 0.4` BEFORE rotation so it stays single-line and never wraps into the headline.
 
 ---
 
-## 3. Mandatory 10-Question Final Quality Filter
+## 3. Quick Verification Tests & 10-Question Quality Gate
 
-Before delivering any deck or PDF, verify every slide against all 10 checks:
-1. Is there a clear visual idea?
-2. Does the eye immediately know what to look at first?
-3. Is there one dominant focal point?
-4. Does the color communicate hierarchy/mood with crisp contrast (never dark-on-dark)?
-5. Does the typography have personality, harmony, and legible room-scale sizing?
-6. Does every image/icon/shape add context, emotion, or proof?
-7. Does the layout change genuinely to match each slide's content?
-8. Is there real breathing room without looking incomplete or empty?
-9. Does it look built for this exact topic/brand rather than "any generic company"?
-10. Could you remove any decorative line/border without losing the message?
+- **3-Point Visual Flow:** Map `1st stop -> 2nd stop -> 3rd stop` (*F-pattern* for dense info, *Z-pattern* for visual spreads).
+- **Squint Test & 5-Second Recall Test:** Squint until details blur — the intended focal point must dominate immediately.
+- **10-Question Filter:** Clear visual idea? Eye knows where to look first? One dominant focal point? Crisp value contrast? Harmonious typography? Meaningful visuals? Varied layouts per content? True breathing room? Bespoke to this brand/topic? Zero unnecessary lines/borders?
