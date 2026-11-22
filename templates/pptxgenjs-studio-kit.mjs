@@ -1,75 +1,82 @@
 /**
- * anti-slop-pptx-kit — PptxGenJS Studio Component Library (v2.0)
- * Drop-in 16:9 graphic-design slide archetypes. Import instead of writing drawCard() loops.
+ * anti-slop-pptx-kit — PptxGenJS Studio Component Library (v2.1)
+ * Includes:
+ * - 8 Color-Harmony Palettes (60-30-10 + Warm-vs-Cool contrast)
+ * - 4 Curated Font Systems (non-AI typography)
+ * - 11 Graphic-Design Slide Archetypes + Vector Motifs (CAD boxes, concentric rings, diagrams, optional photo scrims)
  */
 
 export const SLIDE = { w: 13.333, h: 7.5, mx: 0.8, my: 0.7, gap: 0.35 };
 
 export const PALETTES = {
   OBSIDIAN_CITRINE: {
-    darkBg: "0B0C0E",
-    darkSurface: "17191D",
-    lightBg: "F4F5F3",
-    lightSurface: "FFFFFF",
-    inkOnDark: "F7F7F5",
-    mutedOnDark: "8F949E",
-    ruleOnDark: "262930",
-    inkOnLight: "121316",
-    mutedOnLight: "5C616B",
-    ruleOnLight: "E0E2DF",
-    accent: "C8D636",
-    inkOnAccent: "0B0C0E",
+    darkBg: "0B0C0E", darkSurface: "17191D", lightBg: "F4F5F3", lightSurface: "FFFFFF",
+    inkOnDark: "F7F7F5", mutedOnDark: "8F949E", ruleOnDark: "262930",
+    inkOnLight: "121316", mutedOnLight: "5C616B", ruleOnLight: "E0E2DF",
+    accent: "C8D636", inkOnAccent: "0B0C0E",
   },
   SWISS_ORANGE: {
-    darkBg: "111111",
-    darkSurface: "1D1D1D",
-    lightBg: "F5F4F0",
-    lightSurface: "FFFFFF",
-    inkOnDark: "FAF9F6",
-    mutedOnDark: "94918B",
-    ruleOnDark: "2A2927",
-    inkOnLight: "141413",
-    mutedOnLight: "63605A",
-    ruleOnLight: "E2DFD7",
-    accent: "FF4D00",
-    inkOnAccent: "FFFFFF",
+    darkBg: "111111", darkSurface: "1D1D1D", lightBg: "F5F4F0", lightSurface: "FFFFFF",
+    inkOnDark: "FAF9F6", mutedOnDark: "94918B", ruleOnDark: "2A2927",
+    inkOnLight: "141413", mutedOnLight: "63605A", ruleOnLight: "E2DFD7",
+    accent: "FF4D00", inkOnAccent: "FFFFFF",
   },
   INDIGO_BONE: {
-    darkBg: "0B1325",
-    darkSurface: "14203B",
-    lightBg: "F6F5F1",
-    lightSurface: "FFFFFF",
-    inkOnDark: "FAFAF8",
-    mutedOnDark: "919DB5",
-    ruleOnDark: "223152",
-    inkOnLight: "0B1325",
-    mutedOnLight: "586174",
-    ruleOnLight: "E3E1D8",
-    accent: "F2B53A",
-    inkOnAccent: "0B1325",
+    darkBg: "0B1325", darkSurface: "14203B", lightBg: "F6F5F1", lightSurface: "FFFFFF",
+    inkOnDark: "FAFAF8", mutedOnDark: "919DB5", ruleOnDark: "223152",
+    inkOnLight: "0B1325", mutedOnLight: "586174", ruleOnLight: "E3E1D8",
+    accent: "F2B53A", inkOnAccent: "0B1325",
+  },
+  DEEP_TEAL_CREAM: {
+    darkBg: "013330", darkSurface: "084743", lightBg: "F3EBDD", lightSurface: "FAF6EE",
+    inkOnDark: "F7F3EA", mutedOnDark: "9CC2BE", ruleOnDark: "135954",
+    inkOnLight: "013330", mutedOnLight: "4A6B67", ruleOnLight: "DDD2BF",
+    accent: "FF6A1F", inkOnAccent: "FFFFFF",
+  },
+  NAVY_STEEL: {
+    darkBg: "26364D", darkSurface: "324561", lightBg: "F4F7F9", lightSurface: "FFFFFF",
+    inkOnDark: "FFFFFF", mutedOnDark: "9DB4BE", ruleOnDark: "435A7A",
+    inkOnLight: "26364D", mutedOnLight: "547182", ruleOnLight: "D8E2E7",
+    accent: "547182", inkOnAccent: "FFFFFF",
+  },
+  PLUM_LAVENDER: {
+    darkBg: "342952", darkSurface: "4E4074", lightBg: "F7F5FC", lightSurface: "FFFFFF",
+    inkOnDark: "F7F5FC", mutedOnDark: "BEB5D9", ruleOnDark: "5E4F87",
+    inkOnLight: "2A2042", mutedOnLight: "6E628C", ruleOnLight: "E5DFF2",
+    accent: "4E4074", inkOnAccent: "FFFFFF",
+  },
+  BLUSH_OLIVE: {
+    darkBg: "2E3320", darkSurface: "3E452C", lightBg: "FAF3F4", lightSurface: "FFFFFF",
+    inkOnDark: "F9CDD5", mutedOnDark: "B8C0A2", ruleOnDark: "51593C",
+    inkOnLight: "2E3320", mutedOnLight: "666B54", ruleOnLight: "EAD9DC",
+    accent: "7A8450", inkOnAccent: "FFFFFF",
+  },
+  CERULEAN_BUTTER: {
+    darkBg: "183145", darkSurface: "23445E", lightBg: "FFF9E6", lightSurface: "FFFFFF",
+    inkOnDark: "FFEDA2", mutedOnDark: "9CBBD1", ruleOnDark: "335B7A",
+    inkOnLight: "183145", mutedOnLight: "4C6B82", ruleOnLight: "F0E2B6",
+    accent: "4282AA", inkOnAccent: "FFFFFF",
   },
 };
 
-export const FONTS = {
-  display: "Montserrat",
-  body: "Poppins",
-  mono: "Consolas",
+export const FONT_SYSTEMS = {
+  SWISS_TECH: { display: "Switzer", body: "Poppins", mono: "Consolas" },
+  BOLD_PRODUCT: { display: "Montserrat", body: "Poppins", mono: "Consolas" },
+  EDITORIAL_LUXURY: { display: "Georgia", body: "DM Sans", mono: "Consolas" },
+  MODERN_STUDIO: { display: "Familjen Grotesk", body: "DM Sans", mono: "Consolas" },
 };
 
-function addTurnTitle(slide, parts, { x, y, w, h, fontSize = 30, ink, accent }) {
+export const FONTS = FONT_SYSTEMS.BOLD_PRODUCT;
+
+function addTurnTitle(slide, parts, { x, y, w, h, fontSize = 30, ink, accent, fonts = FONTS }) {
   const runs = parts.map((p) => ({
     text: p.text,
-    options: {
-      fontFace: FONTS.display,
-      fontSize,
-      bold: true,
-      color: p.accent ? accent : ink,
-    },
+    options: { fontFace: fonts.display, fontSize, bold: true, color: p.accent ? accent : ink },
   }));
   slide.addText(runs, { x, y, w, h, valign: "top", wrap: true, lineSpacingMultiple: 1.08 });
 }
 
-function addQuietPageNumber(slide, pageNum, mutedColor) {
+function addQuietPageNumber(slide, pageNum, mutedColor, fonts = FONTS) {
   if (!pageNum) return;
   slide.addText(String(pageNum).padStart(2, "0"), {
     x: SLIDE.w - SLIDE.mx - 0.8,
@@ -77,66 +84,86 @@ function addQuietPageNumber(slide, pageNum, mutedColor) {
     w: 0.8,
     h: 0.3,
     align: "right",
-    fontFace: FONTS.mono,
+    fontFace: fonts.mono,
     fontSize: 9,
     color: mutedColor,
   });
 }
 
-/** 1. Minimalist Full-Bleed Cover (Dark) */
-export function renderCoverSlide(pptx, palette, { titleParts, subtitle, metaLine = "" }) {
+/** Vector Motif: CAD/Figma Selection Box with 4px corner handles */
+export function addCadCallout(slide, pptx, { x, y, w, h, label, accent, ink, fonts = FONTS }) {
+  slide.addShape(pptx.ShapeType.rect, {
+    x, y, w, h,
+    fill: { color: "FFFFFF", transparency: 100 },
+    line: { color: accent, width: 0.75 },
+  });
+  const hs = 0.07;
+  [[x - hs / 2, y - hs / 2], [x + w - hs / 2, y - hs / 2], [x - hs / 2, y + h - hs / 2], [x + w - hs / 2, y + h - hs / 2]].forEach(([hx, hy]) => {
+    slide.addShape(pptx.ShapeType.rect, { x: hx, y: hy, w: hs, h: hs, fill: { color: accent }, line: { color: accent, width: 0 } });
+  });
+  slide.addText(label.toUpperCase(), {
+    x: x + 0.08, y: y + 0.03, w: w - 0.16, h: h - 0.06,
+    fontFace: fonts.mono, fontSize: 9, bold: true, color: ink, valign: "middle", align: "center",
+  });
+}
+
+/** Vector Motif: Concentric Target Rings (instead of fat block arrows) */
+export function addConcentricTarget(slide, pptx, { cx, cy, outerR = 0.45, color }) {
+  [1, 0.62, 0.28].forEach((scale, idx) => {
+    const d = outerR * 2 * scale;
+    slide.addShape(pptx.ShapeType.ellipse, {
+      x: cx - d / 2,
+      y: cy - d / 2,
+      w: d,
+      h: d,
+      fill: { color: idx === 2 ? color : "FFFFFF", transparency: idx === 2 ? 0 : 100 },
+      line: { color, width: idx === 0 ? 1 : 1.5, transparency: idx === 0 ? 60 : 0 },
+    });
+  });
+}
+
+/** 1. Minimalist Cover (supports optional right-side image or clean architectural target) */
+export function renderCoverSlide(pptx, palette, { titleParts, subtitle, metaLine = "", imagePath = null, fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };
 
+  if (imagePath) {
+    slide.addImage({ path: imagePath, x: 7.4, y: 0, w: 5.933, h: SLIDE.h, sizing: { type: "cover", w: 5.933, h: SLIDE.h } });
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 7.4, y: 0, w: 5.933, h: SLIDE.h,
+      fill: { color: palette.darkBg, transparency: 55 },
+      line: { color: palette.darkBg, width: 0 },
+    });
+  } else {
+    addConcentricTarget(slide, pptx, { cx: 11.2, cy: 3.75, outerR: 1.55, color: palette.accent });
+  }
+
   if (metaLine) {
     slide.addText(metaLine.toUpperCase(), {
-      x: SLIDE.mx,
-      y: SLIDE.my,
-      w: 8,
-      h: 0.3,
-      fontFace: FONTS.mono,
-      fontSize: 9,
-      color: palette.mutedOnDark,
-      charSpacing: 2,
+      x: SLIDE.mx, y: SLIDE.my, w: 7.5, h: 0.3,
+      fontFace: fonts.mono, fontSize: 9, color: palette.mutedOnDark, charSpacing: 2,
     });
   }
 
   addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: 2.05,
-    w: SLIDE.w - SLIDE.mx * 2 - 1.2,
-    h: 2.5,
-    fontSize: 48,
-    ink: palette.inkOnDark,
-    accent: palette.accent,
+    x: SLIDE.mx, y: 1.95, w: imagePath ? 6.2 : 9.2, h: 2.6, fontSize: 46, ink: palette.inkOnDark, accent: palette.accent, fonts,
   });
 
   slide.addShape(pptx.ShapeType.line, {
-    x: SLIDE.mx,
-    y: 5.05,
-    w: 1.4,
-    h: 0,
-    line: { color: palette.accent, width: 2.5 },
+    x: SLIDE.mx, y: 4.95, w: 1.4, h: 0, line: { color: palette.accent, width: 2.5 },
   });
 
   if (subtitle) {
     slide.addText(subtitle, {
-      x: SLIDE.mx,
-      y: 5.3,
-      w: 7.5,
-      h: 0.9,
-      fontFace: FONTS.body,
-      fontSize: 15,
-      color: palette.mutedOnDark,
-      wrap: true,
-      lineSpacingMultiple: 1.25,
+      x: SLIDE.mx, y: 5.2, w: imagePath ? 6.0 : 7.5, h: 0.95,
+      fontFace: fonts.body, fontSize: 14.5, color: palette.mutedOnDark, wrap: true, lineSpacingMultiple: 1.25,
     });
   }
   return slide;
 }
 
-/** 2. Editorial Split (Hairline-separated rows on right, bold thesis on left — NO boxes) */
-export function renderEditorialSplit(pptx, palette, { titleParts, leadText, rows, dark = false, pageNum }) {
+/** 2. Editorial Split (with optional CAD tag + hairline rows, zero card boxes) */
+export function renderEditorialSplit(pptx, palette, { titleParts, leadText, rows, tagLabel = "", dark = false, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   const bg = dark ? palette.darkBg : palette.lightBg;
   const ink = dark ? palette.inkOnDark : palette.inkOnLight;
@@ -144,180 +171,73 @@ export function renderEditorialSplit(pptx, palette, { titleParts, leadText, rows
   const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
   slide.background = { color: bg };
 
+  if (tagLabel) {
+    addCadCallout(slide, pptx, { x: SLIDE.mx, y: SLIDE.my, w: 1.85, h: 0.32, label: tagLabel, accent: palette.accent, ink, fonts });
+  }
+
   addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: SLIDE.my + 0.1,
-    w: 4.8,
-    h: 2.4,
-    fontSize: 28,
-    ink,
-    accent: palette.accent,
+    x: SLIDE.mx, y: tagLabel ? 1.25 : SLIDE.my + 0.1, w: 4.8, h: 2.3, fontSize: 27, ink, accent: palette.accent, fonts,
   });
 
   if (leadText) {
     slide.addText(leadText, {
-      x: SLIDE.mx,
-      y: 3.3,
-      w: 4.6,
-      h: 1.8,
-      fontFace: FONTS.body,
-      fontSize: 13.5,
-      color: muted,
-      wrap: true,
-      lineSpacingMultiple: 1.35,
+      x: SLIDE.mx, y: 3.7, w: 4.6, h: 1.8, fontFace: fonts.body, fontSize: 13.5, color: muted, wrap: true, lineSpacingMultiple: 1.35,
     });
   }
 
   const rightX = 6.2;
   const rightW = SLIDE.w - rightX - SLIDE.mx;
-  const rowH = Math.min(1.15, (SLIDE.h - SLIDE.my * 2 - 0.5) / Math.max(rows.length, 1));
+  const rowH = Math.min(1.18, (SLIDE.h - SLIDE.my * 2 - 0.5) / Math.max(rows.length, 1));
 
   rows.forEach((row, i) => {
     const y = SLIDE.my + 0.15 + i * rowH;
     if (i > 0) {
-      slide.addShape(pptx.ShapeType.line, {
-        x: rightX,
-        y: y - 0.12,
-        w: rightW,
-        h: 0,
-        line: { color: rule, width: 1 },
-      });
+      slide.addShape(pptx.ShapeType.line, { x: rightX, y: y - 0.12, w: rightW, h: 0, line: { color: rule, width: 1 } });
     }
-    slide.addText(row.label, {
-      x: rightX,
-      y,
-      w: rightW,
-      h: 0.34,
-      fontFace: FONTS.display,
-      fontSize: 14,
-      bold: true,
-      color: ink,
-    });
-    slide.addText(row.detail, {
-      x: rightX,
-      y: y + 0.36,
-      w: rightW,
-      h: rowH - 0.48,
-      fontFace: FONTS.body,
-      fontSize: 12,
-      color: muted,
-      wrap: true,
-    });
+    slide.addText(row.label, { x: rightX, y, w: rightW, h: 0.34, fontFace: fonts.display, fontSize: 14, bold: true, color: ink });
+    slide.addText(row.detail, { x: rightX, y: y + 0.36, w: rightW, h: rowH - 0.48, fontFace: fonts.body, fontSize: 12, color: muted, wrap: true });
   });
 
-  addQuietPageNumber(slide, pageNum, muted);
+  addQuietPageNumber(slide, pageNum, muted, fonts);
   return slide;
 }
 
-/** 3. Hero KPI Breather (1 massive standalone metric, zero cards) */
-export function renderHeroKpiBreather(pptx, palette, { figure, caption, footnote = "", pageNum }) {
+/** 3. Hero KPI Breather */
+export function renderHeroKpiBreather(pptx, palette, { figure, caption, footnote = "", pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };
-
-  slide.addText(figure, {
-    x: SLIDE.mx,
-    y: 1.8,
-    w: SLIDE.w - SLIDE.mx * 2,
-    h: 2.1,
-    fontFace: FONTS.display,
-    fontSize: 104,
-    bold: true,
-    color: palette.accent,
-  });
-
-  slide.addText(caption, {
-    x: SLIDE.mx,
-    y: 4.15,
-    w: 8.6,
-    h: 1.2,
-    fontFace: FONTS.display,
-    fontSize: 26,
-    bold: true,
-    color: palette.inkOnDark,
-    wrap: true,
-    lineSpacingMultiple: 1.15,
-  });
-
+  slide.addText(figure, { x: SLIDE.mx, y: 1.8, w: SLIDE.w - SLIDE.mx * 2, h: 2.1, fontFace: fonts.display, fontSize: 102, bold: true, color: palette.accent });
+  slide.addText(caption, { x: SLIDE.mx, y: 4.15, w: 8.6, h: 1.2, fontFace: fonts.display, fontSize: 26, bold: true, color: palette.inkOnDark, wrap: true, lineSpacingMultiple: 1.15 });
   if (footnote) {
-    slide.addText(footnote, {
-      x: SLIDE.mx,
-      y: 5.55,
-      w: 8.0,
-      h: 0.6,
-      fontFace: FONTS.body,
-      fontSize: 12.5,
-      color: palette.mutedOnDark,
-      wrap: true,
-    });
+    slide.addText(footnote, { x: SLIDE.mx, y: 5.55, w: 8.0, h: 0.6, fontFace: fonts.body, fontSize: 12.5, color: palette.mutedOnDark, wrap: true });
   }
-
-  addQuietPageNumber(slide, pageNum, palette.mutedOnDark);
+  addQuietPageNumber(slide, pageNum, palette.mutedOnDark, fonts);
   return slide;
 }
 
-/** 4. Dot-Matrix / Waffle Chart (10x4 circles, zero clutter) */
-export function renderDotMatrixSlide(pptx, palette, { titleParts, bigPercent, filledDots, totalDots = 40, caption, pageNum }) {
+/** 4. Dot-Matrix / Waffle Chart */
+export function renderDotMatrixSlide(pptx, palette, { titleParts, bigPercent, filledDots, totalDots = 40, caption, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 10.5, h: 1.1, fontSize: 26, ink: palette.inkOnDark, accent: palette.accent, fonts });
+  slide.addText(bigPercent, { x: SLIDE.mx, y: 2.35, w: 4.5, h: 1.5, fontFace: fonts.display, fontSize: 76, bold: true, color: palette.accent });
+  slide.addText(caption, { x: SLIDE.mx, y: 4.05, w: 4.3, h: 1.4, fontFace: fonts.body, fontSize: 14, color: palette.mutedOnDark, wrap: true, lineSpacingMultiple: 1.3 });
 
-  addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: SLIDE.my,
-    w: 10.5,
-    h: 1.1,
-    fontSize: 26,
-    ink: palette.inkOnDark,
-    accent: palette.accent,
-  });
-
-  slide.addText(bigPercent, {
-    x: SLIDE.mx,
-    y: 2.35,
-    w: 4.5,
-    h: 1.5,
-    fontFace: FONTS.display,
-    fontSize: 78,
-    bold: true,
-    color: palette.accent,
-  });
-
-  slide.addText(caption, {
-    x: SLIDE.mx,
-    y: 4.05,
-    w: 4.3,
-    h: 1.4,
-    fontFace: FONTS.body,
-    fontSize: 14,
-    color: palette.mutedOnDark,
-    wrap: true,
-    lineSpacingMultiple: 1.3,
-  });
-
-  const cols = 10;
-  const dotSize = 0.36;
-  const dotGap = 0.16;
-  const startX = 6.2;
-  const startY = 2.45;
-
+  const cols = 10, dotSize = 0.36, dotGap = 0.16, startX = 6.2, startY = 2.45;
   for (let i = 0; i < totalDots; i++) {
-    const r = Math.floor(i / cols);
-    const c = i % cols;
+    const r = Math.floor(i / cols), c = i % cols;
     slide.addShape(pptx.ShapeType.ellipse, {
-      x: startX + c * (dotSize + dotGap),
-      y: startY + r * (dotSize + dotGap),
-      w: dotSize,
-      h: dotSize,
+      x: startX + c * (dotSize + dotGap), y: startY + r * (dotSize + dotGap), w: dotSize, h: dotSize,
       fill: { color: i < filledDots ? palette.accent : palette.darkSurface },
       line: { color: i < filledDots ? palette.accent : palette.ruleOnDark, width: 1 },
     });
   }
-
-  addQuietPageNumber(slide, pageNum, palette.mutedOnDark);
+  addQuietPageNumber(slide, pageNum, palette.mutedOnDark, fonts);
   return slide;
 }
 
-/** 5. Horizontal Node-and-Line Timeline (replaces PASO 01/02/03 box spam) */
-export function renderNodeTimeline(pptx, palette, { titleParts, steps, activeIndex = 0, dark = false, pageNum }) {
+/** 5. Axis-Free Milestone Curve (native vector line segments + labeled nodes) */
+export function renderMilestoneCurve(pptx, palette, { titleParts, points, dark = false, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   const bg = dark ? palette.darkBg : palette.lightBg;
   const ink = dark ? palette.inkOnDark : palette.inkOnLight;
@@ -325,101 +245,133 @@ export function renderNodeTimeline(pptx, palette, { titleParts, steps, activeInd
   const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
   slide.background = { color: bg };
 
-  addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: SLIDE.my,
-    w: 10.5,
-    h: 1.2,
-    fontSize: 28,
-    ink,
-    accent: palette.accent,
-  });
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 10.8, h: 1.15, fontSize: 26, ink, accent: palette.accent, fonts });
 
-  const lineY = 3.2;
-  const lineW = SLIDE.w - SLIDE.mx * 2;
-  slide.addShape(pptx.ShapeType.line, {
-    x: SLIDE.mx,
-    y: lineY,
-    w: lineW,
-    h: 0,
-    line: { color: rule, width: 1.5 },
-  });
+  const chartX = SLIDE.mx + 0.4;
+  const chartW = SLIDE.w - SLIDE.mx * 2 - 0.8;
+  const baseBottomY = 5.6;
+  const maxH = 2.7;
+  const maxVal = Math.max(...points.map((p) => p.value), 1);
+  const coords = points.map((p, i) => ({
+    ...p,
+    x: chartX + (i * chartW) / Math.max(points.length - 1, 1),
+    y: baseBottomY - (p.value / maxVal) * maxH,
+  }));
 
-  const stepW = lineW / steps.length;
-  steps.forEach((step, i) => {
-    const x = SLIDE.mx + i * stepW;
-    const isActive = i === activeIndex;
+  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: baseBottomY + 0.3, w: SLIDE.w - SLIDE.mx * 2, h: 0, line: { color: rule, width: 1 } });
+
+  coords.forEach((pt, i) => {
+    if (i < coords.length - 1) {
+      const next = coords[i + 1];
+      slide.addShape(pptx.ShapeType.line, {
+        x: Math.min(pt.x, next.x),
+        y: Math.min(pt.y, next.y),
+        w: Math.abs(next.x - pt.x),
+        h: Math.abs(next.y - pt.y),
+        flipV: next.y < pt.y,
+        line: { color: palette.accent, width: 2.5 },
+      });
+    }
+    const isLast = i === coords.length - 1;
     slide.addShape(pptx.ShapeType.ellipse, {
-      x,
-      y: lineY - 0.14,
-      w: 0.28,
-      h: 0.28,
-      fill: { color: isActive ? palette.accent : bg },
-      line: { color: isActive ? palette.accent : ink, width: 2 },
+      x: pt.x - 0.11, y: pt.y - 0.11, w: 0.22, h: 0.22,
+      fill: { color: isLast ? palette.accent : bg },
+      line: { color: palette.accent, width: 2 },
     });
-
-    slide.addText(step.tag || String(i + 1).padStart(2, "0"), {
-      x,
-      y: lineY - 0.62,
-      w: stepW - 0.25,
-      h: 0.3,
-      fontFace: FONTS.mono,
-      fontSize: 10,
-      bold: true,
-      color: isActive ? palette.accent : muted,
+    slide.addText(pt.displayValue, {
+      x: pt.x - 0.65, y: pt.y - 0.5, w: 1.3, h: 0.34, align: "center",
+      fontFace: fonts.display, fontSize: 13, bold: true, color: isLast ? palette.accent : ink,
     });
-
-    slide.addText(step.title, {
-      x,
-      y: lineY + 0.35,
-      w: stepW - 0.3,
-      h: 0.55,
-      fontFace: FONTS.display,
-      fontSize: 15,
-      bold: true,
-      color: ink,
-      wrap: true,
-    });
-
-    slide.addText(step.detail, {
-      x,
-      y: lineY + 0.95,
-      w: stepW - 0.3,
-      h: 1.6,
-      fontFace: FONTS.body,
-      fontSize: 12,
-      color: muted,
-      wrap: true,
-      lineSpacingMultiple: 1.3,
+    slide.addText(pt.label, {
+      x: pt.x - 0.75, y: baseBottomY + 0.42, w: 1.5, h: 0.35, align: "center",
+      fontFace: fonts.mono, fontSize: 10, color: muted,
     });
   });
 
-  addQuietPageNumber(slide, pageNum, muted);
+  addQuietPageNumber(slide, pageNum, muted, fonts);
   return slide;
 }
 
-/** 6. Clean Hairline Table (horizontal rules only, highlighted winning column) */
-export function renderCleanTable(pptx, palette, { titleParts, headers, rows, colW, highlightCol = 1, pageNum }) {
+/** 6. Architecture / Hard-Gate Vector Diagram (replaces 4 BLOQUEO boxes) */
+export function renderArchitectureGateDiagram(pptx, palette, { titleParts, gates, dark = true, pageNum, fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
+  slide.background = { color: bg };
+
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 10.8, h: 1.15, fontSize: 26, ink, accent: palette.accent, fonts });
+
+  const spineX = 1.65;
+  const topY = 2.3;
+  const rowH = 1.12;
+  slide.addShape(pptx.ShapeType.line, {
+    x: spineX, y: topY + 0.15, w: 0, h: (gates.length - 1) * rowH, line: { color: rule, width: 1.5 },
+  });
+
+  gates.slice(0, 4).forEach((g, i) => {
+    const cy = topY + i * rowH;
+    addConcentricTarget(slide, pptx, { cx: spineX, cy: cy + 0.15, outerR: 0.2, color: palette.accent });
+    slide.addShape(pptx.ShapeType.line, { x: spineX + 0.25, y: cy + 0.15, w: 0.75, h: 0, line: { color: rule, width: 1 } });
+    slide.addText(g.domain.toUpperCase(), {
+      x: 2.8, y: cy - 0.02, w: 2.6, h: 0.34, fontFace: fonts.mono, fontSize: 10, bold: true, color: palette.accent,
+    });
+    slide.addText(g.rule, {
+      x: 5.55, y: cy - 0.04, w: 6.9, h: 0.65, fontFace: fonts.body, fontSize: 13.5, color: ink, wrap: true,
+    });
+  });
+
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  return slide;
+}
+
+/** 7. Horizontal Node-and-Line Timeline */
+export function renderNodeTimeline(pptx, palette, { titleParts, steps, activeIndex = 0, dark = false, pageNum, fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
+  slide.background = { color: bg };
+
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 10.5, h: 1.2, fontSize: 28, ink, accent: palette.accent, fonts });
+
+  const lineY = 3.2, lineW = SLIDE.w - SLIDE.mx * 2;
+  slide.addShape(pptx.ShapeType.line, { x: SLIDE.mx, y: lineY, w: lineW, h: 0, line: { color: rule, width: 1.5 } });
+
+  const stepW = lineW / steps.length;
+  steps.forEach((step, i) => {
+    const x = SLIDE.mx + i * stepW, isActive = i === activeIndex;
+    slide.addShape(pptx.ShapeType.ellipse, {
+      x, y: lineY - 0.14, w: 0.28, h: 0.28,
+      fill: { color: isActive ? palette.accent : bg },
+      line: { color: isLastOrActive(isActive) ? palette.accent : ink, width: 2 },
+    });
+    slide.addText(step.tag || String(i + 1).padStart(2, "0"), {
+      x, y: lineY - 0.62, w: stepW - 0.25, h: 0.3, fontFace: fonts.mono, fontSize: 10, bold: true, color: isActive ? palette.accent : muted,
+    });
+    slide.addText(step.title, { x, y: lineY + 0.35, w: stepW - 0.3, h: 0.55, fontFace: fonts.display, fontSize: 15, bold: true, color: ink, wrap: true });
+    slide.addText(step.detail, { x, y: lineY + 0.95, w: stepW - 0.3, h: 1.6, fontFace: fonts.body, fontSize: 12, color: muted, wrap: true, lineSpacingMultiple: 1.3 });
+  });
+
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  return slide;
+}
+
+function isLastOrActive(flag) { return Boolean(flag); }
+
+/** 8. Clean Hairline Table */
+export function renderCleanTable(pptx, palette, { titleParts, headers, rows, colW, highlightCol = 1, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.lightBg };
-
-  addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: SLIDE.my,
-    w: 11,
-    h: 1.1,
-    fontSize: 26,
-    ink: palette.inkOnLight,
-    accent: palette.accent,
-  });
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11, h: 1.1, fontSize: 26, ink: palette.inkOnLight, accent: palette.accent, fonts });
 
   const tableRows = [
     headers.map((h, cIdx) => ({
       text: h,
       options: {
-        bold: true,
-        fontFace: FONTS.display,
-        fontSize: 11,
+        bold: true, fontFace: fonts.display, fontSize: 11,
         color: cIdx === highlightCol ? palette.inkOnAccent : palette.inkOnDark,
         fill: { color: cIdx === highlightCol ? palette.accent : palette.darkBg },
         margin: [10, 12, 10, 12],
@@ -429,162 +381,71 @@ export function renderCleanTable(pptx, palette, { titleParts, headers, rows, col
       r.map((cell, cIdx) => ({
         text: cell,
         options: {
-          fontFace: FONTS.body,
-          fontSize: 11,
-          bold: cIdx === highlightCol,
-          color: palette.inkOnLight,
+          fontFace: fonts.body, fontSize: 11, bold: cIdx === highlightCol, color: palette.inkOnLight,
           fill: { color: rIdx % 2 === 1 ? palette.lightSurface : palette.lightBg },
-          border: [
-            { pt: 0, color: palette.lightBg },
-            { pt: 0, color: palette.lightBg },
-            { pt: 1, color: palette.ruleOnLight },
-            { pt: 0, color: palette.lightBg },
-          ],
+          border: [{ pt: 0, color: palette.lightBg }, { pt: 0, color: palette.lightBg }, { pt: 1, color: palette.ruleOnLight }, { pt: 0, color: palette.lightBg }],
           margin: [9, 12, 9, 12],
         },
       }))
     ),
   ];
 
-  slide.addTable(tableRows, {
-    x: SLIDE.mx,
-    y: 2.05,
-    w: SLIDE.w - SLIDE.mx * 2,
-    colW,
-    valign: "middle",
-  });
-
-  addQuietPageNumber(slide, pageNum, palette.mutedOnLight);
+  slide.addTable(tableRows, { x: SLIDE.mx, y: 2.05, w: SLIDE.w - SLIDE.mx * 2, colW, valign: "middle" });
+  addQuietPageNumber(slide, pageNum, palette.mutedOnLight, fonts);
   return slide;
 }
 
-/** 7. Asymmetric 2x1 Bento (1 dominant hero block + 2 compact supporting blocks) */
-export function renderAsymmetricBento(pptx, palette, { titleParts, heroBlock, sideBlocks, pageNum }) {
+/** 9. Asymmetric 2x1 Bento */
+export function renderAsymmetricBento(pptx, palette, { titleParts, heroBlock, sideBlocks, pageNum, fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.lightBg };
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11, h: 1.05, fontSize: 26, ink: palette.inkOnLight, accent: palette.accent, fonts });
 
-  addTurnTitle(slide, titleParts, {
-    x: SLIDE.mx,
-    y: SLIDE.my,
-    w: 11,
-    h: 1.05,
-    fontSize: 26,
-    ink: palette.inkOnLight,
-    accent: palette.accent,
-  });
-
-  const topY = 2.0;
-  const totalH = 4.65;
-  const leftW = 6.7;
-  const rightX = SLIDE.mx + leftW + 0.3;
-  const rightW = SLIDE.w - rightX - SLIDE.mx;
-
-  slide.addShape(pptx.ShapeType.rect, {
-    x: SLIDE.mx,
-    y: topY,
-    w: leftW,
-    h: totalH,
-    fill: { color: palette.darkBg },
-    line: { color: palette.darkBg, width: 0 },
-  });
-  slide.addText(heroBlock.stat || "", {
-    x: SLIDE.mx + 0.45,
-    y: topY + 0.45,
-    w: leftW - 0.9,
-    h: 1.1,
-    fontFace: FONTS.display,
-    fontSize: 54,
-    bold: true,
-    color: palette.accent,
-  });
-  slide.addText(heroBlock.title, {
-    x: SLIDE.mx + 0.45,
-    y: topY + 1.8,
-    w: leftW - 0.9,
-    h: 0.7,
-    fontFace: FONTS.display,
-    fontSize: 20,
-    bold: true,
-    color: palette.inkOnDark,
-  });
-  slide.addText(heroBlock.detail, {
-    x: SLIDE.mx + 0.45,
-    y: topY + 2.55,
-    w: leftW - 0.9,
-    h: 1.6,
-    fontFace: FONTS.body,
-    fontSize: 13,
-    color: palette.mutedOnDark,
-    wrap: true,
-    lineSpacingMultiple: 1.3,
-  });
+  const topY = 2.0, totalH = 4.65, leftW = 6.7, rightX = SLIDE.mx + leftW + 0.3, rightW = SLIDE.w - rightX - SLIDE.mx;
+  slide.addShape(pptx.ShapeType.rect, { x: SLIDE.mx, y: topY, w: leftW, h: totalH, fill: { color: palette.darkBg }, line: { color: palette.darkBg, width: 0 } });
+  slide.addText(heroBlock.stat || "", { x: SLIDE.mx + 0.45, y: topY + 0.45, w: leftW - 0.9, h: 1.1, fontFace: fonts.display, fontSize: 54, bold: true, color: palette.accent });
+  slide.addText(heroBlock.title, { x: SLIDE.mx + 0.45, y: topY + 1.8, w: leftW - 0.9, h: 0.7, fontFace: fonts.display, fontSize: 20, bold: true, color: palette.inkOnDark });
+  slide.addText(heroBlock.detail, { x: SLIDE.mx + 0.45, y: topY + 2.55, w: leftW - 0.9, h: 1.6, fontFace: fonts.body, fontSize: 13, color: palette.mutedOnDark, wrap: true, lineSpacingMultiple: 1.3 });
 
   const halfH = (totalH - 0.3) / 2;
   sideBlocks.slice(0, 2).forEach((blk, idx) => {
     const y = topY + idx * (halfH + 0.3);
-    slide.addShape(pptx.ShapeType.rect, {
-      x: rightX,
-      y,
-      w: rightW,
-      h: halfH,
-      fill: { color: palette.lightSurface },
-      line: { color: palette.ruleOnLight, width: 1 },
-    });
-    slide.addText(blk.title, {
-      x: rightX + 0.35,
-      y: y + 0.3,
-      w: rightW - 0.7,
-      h: 0.45,
-      fontFace: FONTS.display,
-      fontSize: 15,
-      bold: true,
-      color: palette.inkOnLight,
-    });
-    slide.addText(blk.detail, {
-      x: rightX + 0.35,
-      y: y + 0.85,
-      w: rightW - 0.7,
-      h: halfH - 1.05,
-      fontFace: FONTS.body,
-      fontSize: 12,
-      color: palette.mutedOnLight,
-      wrap: true,
-      lineSpacingMultiple: 1.25,
-    });
+    slide.addShape(pptx.ShapeType.rect, { x: rightX, y, w: rightW, h: halfH, fill: { color: palette.lightSurface }, line: { color: palette.ruleOnLight, width: 1 } });
+    slide.addText(blk.title, { x: rightX + 0.35, y: y + 0.3, w: rightW - 0.7, h: 0.45, fontFace: fonts.display, fontSize: 15, bold: true, color: palette.inkOnLight });
+    slide.addText(blk.detail, { x: rightX + 0.35, y: y + 0.85, w: rightW - 0.7, h: halfH - 1.05, fontFace: fonts.body, fontSize: 12, color: palette.mutedOnLight, wrap: true, lineSpacingMultiple: 1.25 });
   });
-
-  addQuietPageNumber(slide, pageNum, palette.mutedOnLight);
+  addQuietPageNumber(slide, pageNum, palette.mutedOnLight, fonts);
   return slide;
 }
 
-/** 8. Minimalist Closing Slide */
-export function renderClosingSlide(pptx, palette, { headline, contactLine = "" }) {
+/** 10. Quote / Human Breather Slide (oversized opposing quotes, optional photo) */
+export function renderQuoteBreather(pptx, palette, { quote, author, imagePath = null, dark = false, pageNum, fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  slide.background = { color: bg };
+
+  if (imagePath) {
+    slide.addImage({ path: imagePath, x: 1.0, y: 1.5, w: 3.4, h: 4.5, sizing: { type: "cover", w: 3.4, h: 4.5 } });
+  }
+  const qx = imagePath ? 5.0 : 1.6;
+  const qw = imagePath ? 7.4 : 10.1;
+
+  slide.addText("“", { x: qx - 0.45, y: 1.45, w: 0.8, h: 1.0, fontFace: fonts.display, fontSize: 84, bold: true, color: palette.accent });
+  slide.addText(quote, { x: qx, y: 2.35, w: qw, h: 2.3, fontFace: fonts.display, fontSize: 26, bold: true, color: ink, wrap: true, lineSpacingMultiple: 1.2 });
+  slide.addText(author, { x: qx, y: 4.95, w: qw, h: 0.4, fontFace: fonts.mono, fontSize: 11, color: muted });
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  return slide;
+}
+
+/** 11. Minimalist Closing Slide */
+export function renderClosingSlide(pptx, palette, { headline, contactLine = "", fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };
-
-  slide.addText(headline, {
-    x: SLIDE.mx,
-    y: 2.3,
-    w: SLIDE.w - SLIDE.mx * 2,
-    h: 1.8,
-    align: "center",
-    fontFace: FONTS.display,
-    fontSize: 64,
-    bold: true,
-    color: palette.inkOnDark,
-  });
-
+  slide.addText(headline, { x: SLIDE.mx, y: 2.3, w: SLIDE.w - SLIDE.mx * 2, h: 1.8, align: "center", fontFace: fonts.display, fontSize: 62, bold: true, color: palette.inkOnDark });
   if (contactLine) {
-    slide.addText(contactLine, {
-      x: SLIDE.mx,
-      y: 4.5,
-      w: SLIDE.w - SLIDE.mx * 2,
-      h: 0.5,
-      align: "center",
-      fontFace: FONTS.mono,
-      fontSize: 11,
-      color: palette.accent,
-    });
+    slide.addText(contactLine, { x: SLIDE.mx, y: 4.5, w: SLIDE.w - SLIDE.mx * 2, h: 0.5, align: "center", fontFace: fonts.mono, fontSize: 11, color: palette.accent });
   }
   return slide;
 }
