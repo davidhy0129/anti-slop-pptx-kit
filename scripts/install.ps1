@@ -90,6 +90,7 @@ if ($Target -in @("all", "gemini")) {
 Copy-DirContents (Join-Path $KitRoot "workflows") (Join-Path $DestRoot "workflows")
 Copy-DirContents (Join-Path $KitRoot "prompts") (Join-Path $DestRoot "prompts")
 Copy-DirContents (Join-Path $KitRoot "agents") (Join-Path $DestRoot "agents")
+Copy-DirContents (Join-Path $KitRoot "templates") (Join-Path $DestRoot "templates")
 Copy-FileSafe (Join-Path $KitRoot "scripts\audit-pptx-code.mjs") (Join-Path $DestRoot "scripts\audit-pptx-code.mjs") -Overwrite:$true
 
 Write-Host "`nDone! Run 'node scripts/audit-pptx-code.mjs .' in $DestRoot`n" -ForegroundColor Cyan

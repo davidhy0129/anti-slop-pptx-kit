@@ -1,40 +1,38 @@
-# Universal Presentation & PPTX Design Engineering Instructions
+# Universal Presentation & PPTX Design Engineering Instructions (v2.0)
 
-You are operating with **anti-slop-pptx-kit** — a universal, domain-agnostic presentation design and programmatic PPTX (`PptxGenJS` / `python-pptx`) engineering kit crafted to make every deck look designed by a senior graphic design studio, never AI-generated.
+You are operating with **anti-slop-pptx-kit** — a strict studio-grade presentation design and programmatic PPTX (`PptxGenJS` / `python-pptx`) engineering kit.
 
-## Non-Negotiable Presentation Rules
+## HARD ANTI-SLOP CONTRACT (VIOLATIONS FAIL AUDIT)
 
-1. **Kill All AI-Slop Slide Clichés:**
-   - NEVER use purple-to-blue gradients, neon-on-black glow, cream-and-terracotta defaults, or translucent glassmorphism KPI cards.
-   - NEVER place `● DOT + PILL BADGES` above every slide title, filler subtitles, emojis on headings (`🚀`, `✨`), or 4-line unreadable footers.
-   - NEVER repeat the same 3-column icon-card layout or identical `01–08` boxed grids across consecutive slides.
-   - NEVER write walls of bullets; cap text blocks to 1–2 crisp lines (`8–15` words) and enforce **one core takeaway per slide**.
+1. **BAN THE "CARD-GRID LOOP" (THE #1 AI GIVEAWAY):**
+   - **NEVER** build a deck where 3+ slides use `forEach`/`for` loops to stamp 3, 4, 6, or 7 identical bordered/filled rectangle cards (`01..07`, `PASO 01..03`, `BLOQUEO X`).
+   - **Maximum 1 card-grid slide in an entire 10–12 slide deck.** Every other slide MUST use a distinct visual archetype (Editorial Split, Giant Standalone KPI, Dot-Matrix Chart, Axis-Free Curve, Horizontal Node Timeline, Borderless Comparison Table, Asymmetric 2×1 Bento, Quote Breather, Minimalist Closing).
+   - **Zero consecutive slides** may share the same layout structure or background polarity if avoidable.
 
-2. **Graphic-Design Grid, Typography & Scale:**
-   - Build every 16:9 slide on a strict **modular grid** (Swiss 6×4 or 3×3) with generous outer margins and **35–55% negative space**.
-   - Avoid AI default fonts (`Inter`, `Arial`, `Roboto`, `Space Grotesk`, `Geist`). Use high-craft pairings (`Switzer`, `Familjen Grotesk`, `Archivo Black + Montserrat`, `Editorial Serif + Geometric Sans`, `Poppins`, `DM Sans`).
-   - Use **5x–10x display-to-body scale contrast** (`100–190px` hero numbers/covers vs `18–24px` body on `1920×1080` or proportional `pt` in PPTX) and strict flush-left alignment unless executing a deliberate centered focal quote/closing.
+2. **BAN ALL EYEBROW CHROME & REPEATED HEADERS/FOOTERS:**
+   - **NEVER** put `02 · SECTION NAME`, `03 · BUSINESS COMPLEXITY`, `PASO 01`, `BLOQUEO FINANCIERO`, or colored pill badges above slide titles.
+   - **NEVER** stamp a repeated company/subtitle banner (`ACME CORP | INTERNAL DECK | 04 / 12`) across every slide. Use at most a whisper-quiet slide number (`04`) at 35% opacity.
 
-3. **Studio Color & Pacing Discipline:**
-   - Follow the **60-30-10 rule** and **2–3 color limits** with **4-step opacity ramps (`100% / 60% / 30% / 10%`)** instead of gradients.
-   - Alternate cleanly between **deep matte dark slides** (covers, dividers, hero KPIs) and **warm off-white slides** (`#F5F4F0`, `#F4F5F3`) for reading-heavy agendas, timelines, and tables.
+3. **STRICT SLIDE WORD BUDGET (MAX 35–50 WORDS PER VISUAL SLIDE):**
+   - Slides are visual anchors, not Word documents. Cap each block to `1–2` crisp lines (`6–14` words).
+   - Never dump 6 modules × 20 words onto one slide. Compress into a visual architecture diagram, a clean table, or split across focused slides.
 
-4. **Action Titles & Decluttered Data Viz:**
-   - Every slide header must be an **insight-driven Action Title**, never a lazy topic label (`"Q3 Revenue"` -> `"Enterprise drove 12% Q3 revenue acceleration"`).
-   - Strip chart junk: remove default axes, gridlines, borders, and redundant legends; use **One Number Per Slide**, **dot-matrix/waffle grids**, **axis-free milestone curves**, or **direct-labeled horizontal bars**.
+4. **USE THE STUDIO COMPONENT TEMPLATES — DO NOT INVENT `drawCard()`:**
+   - Import and use `templates/pptxgenjs-studio-kit.mjs` (Node) or `templates/python_pptx_studio.py` (Python), which provide 10 non-AI graphic-design archetypes (`renderCoverSlide`, `renderEditorialSplit`, `renderHeroKpiBreather`, `renderDotMatrixSlide`, `renderMilestoneCurve`, `renderNodeTimeline`, `renderCleanTable`, `renderAsymmetricBento`, `renderQuoteBreather`, `renderClosingSlide`).
 
-5. **Programmatic PPTX Engineering & Visual QA:**
-   - Always use `Slide Master` / `.pptx` templates + centralized design tokens; never hardcode magic coordinates everywhere.
-   - Run `node scripts/audit-pptx-code.mjs .` and visually inspect rendered slides (LibreOffice headless -> PDF -> PNG) before delivering any `.pptx`.
+5. **TYPOGRAPHY, COLOR & VISUAL QA:**
+   - Ban `Inter`, `Arial`, `Calibri`, `Roboto`, `Space Grotesk`, `Geist`, purple-blue gradients, neon-on-black, glassmorphism, and heading emojis (`🚀`, `✨`).
+   - Enforce **5x–10x scale contrast** (`56–110pt` hero figures vs `12–14pt` body), flush-left alignment, **35–55% negative space**, and **60-30-10 palettes** with 4-step opacity ramps (`100%/60%/30%/10%`).
+   - Always run `node scripts/audit-pptx-code.mjs .` (must exit `0`) and visually inspect rendered PNGs (`workflows/visual-qa-render-loop.md`) before delivering.
 
 ## Skill Routing Table
 
 | Domain | Skill Path |
 |---|---|
-| Removing AI slide giveaways & motifs | `skills/anti-ai-slop-slides/SKILL.md` |
+| Removing AI slide giveaways & card-grid loops | `skills/anti-ai-slop-slides/SKILL.md` |
 | Grids, typography, scale, negative space | `skills/slide-grid-typography/SKILL.md` |
 | Color palettes, opacity ramps & pacing | `skills/slide-color-pacing/SKILL.md` |
 | Charts, hero KPIs, dot-matrix & tables | `skills/data-viz-hero-metrics/SKILL.md` |
 | Cutouts, masking, photos & studio motifs | `skills/editorial-imagery-motifs/SKILL.md` |
-| PptxGenJS / python-pptx & visual QA | `skills/pptx-code-architecture/SKILL.md` |
+| PptxGenJS / python-pptx templates & visual QA | `skills/pptx-code-architecture/SKILL.md` |
 | Deck structure & Action Title narrative | `skills/narrative-storytelling-decks/SKILL.md` |

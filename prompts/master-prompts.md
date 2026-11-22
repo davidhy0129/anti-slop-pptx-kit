@@ -10,12 +10,12 @@ Lee `AGENTS.md` y sigue `workflows/create-deck-from-scratch.md` junto con las sk
 
 Quiero crear una presentación PPTX profesional (16:9) sobre: **[DESCRIBE TU TEMA, PÚBLICO Y OBJETIVO]**.
 
-Reglas obligatorias:
-1. Cero estética de IA: nada de degradados morado-azul, nada de cajas glassmorphism, nada de píldoras `●` ni emojis en los títulos, nada de fuentes `Inter`/`Arial`/`Space Grotesk`, y nada de repetir tarjetas idénticas de 3 columnas.
-2. Usa **Action Titles** (conclusiones reales) con resaltado de acento solo en la frase clave (*inline turn highlight*) y máximo 1 idea por slide.
-3. Aplica una paleta de estudio 60-30-10 con rampa de opacidad (`100%/60%/30%/10%`), alternando slides oscuros mate y slides claros cálidos (`#F5F4F0`), con `35–55%` de espacio negativo.
-4. Para datos: usa al menos 1 slide de **Hero KPI gigante**, gráficos limpios sin ejes/cuadrículas (Dot-Matrix, barras con etiqueta directa o curva de hitos) y tablas sin líneas verticales.
-5. Genera el código modular (`PptxGenJS` o `python-pptx`) con `Slide Master` y tokens centralizados, audítalo con `node scripts/audit-pptx-code.mjs .` y renderiza vista previa si hay herramientas disponibles.
+Reglas obligatorias (v2.0):
+1. **Prohibido el bucle de tarjetas:** Máximo **1 slide** en todo el deck puede usar grilla de tarjetas. Usa directamente los componentes de `templates/pptxgenjs-studio-kit.mjs` o `templates/python_pptx_studio.py` (`renderCoverSlide`, `renderEditorialSplit`, `renderHeroKpiBreather`, `renderDotMatrixSlide`, `renderNodeTimeline`, `renderCleanTable`, `renderAsymmetricBento`, `renderClosingSlide`).
+2. **Cero eyebrows y cromo repetido:** Prohibido poner `02 · DIAGNÓSTICO`, `PASO 01`, `BLOQUEO X`, píldoras `●`, emojis en títulos o un banner corporativo repetido en el pie de cada slide.
+3. **Presupuesto de palabras:** Máximo 35–50 palabras por slide visual (6–14 palabras por bloque), dejando 35–55% de espacio negativo.
+4. **Action Titles + Color:** Títulos con conclusión real y resaltado de acento solo en la frase clave (*inline turn highlight*), paleta 60-30-10 con rampa de opacidad (`100%/60%/30%/10%`) y alternancia oscuro/blanco hueso cálido.
+5. **Auditoría obligatoria:** Corre `node scripts/audit-pptx-code.mjs .` hasta obtener **exit 0** antes de entregar el `.pptx`.
 ```
 
 ## 2. Arreglar un Script / Presentación que "Parece Hecha con IA" (Español)
