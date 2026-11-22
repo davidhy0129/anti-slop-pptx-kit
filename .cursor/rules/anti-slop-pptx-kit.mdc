@@ -1,0 +1,13 @@
+---
+description: Anti-AI-Slop Presentation & PPTX Design Engineering Rules
+globs: ["**/*.py", "**/*.ts", "**/*.js", "**/*.tsx", "**/*.jsx", "**/*.pptx", "**/*.md"]
+alwaysApply: true
+---
+
+# anti-slop-pptx-kit Active Rules
+
+1. **No AI Slide Clichés**: Ban purple-blue gradients, neon-on-black, glassmorphism boxes, dot+pill eyebrows above titles, heading emojis, bullet walls, and repetitive 3-card icon grids.
+2. **Typography & Grid**: Ban `Inter`, `Arial`, `Roboto`, `Space Grotesk`, `Geist`. Enforce 16:9 modular grids (35–55% negative space), flush-left alignment, and 5x–10x display-to-body scale contrast.
+3. **Color & Pacing**: Follow 60-30-10 with 2–3 colors + 4-step opacity ramps (`100%/60%/30%/10%`), alternating dark and warm off-white slides.
+4. **Data & Action Titles**: Write insight-driven Action Titles; strip chart axes/gridlines/legends; use direct labels, dot-matrix charts, or standalone hero KPIs.
+5. **PPTX Code**: Use Slide Masters, centralized style tokens, dynamic layout math, `word_wrap = True`, and headless visual QA before delivery.
