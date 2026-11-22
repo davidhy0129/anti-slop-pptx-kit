@@ -45,7 +45,7 @@ Compatible desde el minuto cero con **Antigravity**, **Claude Code**, **OpenAI C
 ```powershell
 Remove-Item -Recurse -Force "$env:TEMP\anti-slop-pptx-kit" -ErrorAction SilentlyContinue
 git clone https://github.com/davidhy0129/anti-slop-pptx-kit.git "$env:TEMP\anti-slop-pptx-kit"
-& "$env:TEMP\anti-slop-pptx-kit\scripts\install.ps1" -Target all -Scope project -Force
+powershell -ExecutionPolicy Bypass -File "$env:TEMP\anti-slop-pptx-kit\scripts\install.ps1" -Target all -Scope project -Force
 ```
 
 ### macOS / Linux (Bash)
