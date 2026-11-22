@@ -1,7 +1,6 @@
 /**
- * anti-slop-pptx-kit — Lightweight Technical Primitives (v8.0)
- * NO fixed slide layouts or templates here — only clean utilities so bespoke layouts
- * never inherit PowerPoint drop shadows, encoding bugs, or cluttered default charts.
+ * anti-slop-pptx-kit — Lightweight Technical Primitives (v9.0)
+ * Shadow-free flat shapes, translucent industry background layers, SVG icons, and clean native charts.
  */
 
 export const SLIDE = { w: 13.333, h: 7.5 };
@@ -12,26 +11,28 @@ export function addFlatShape(slide, shapeType, opts) {
   return slide.addShape(shapeType, { shadow: NO_SHADOW, ...opts });
 }
 
-/** Add a clean hairline divider (horizontal or vertical) with zero shadow */
-export function addHairline(slide, pptx, { x, y, w = 0, h = 0, color, width = 1 }) {
-  return slide.addShape(pptx.ShapeType.line, {
+/** Add a borderless translucent background shape for layered depth & industry atmosphere */
+export function addTranslucentAccent(slide, shapeType, { x, y, w, h, color, transparency = 88, rectRadius = 0.12 }) {
+  return slide.addShape(shapeType, {
     shadow: NO_SHADOW,
     x,
     y,
     w,
     h,
-    line: { color, width },
+    rectRadius,
+    fill: { color, transparency },
+    line: { color, width: 0, transparency: 100 },
   });
 }
 
 /** Build a crisp SVG icon data URI colored dynamically to any hex palette */
 export function svgIconUri(pathsSvg, strokeHex, size = 64) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="#${strokeHex.replace("#", "")}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${pathsSvg}</svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="#${strokeHex.replace("#", "")}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${pathsSvg}</svg>`;
   return "data:image/svg+xml;base64," + Buffer.from(svg).toString("base64");
 }
 
 /** Clean defaults for native editable PowerPoint charts (zero gridlines, zero border clutter) */
-export function cleanChartOptions({ x, y, w, h, chartColors, labelColor, fontFace, valFontSize = 13, catFontSize = 13, barDir = "bar" }) {
+export function cleanChartOptions({ x, y, w, h, chartColors, labelColor, fontFace, valFontSize = 14, catFontSize = 14, barDir = "bar" }) {
   return {
     x,
     y,
