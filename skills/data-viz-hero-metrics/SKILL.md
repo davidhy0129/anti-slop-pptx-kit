@@ -1,40 +1,29 @@
 ---
 name: data-viz-hero-metrics
-description: Replaces cluttered default PowerPoint charts with graphic-designer data visualizations: One-Number-Per-Slide KPIs, Dot-Matrix/Waffle charts, axis-free milestone curves, direct-labeled bars, and clean zebra tables.
+description: Chart Selection Decision Matrix (Comparison, Composition, Trends, Variance/Waterfall, Proportion/Dot-Matrix), One-Number-Per-Slide KPIs, Single-Focus highlighting, and borderless tables.
 ---
 
-# Data Visualization, Hero Metrics & Tables
+# Data Visualization, Chart Selection & Hero Metrics
 
-Default PowerPoint/Excel charts scream amateur or AI-generated because of horizontal gridlines, redundant Y-axis ticks, thick borders, and floating legends. Maximize the data-ink ratio.
+Charts are tools for instant communication, not decoration. Match the chart to the message and strip all visual noise.
 
-## 1. "One Number Per Slide" Hero KPIs
+## 1. Chart Selection Matrix (Pick the Right Visual)
 
-- Isolate your strongest metric (`63%`, `9.3/10`, `$240M`, `6 hours`) at **100–190 px (`60–110 pt`)** with a crisp 1-line subtitle (`"After 8 weeks, users reported..."`).
-- Do **not** trap hero KPIs inside glowing gradient boxes. Place them directly on a matte dark canvas or inside clean asymmetric dark bento shapes on a warm off-white slide.
-
----
-
-## 2. Decluttered Chart Patterns
-
-Before exporting any chart, **strip chart junk**:
-- **Remove:** Outer chart border, background fill, horizontal/vertical gridlines, Y-axis tick lines, and legends (whenever there is 1 series or direct labels work).
-- **Keep:** Clean category labels, direct data labels (`$45M`, `+18%`), and **one accent color** highlighting the winning/target series while keeping comparison series in muted gray (`30%` opacity).
-
-### 4 Studio Chart Alternatives to Default Bars/Pies
-1. **Dot-Matrix / Waffle Grid (`10×4` or `10×10`):** Show percentages (`10%`, `63%`) as a crisp grid of circles where `K` circles are filled in bright brand accent and the remaining circles sit in muted charcoal/stone (`#262626` or `15%` opacity).
-2. **Axis-Free Bezier Milestone Curve:** Plot growth (`1k → 2.5k → 3.3k → 5.3k`) as a single smooth stroke with circular milestone dots and values placed directly above each dot — zero Y-axis, zero gridlines.
-3. **Direct-Labeled Horizontal Bars (Single-Focus Highlight):** Put category names on the left, flat color-blocked bars across, and exact values directly at the bar tip (`5–7` bars max). Paint **comparison bars in muted neutral gray** and **only the 1–2 crucial bars in your protagonist accent** so the takeaway jumps out in 0.5 seconds.
-4. **Node-and-Line Funnel / Timeline:** Plot sequential stages (`220 → 40 → 20 → 40`) along one `1px` horizontal hairline with clean accent nodes and 2-line captions underneath.
+| Message / Question | Best Chart / Visual | Avoid |
+|---|---|---|
+| **Single landmark metric** | **One-Number-Per-Slide Hero KPI** (`96–110pt` standalone figure + 1-line caption) | Wrapping a lone number in a tiny card with 4 sub-boxes |
+| **Proportion / Percentage (`10%`, `63%`)** | **Dot-Matrix / Waffle Grid (`10×4` or `10×10`)** | 3D Pie charts or 6-slice Donut charts |
+| **Comparison / Ranking (≤7 items)** | **Single-Focus Horizontal Bars** (comparison bars in muted gray, **only 1 crucial bar in accent**, direct labels) | Multi-colored rainbow bars with Y-axis gridlines |
+| **Trend / Growth over time** | **Axis-Free Milestone Line Curve** (smooth line + labeled milestone dots) | Cluttered Excel lines with legend boxes & gridlines |
+| **Bridge / Variance (`$180K -> $3K`)** | **Waterfall Bridge** showing positive/negative drivers from start to end | Raw bullet list of savings |
+| **Composition across categories** | **100% Stacked Bar / Mekko** with direct percentage labels | Multiple side-by-side pie charts |
+| **Multi-criteria comparison** | **Clean Hairline Table** (horizontal rules only, highlighted winning column, right-aligned `tabular-nums`) | Heavy black-bordered grids |
 
 ---
 
-## 3. Clean Financial & Operational Tables
+## 2. Declutter Checklist (The MBB / Studio Standard)
 
-- **Explicit Column Widths:** Never leave column widths to auto-fit luck; size each column intentionally to avoid awkward mid-word wraps.
-- **No Vertical Gridlines:** Use faint horizontal hairlines (`10%` opacity) and subtle zebra striping (`3–5%` tint on alternate rows).
-- **Header Contrast:** Dark/brand header fill with crisp bold white text (or bold uppercase `10pt` header with `1.5px` bottom rule).
-- **Alignment & Padding:**
-  - Left-align text columns.
-  - Right-align numbers, percentages, and currency (`$45.2M`).
-  - Center-align short status tags or dates.
-  - Enforce generous internal cell padding (`0.12"` top/bottom, `0.15"` left/right) so text never touches edges.
+Before exporting any chart:
+- **Remove:** Outer chart border, background fill, horizontal/vertical gridlines, Y-axis tick lines, 3D effects, and legends (whenever 1 series or direct labels suffice).
+- **Keep:** Clean category labels, direct data labels (`$45M`, `+18%`), and **1 protagonist accent color** highlighting the target series while comparison series stay muted gray (`30%` opacity).
+- **Table Alignment & Padding:** Left-align text, right-align numbers/currency, center-align short status tags, and enforce generous cell padding (`>= 9pt` top/bottom, `12pt` left/right).

@@ -1,6 +1,9 @@
 """
-anti-slop-pptx-kit — python-pptx Studio Component Library (v2.1)
-Includes 8 Color-Harmony Palettes, 4 Font Systems, and 9 Graphic-Design Slide Archetypes + Vector Motifs.
+anti-slop-pptx-kit — python-pptx Studio Component Library (v3.0)
+Full parity with pptxgenjs-studio-kit.mjs:
+- 8 Color-Harmony Palettes (60-30-10 + Warm-vs-Cool contrast)
+- 4 Curated Font Systems
+- 13 Graphic-Design Slide Archetypes + Vector Motifs + Speaker Notes separation
 """
 
 from pptx import Presentation
@@ -39,6 +42,30 @@ PALETTES = {
         "ink_light": "013330", "muted_light": "4A6B67", "rule_light": "DDD2BF",
         "accent": "FF6A1F", "ink_accent": "FFFFFF",
     },
+    "NAVY_STEEL": {
+        "dark_bg": "26364D", "dark_surface": "324561", "light_bg": "F4F7F9", "light_surface": "FFFFFF",
+        "ink_dark": "FFFFFF", "muted_dark": "9DB4BE", "rule_dark": "435A7A",
+        "ink_light": "26364D", "muted_light": "547182", "rule_light": "D8E2E7",
+        "accent": "547182", "ink_accent": "FFFFFF",
+    },
+    "PLUM_LAVENDER": {
+        "dark_bg": "342952", "dark_surface": "4E4074", "light_bg": "F7F5FC", "light_surface": "FFFFFF",
+        "ink_dark": "F7F5FC", "muted_dark": "BEB5D9", "rule_dark": "5E4F87",
+        "ink_light": "2A2042", "muted_light": "6E628C", "rule_light": "E5DFF2",
+        "accent": "4E4074", "ink_accent": "FFFFFF",
+    },
+    "BLUSH_OLIVE": {
+        "dark_bg": "2E3320", "dark_surface": "3E452C", "light_bg": "FAF3F4", "light_surface": "FFFFFF",
+        "ink_dark": "F9CDD5", "muted_dark": "B8C0A2", "rule_dark": "51593C",
+        "ink_light": "2E3320", "muted_light": "666B54", "rule_light": "EAD9DC",
+        "accent": "7A8450", "ink_accent": "FFFFFF",
+    },
+    "CERULEAN_BUTTER": {
+        "dark_bg": "183145", "dark_surface": "23445E", "light_bg": "FFF9E6", "light_surface": "FFFFFF",
+        "ink_dark": "FFEDA2", "muted_dark": "9CBBD1", "rule_dark": "335B7A",
+        "ink_light": "183145", "muted_light": "4C6B82", "rule_light": "F0E2B6",
+        "accent": "4282AA", "ink_accent": "FFFFFF",
+    },
 }
 
 FONT_SYSTEMS = {
@@ -64,6 +91,11 @@ def _set_bg(slide, hex_color: str):
     fill = slide.background.fill
     fill.solid()
     fill.fore_color.rgb = rgb(hex_color)
+
+
+def _add_notes(slide, speaker_notes: str):
+    if speaker_notes:
+        slide.notes_slide.notes_text_frame.text = speaker_notes
 
 
 def _add_turn_title(slide, parts, x, y, w, h, font_pt, ink, accent, font_name="Montserrat"):
@@ -107,7 +139,7 @@ def add_concentric_target(slide, cx, cy, outer_r_in: float, color_hex: str):
         dot.line.width = Pt(1 if idx == 0 else 1.5)
 
 
-def render_cover_slide(prs, pal, title_parts, subtitle="", meta_line="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+def render_cover_slide(prs, pal, title_parts, subtitle="", meta_line="", speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     _set_bg(slide, pal["dark_bg"])
     add_concentric_target(slide, Inches(11.2), Inches(3.75), 1.5, pal["accent"])
@@ -135,10 +167,72 @@ def render_cover_slide(prs, pal, title_parts, subtitle="", meta_line="", fonts=F
         r.font.name = fonts["body"]
         r.font.size = Pt(14.5)
         r.font.color.rgb = rgb(pal["muted_dark"])
+    _add_notes(slide, speaker_notes)
     return slide
 
 
-def render_hero_kpi_breather(prs, pal, figure: str, caption: str, footnote: str = "", page_num: int | None = None, fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+def render_statement_slide(prs, pal, title_parts, dark=True, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    _set_bg(slide, bg)
+    _add_turn_title(slide, title_parts, MX, Inches(2.2), SLIDE_W - MX * 2, Inches(3.0), 42, ink, pal["accent"], fonts["display"])
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_editorial_split(prs, pal, title_parts, lead_text, rows, dark=False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    rule = pal["rule_dark"] if dark else pal["rule_light"]
+    _set_bg(slide, bg)
+
+    _add_turn_title(slide, title_parts, MX, MY, Inches(4.8), Inches(2.3), 27, ink, pal["accent"], fonts["display"])
+    if lead_text:
+        tb = slide.shapes.add_textbox(MX, Inches(3.5), Inches(4.6), Inches(1.8))
+        tb.text_frame.word_wrap = True
+        r = tb.text_frame.paragraphs[0].add_run()
+        r.text = lead_text
+        r.font.name = fonts["body"]
+        r.font.size = Pt(13.5)
+        r.font.color.rgb = rgb(muted)
+
+    right_x = Inches(6.2)
+    right_w = SLIDE_W - right_x - MX
+    row_h = min(Inches(1.18), (SLIDE_H - MY * 2 - Inches(0.5)) / max(len(rows), 1))
+    for i, row in enumerate(rows):
+        y = MY + i * row_h
+        if i > 0:
+            line = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, right_x, y - Inches(0.1), right_w, Inches(0.015))
+            line.fill.solid()
+            line.fill.fore_color.rgb = rgb(rule)
+            line.line.fill.background()
+        tb_l = slide.shapes.add_textbox(right_x, y, right_w, Inches(0.34))
+        rl = tb_l.text_frame.paragraphs[0].add_run()
+        rl.text = row["label"]
+        rl.font.name = fonts["display"]
+        rl.font.size = Pt(14)
+        rl.font.bold = True
+        rl.font.color.rgb = rgb(ink)
+
+        tb_d = slide.shapes.add_textbox(right_x, y + Inches(0.36), right_w, row_h - Inches(0.45))
+        tb_d.text_frame.word_wrap = True
+        rd = tb_d.text_frame.paragraphs[0].add_run()
+        rd.text = row["detail"]
+        rd.font.name = fonts["body"]
+        rd.font.size = Pt(12)
+        rd.font.color.rgb = rgb(muted)
+
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_hero_kpi_breather(prs, pal, figure: str, caption: str, footnote: str = "", page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     _set_bg(slide, pal["dark_bg"])
 
@@ -169,10 +263,194 @@ def render_hero_kpi_breather(prs, pal, figure: str, caption: str, footnote: str 
         r3.font.color.rgb = rgb(pal["muted_dark"])
 
     _quiet_page_num(slide, page_num, pal["muted_dark"], fonts["mono"])
+    _add_notes(slide, speaker_notes)
     return slide
 
 
-def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=False, page_num=None, fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+def render_dot_matrix_slide(prs, pal, title_parts, big_percent: str, filled_dots: int, caption: str, total_dots: int = 40, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _set_bg(slide, pal["dark_bg"])
+    _add_turn_title(slide, title_parts, MX, MY, Inches(10.5), Inches(1.1), 26, pal["ink_dark"], pal["accent"], fonts["display"])
+
+    tb = slide.shapes.add_textbox(MX, Inches(2.35), Inches(4.5), Inches(1.5))
+    r = tb.text_frame.paragraphs[0].add_run()
+    r.text = big_percent
+    r.font.name = fonts["display"]
+    r.font.size = Pt(76)
+    r.font.bold = True
+    r.font.color.rgb = rgb(pal["accent"])
+
+    tb2 = slide.shapes.add_textbox(MX, Inches(4.05), Inches(4.3), Inches(1.4))
+    tb2.text_frame.word_wrap = True
+    r2 = tb2.text_frame.paragraphs[0].add_run()
+    r2.text = caption
+    r2.font.name = fonts["body"]
+    r2.font.size = Pt(14)
+    r2.font.color.rgb = rgb(pal["muted_dark"])
+
+    cols, dot_s, gap, sx, sy = 10, Inches(0.36), Inches(0.16), Inches(6.2), Inches(2.45)
+    for i in range(total_dots):
+        r_idx, c_idx = divmod(i, cols)
+        dot = slide.shapes.add_shape(MSO_SHAPE.OVAL, sx + c_idx * (dot_s + gap), sy + r_idx * (dot_s + gap), dot_s, dot_s)
+        dot.fill.solid()
+        dot.fill.fore_color.rgb = rgb(pal["accent"] if i < filled_dots else pal["dark_surface"])
+        dot.line.color.rgb = rgb(pal["accent"] if i < filled_dots else pal["rule_dark"])
+
+    _quiet_page_num(slide, page_num, pal["muted_dark"], fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_single_focus_bar_chart(prs, pal, title_parts, bars, dark=False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    neutral_bar = pal["dark_surface"] if dark else pal["rule_light"]
+    _set_bg(slide, bg)
+
+    _add_turn_title(slide, title_parts, MX, MY, Inches(11.0), Inches(1.15), 27, ink, pal["accent"], fonts["display"])
+    items = bars[:7]
+    max_val = max((b["value"] for b in items), default=1) or 1
+    label_w, bar_max_w, start_y = Inches(3.2), Inches(6.6), Inches(2.25)
+    row_h = min(Inches(0.68), Inches(4.4) / max(len(items), 1))
+
+    for i, b in enumerate(items):
+        y = start_y + i * row_h
+        bw = max(Inches(0.25), bar_max_w * (b["value"] / max_val))
+        hi = bool(b.get("highlight"))
+        tb_l = slide.shapes.add_textbox(MX, y, label_w, Inches(0.38))
+        rl = tb_l.text_frame.paragraphs[0].add_run()
+        rl.text = b["label"]
+        rl.font.name = fonts["body"]
+        rl.font.size = Pt(12.5)
+        rl.font.bold = hi
+        rl.font.color.rgb = rgb(ink if hi else muted)
+
+        rect = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX + label_w + Inches(0.25), y + Inches(0.06), bw, Inches(0.26))
+        rect.fill.solid()
+        rect.fill.fore_color.rgb = rgb(pal["accent"] if hi else neutral_bar)
+        rect.line.fill.background()
+
+        tb_v = slide.shapes.add_textbox(MX + label_w + Inches(0.4) + bw, y, Inches(1.5), Inches(0.38))
+        rv = tb_v.text_frame.paragraphs[0].add_run()
+        rv.text = b["display_value"]
+        rv.font.name = fonts["display"]
+        rv.font.size = Pt(13)
+        rv.font.bold = True
+        rv.font.color.rgb = rgb(pal["accent"] if hi else muted)
+
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_architecture_gate_diagram(prs, pal, title_parts, gates, dark=True, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    rule = pal["rule_dark"] if dark else pal["rule_light"]
+    _set_bg(slide, bg)
+
+    _add_turn_title(slide, title_parts, MX, MY, Inches(10.8), Inches(1.15), 26, ink, pal["accent"], fonts["display"])
+    spine_x, top_y, row_h = Inches(1.65), Inches(2.3), Inches(1.12)
+    items = gates[:4]
+    spine = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, spine_x, top_y + Inches(0.15), Inches(0.02), row_h * max(len(items) - 1, 1))
+    spine.fill.solid()
+    spine.fill.fore_color.rgb = rgb(rule)
+    spine.line.fill.background()
+
+    for i, g in enumerate(items):
+        cy = top_y + i * row_h
+        add_concentric_target(slide, spine_x, cy + Inches(0.15), 0.2, pal["accent"])
+        branch = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, spine_x + Inches(0.25), cy + Inches(0.15), Inches(0.75), Inches(0.015))
+        branch.fill.solid()
+        branch.fill.fore_color.rgb = rgb(rule)
+        branch.line.fill.background()
+
+        tb_d = slide.shapes.add_textbox(Inches(2.8), cy - Inches(0.02), Inches(2.6), Inches(0.34))
+        rd = tb_d.text_frame.paragraphs[0].add_run()
+        rd.text = g["domain"].upper()
+        rd.font.name = fonts["mono"]
+        rd.font.size = Pt(10)
+        rd.font.bold = True
+        rd.font.color.rgb = rgb(pal["accent"])
+
+        tb_r = slide.shapes.add_textbox(Inches(5.55), cy - Inches(0.04), Inches(6.9), Inches(0.65))
+        tb_r.text_frame.word_wrap = True
+        rr = tb_r.text_frame.paragraphs[0].add_run()
+        rr.text = g["rule"]
+        rr.font.name = fonts["body"]
+        rr.font.size = Pt(13.5)
+        rr.font.color.rgb = rgb(ink)
+
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_consulting_columns(prs, pal, title_parts, columns, dark=False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bg = pal["dark_bg"] if dark else pal["light_bg"]
+    ink = pal["ink_dark"] if dark else pal["ink_light"]
+    muted = pal["muted_dark"] if dark else pal["muted_light"]
+    rule = pal["rule_dark"] if dark else pal["rule_light"]
+    _set_bg(slide, bg)
+
+    _add_turn_title(slide, title_parts, MX, MY, Inches(11.2), Inches(1.15), 27, ink, pal["accent"], fonts["display"])
+    cols = columns[:3]
+    gap = Inches(0.5)
+    total_w = SLIDE_W - MX * 2
+    col_w = (total_w - gap * (len(cols) - 1)) / max(len(cols), 1)
+    top_y = Inches(2.3)
+
+    for i, col in enumerate(cols):
+        x = MX + i * (col_w + gap)
+        hi = bool(col.get("highlight"))
+        bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, top_y, col_w, Inches(0.03 if hi else 0.02))
+        bar.fill.solid()
+        bar.fill.fore_color.rgb = rgb(pal["accent"] if hi else ink)
+        bar.line.fill.background()
+
+        tb_h = slide.shapes.add_textbox(x, top_y + Inches(0.18), col_w, Inches(0.5))
+        tb_h.text_frame.word_wrap = True
+        rh = tb_h.text_frame.paragraphs[0].add_run()
+        rh.text = col["heading"]
+        rh.font.name = fonts["display"]
+        rh.font.size = Pt(16)
+        rh.font.bold = True
+        rh.font.color.rgb = rgb(pal["accent"] if hi else ink)
+
+        for p_idx, pt in enumerate(col.get("points", [])[:3]):
+            py = top_y + Inches(0.85) + p_idx * Inches(1.15)
+            if p_idx > 0:
+                sep = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, py - Inches(0.12), col_w, Inches(0.01))
+                sep.fill.solid()
+                sep.fill.fore_color.rgb = rgb(rule)
+                sep.line.fill.background()
+            tb_p = slide.shapes.add_textbox(x, py, col_w, Inches(0.95))
+            tb_p.text_frame.word_wrap = True
+            para = tb_p.text_frame.paragraphs[0]
+            r_lead = para.add_run()
+            r_lead.text = pt["lead"] + " "
+            r_lead.font.name = fonts["body"]
+            r_lead.font.size = Pt(12.5)
+            r_lead.font.bold = True
+            r_lead.font.color.rgb = rgb(ink)
+
+            r_body = para.add_run()
+            r_body.text = pt["body"]
+            r_body.font.name = fonts["body"]
+            r_body.font.size = Pt(12.5)
+            r_body.font.color.rgb = rgb(muted)
+
+    _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=False, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     bg = pal["dark_bg"] if dark else pal["light_bg"]
     ink = pal["ink_dark"] if dark else pal["ink_light"]
@@ -181,9 +459,7 @@ def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=Fals
     _set_bg(slide, bg)
 
     _add_turn_title(slide, title_parts, MX, MY, Inches(10.5), Inches(1.2), 28, ink, pal["accent"], fonts["display"])
-
-    line_y = Inches(3.2)
-    line_w = SLIDE_W - MX * 2
+    line_y, line_w = Inches(3.2), SLIDE_W - MX * 2
     hair = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, MX, line_y, line_w, Inches(0.02))
     hair.fill.solid()
     hair.fill.fore_color.rgb = rgb(rule)
@@ -217,4 +493,73 @@ def render_node_timeline(prs, pal, title_parts, steps, active_index=0, dark=Fals
         rd.font.color.rgb = rgb(muted)
 
     _quiet_page_num(slide, page_num, muted, fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_clean_table(prs, pal, title_parts, headers, rows, col_widths_in, highlight_col=1, page_num=None, speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _set_bg(slide, pal["light_bg"])
+    _add_turn_title(slide, title_parts, MX, MY, Inches(11.0), Inches(1.1), 26, pal["ink_light"], pal["accent"], fonts["display"])
+
+    n_rows, n_cols = len(rows) + 1, len(headers)
+    table_shape = slide.shapes.add_table(n_rows, n_cols, MX, Inches(2.05), SLIDE_W - MX * 2, Inches(0.55 * n_rows))
+    table = table_shape.table
+    for c_idx, w_in in enumerate(col_widths_in):
+        table.columns[c_idx].width = Inches(w_in)
+
+    for c_idx, h in enumerate(headers):
+        cell = table.cell(0, c_idx)
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = rgb(pal["accent"] if c_idx == highlight_col else pal["dark_bg"])
+        p = cell.text_frame.paragraphs[0]
+        r = p.add_run()
+        r.text = h
+        r.font.name = fonts["display"]
+        r.font.size = Pt(11)
+        r.font.bold = True
+        r.font.color.rgb = rgb(pal["ink_accent"] if c_idx == highlight_col else pal["ink_dark"])
+
+    for r_idx, row in enumerate(rows):
+        for c_idx, val in enumerate(row):
+            cell = table.cell(r_idx + 1, c_idx)
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = rgb(pal["light_surface"] if r_idx % 2 == 1 else pal["light_bg"])
+            p = cell.text_frame.paragraphs[0]
+            r = p.add_run()
+            r.text = val
+            r.font.name = fonts["body"]
+            r.font.size = Pt(11)
+            r.font.bold = c_idx == highlight_col
+            r.font.color.rgb = rgb(pal["ink_light"])
+
+    _quiet_page_num(slide, page_num, pal["muted_light"], fonts["mono"])
+    _add_notes(slide, speaker_notes)
+    return slide
+
+
+def render_closing_slide(prs, pal, headline: str, contact_line: str = "", speaker_notes="", fonts=FONT_SYSTEMS["BOLD_PRODUCT"]):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _set_bg(slide, pal["dark_bg"])
+    tb = slide.shapes.add_textbox(MX, Inches(2.3), SLIDE_W - MX * 2, Inches(1.8))
+    p = tb.text_frame.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    r = p.add_run()
+    r.text = headline
+    r.font.name = fonts["display"]
+    r.font.size = Pt(62)
+    r.font.bold = True
+    r.font.color.rgb = rgb(pal["ink_dark"])
+
+    if contact_line:
+        tb2 = slide.shapes.add_textbox(MX, Inches(4.5), SLIDE_W - MX * 2, Inches(0.5))
+        p2 = tb2.text_frame.paragraphs[0]
+        p2.alignment = PP_ALIGN.CENTER
+        r2 = p2.add_run()
+        r2.text = contact_line
+        r2.font.name = fonts["mono"]
+        r2.font.size = Pt(11)
+        r2.font.color.rgb = rgb(pal["accent"])
+
+    _add_notes(slide, speaker_notes)
     return slide

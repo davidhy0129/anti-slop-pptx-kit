@@ -1,61 +1,39 @@
 ---
 name: narrative-storytelling-decks
-description: Structures high-impact presentation narratives for Investor Pitch Decks, Executive Board Reviews, Sales Proposals, and Keynotes using Action Titles, Question-Driven framing, and 10-12 slide pacing.
+description: Structures high-impact presentation narratives using the SCQA Framework (Situation, Complication, Question, Answer), Minto Pyramid Principle, 5x5/6x6 brevity, Keyword Bolding, Read-vs-Speak separation (Speaker Notes), and Action Titles.
 ---
 
-# Narrative Storytelling & Action Titles
+# Narrative Storytelling, SCQA & Action Titles
 
-Even gorgeous graphic design fails if the slides read like a random dump of bullet points. Structure the story before designing a single shape.
+Even gorgeous graphic design fails if the slides read like a Word document. Structure the argument using elite strategy-consulting frameworks before designing a single shape.
 
-## 1. The 5×5 Rule, Pyramid Principle & "Action Title" Formula
+## 1. The SCQA Opening Arc (Minto Pyramid Principle)
 
-### The 5×5 Rule (Prevent "Death by PowerPoint")
-- **≤ 5–7 words per line** and **≤ 5 lines per slide block** (strip filler articles and fluff).
-- **Never >3 text-heavy slides in a row:** Force visual breathers (Hero KPI, chart, diagram, quote).
-- **Keyword Bolding (McKinsey / BCG style):** Bold the **first 2–4 key words** of a concise point so executives can scan the slide in 2 seconds without reading every word.
-- **Zero AI Buzzwords:** Write like a direct senior engineer or operator, not a hype brochure.
+Hook executives in the first 2 slides using **SCQA** instead of diving into raw feature lists:
+- **Situation (`S`):** Baseline reality everyone agrees on. *(e.g. "Operations span 7 engineering lines across 3 countries.")*
+- **Complication (`C`):** The trigger breaking the status quo. *(e.g. "Local spreadsheets fragment cost control and hide expired compliance permits.")*
+- **Question (`Q`):** The core decision to resolve. *(e.g. "Can an in-house platform outperform commercial ERPs on fit and 5-year TCO?")*
+- **Answer (`A`):** Your direct thesis upfront (top of the Pyramid). *(e.g. "Our proprietary cloud ERP cuts 5-year TCO by 85% with native regulatory hard gates.")*
 
-### The "Action Title" Formula
+---
 
-Never write lazy topic labels (`"Market"`, `"Financials"`, `"Our Solution"`). Every slide title must state the **core insight**:
+## 2. Read-vs-Speak Separation & The 5×5 / 6×6 Rule
+
+- **Move Dense Details to `speakerNotes`:** Slides are visual anchors, not teleprompters. Keep **15–45 words** on the visible slide and put detailed background, legal citations, Q&A talking points, and caveats into **PowerPoint Speaker Notes** (`speakerNotes`).
+- **The 5×5 / 6×6 Rule:** Aim for `<= 5–7` words per line and `<= 5` lines per visual block. Never put >3 text-heavy slides in a row.
+- **1-Slide-Per-Minute Pacing:** Match deck length to meeting time; avoid constant flipping.
+- **Keyword Bolding (McKinsey / BCG style):** Bold the **first 2–4 key words** of each concise point so executives grasp the argument in 2 seconds.
+- **Zero AI Buzzwords:** Write like a skeptical senior engineer or operator, never like a hype brochure. Never use ALL CAPS for body copy or italics for long text (slows scanning).
+
+---
+
+## 3. The "Action Title" Formula
+
+Never write lazy topic labels (`"Market"`, `"Financials"`, `"Our Solution"`). Every slide title must state the **core takeaway**:
 
 $$\text{Action Title} = \text{[Subject / Metric]} + \text{[Direction / Proof]} + \text{[So What?]}$$
 
 - **Weak:** *"Q3 Customer Support Metrics"*
 - **Strong:** *"Self-serve onboarding cut ticket volume 38% in Q3"*
-- **Rule:** If a busy executive reads **only the Action Titles** from Slide 1 to Slide 12, they must understand 100% of your argument.
-
----
-
-## 2. Question-Driven & "Turn" Framing
-
-Borrow the editorial structure used by top design studios:
-- Anchor analytical slides with a crisp micro-question tag (`WHERE?`, `CONTEXT`, `SO WHAT?`, `ALONGSIDE WHAT?`) paired with 1 short answer block (`8–15` words).
-- Highlight only the turning clause of a headline in your accent color so the eye jumps straight to the shift in logic.
-
----
-
-## 3. Proven 10–12 Slide Blueprints by Goal
-
-### A. Startup / Business Pitch Deck (11 Slides)
-1. **Cover:** Bold promise + visual hook.
-2. **The Shift / Context:** Why now? (1 macro trend + 1 crisp chart/stat).
-3. **The Pain:** Real human/cost problem (`1` story or `1` sharp stat).
-4. **The Solution:** Large product visual + 3-word value prop (no 6-bullet wall).
-5. **Hero Proof / Traction:** Giant standalone metric breather (`$1.2M ARR` or `94% retention`).
-6. **How It Works:** 3-step node timeline or asymmetric Bento (max 10 words/step).
-7. **Market Opportunity:** Clean concentric or direct-labeled horizontal bars (TAM/SAM/SOM without clutter).
-8. **Business Model:** Simple visual unit economics (`1` clean table or 2-bar comparison).
-9. **Competitive Edge:** 2×2 matrix or clean comparison table with 1 highlighted column.
-10. **Team / Track Record:** Monochrome cutout portraits + 1-line proof per person.
-11. **The Ask / Closing:** Exact ask + next step + minimal contact line.
-
-### B. Executive Board / Monthly Report (8–10 Slides)
-1. **Cover + Period Tag**
-2. **Executive Summary (3 Action Headlines, 1 active focus)**
-3. **Hero KPI Breather** (1 giant number)
-4. **Revenue / Growth Curve** (axis-free milestone curve)
-5. **Operational Breakdown** (clean zebra table, right-aligned numbers)
-6. **Channel / Segment Comparison** (direct-labeled bars)
-7. **Risks & Blockers** (structured 2-column matrix: Risk vs Mitigation owner)
-8. **Next 30-Day Decisions** (3 concrete commitments)
+- **Rule:** Reading **only the Action Titles** from Slide 1 to Slide 12 must tell the entire story.
+- **Inline "Turn" Highlighting:** Highlight only the key turning clause in your accent color so skimmers see the shift immediately.
