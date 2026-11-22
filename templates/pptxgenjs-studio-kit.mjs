@@ -439,7 +439,85 @@ export function renderQuoteBreather(pptx, palette, { quote, author, imagePath = 
   return slide;
 }
 
-/** 11. Minimalist Closing Slide */
+/** 11. Consulting Pyramid Columns (McKinsey/BCG style — hairline headers, keyword bolding, ZERO boxes) */
+export function renderConsultingColumns(pptx, palette, { titleParts, columns, dark = false, pageNum, fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  const rule = dark ? palette.ruleOnDark : palette.ruleOnLight;
+  slide.background = { color: bg };
+
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11.2, h: 1.15, fontSize: 27, ink, accent: palette.accent, fonts });
+
+  const cols = columns.slice(0, 3);
+  const gap = 0.5;
+  const totalW = SLIDE.w - SLIDE.mx * 2;
+  const colW = (totalW - gap * (cols.length - 1)) / cols.length;
+  const topY = 2.3;
+
+  cols.forEach((col, i) => {
+    const x = SLIDE.mx + i * (colW + gap);
+    slide.addShape(pptx.ShapeType.line, { x, y: topY, w: colW, h: 0, line: { color: col.highlight ? palette.accent : ink, width: col.highlight ? 2.5 : 1.5 } });
+    slide.addText(col.heading, { x, y: topY + 0.18, w: colW, h: 0.5, fontFace: fonts.display, fontSize: 16, bold: true, color: col.highlight ? palette.accent : ink, wrap: true });
+
+    (col.points || []).slice(0, 3).forEach((pt, pIdx) => {
+      const py = topY + 0.85 + pIdx * 1.15;
+      if (pIdx > 0) {
+        slide.addShape(pptx.ShapeType.line, { x, y: py - 0.12, w: colW, h: 0, line: { color: rule, width: 0.75 } });
+      }
+      slide.addText(
+        [
+          { text: pt.lead + " ", options: { fontFace: fonts.body, fontSize: 12.5, bold: true, color: ink } },
+          { text: pt.body, options: { fontFace: fonts.body, fontSize: 12.5, color: muted } },
+        ],
+        { x, y: py, w: colW, h: 0.95, wrap: true, valign: "top", lineSpacingMultiple: 1.25 }
+      );
+    });
+  });
+
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  return slide;
+}
+
+/** 12. Single-Focus Horizontal Bar Chart (9 gray bars + 1 accent bar, direct labels, zero gridlines) */
+export function renderSingleFocusBarChart(pptx, palette, { titleParts, bars, dark = false, pageNum, fonts = FONTS }) {
+  const slide = pptx.addSlide();
+  const bg = dark ? palette.darkBg : palette.lightBg;
+  const ink = dark ? palette.inkOnDark : palette.inkOnLight;
+  const muted = dark ? palette.mutedOnDark : palette.mutedOnLight;
+  const neutralBar = dark ? palette.darkSurface : palette.ruleOnLight;
+  slide.background = { color: bg };
+
+  addTurnTitle(slide, titleParts, { x: SLIDE.mx, y: SLIDE.my, w: 11.0, h: 1.15, fontSize: 27, ink, accent: palette.accent, fonts });
+
+  const list = bars.slice(0, 7);
+  const maxVal = Math.max(...list.map((b) => b.value), 1);
+  const labelW = 3.2;
+  const barMaxW = 6.6;
+  const startY = 2.25;
+  const rowH = Math.min(0.68, 4.4 / Math.max(list.length, 1));
+
+  list.forEach((b, i) => {
+    const y = startY + i * rowH;
+    const bw = Math.max(0.25, (b.value / maxVal) * barMaxW);
+    slide.addText(b.label, { x: SLIDE.mx, y, w: labelW, h: 0.38, fontFace: fonts.body, fontSize: 12.5, bold: Boolean(b.highlight), color: b.highlight ? ink : muted, valign: "middle" });
+    slide.addShape(pptx.ShapeType.rect, {
+      x: SLIDE.mx + labelW + 0.25, y: y + 0.06, w: bw, h: 0.26,
+      fill: { color: b.highlight ? palette.accent : neutralBar },
+      line: { color: b.highlight ? palette.accent : neutralBar, width: 0 },
+    });
+    slide.addText(b.displayValue, {
+      x: SLIDE.mx + labelW + 0.4 + bw, y, w: 1.5, h: 0.38,
+      fontFace: fonts.display, fontSize: 13, bold: true, color: b.highlight ? palette.accent : muted, valign: "middle",
+    });
+  });
+
+  addQuietPageNumber(slide, pageNum, muted, fonts);
+  return slide;
+}
+
+/** 13. Minimalist Closing Slide */
 export function renderClosingSlide(pptx, palette, { headline, contactLine = "", fonts = FONTS }) {
   const slide = pptx.addSlide();
   slide.background = { color: palette.darkBg };

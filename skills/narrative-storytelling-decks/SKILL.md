@@ -7,7 +7,15 @@ description: Structures high-impact presentation narratives for Investor Pitch D
 
 Even gorgeous graphic design fails if the slides read like a random dump of bullet points. Structure the story before designing a single shape.
 
-## 1. The "Action Title" Formula
+## 1. The 5×5 Rule, Pyramid Principle & "Action Title" Formula
+
+### The 5×5 Rule (Prevent "Death by PowerPoint")
+- **≤ 5–7 words per line** and **≤ 5 lines per slide block** (strip filler articles and fluff).
+- **Never >3 text-heavy slides in a row:** Force visual breathers (Hero KPI, chart, diagram, quote).
+- **Keyword Bolding (McKinsey / BCG style):** Bold the **first 2–4 key words** of a concise point so executives can scan the slide in 2 seconds without reading every word.
+- **Zero AI Buzzwords:** Write like a direct senior engineer or operator, not a hype brochure.
+
+### The "Action Title" Formula
 
 Never write lazy topic labels (`"Market"`, `"Financials"`, `"Our Solution"`). Every slide title must state the **core insight**:
 

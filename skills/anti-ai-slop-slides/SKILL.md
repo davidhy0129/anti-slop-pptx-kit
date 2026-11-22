@@ -18,6 +18,9 @@ The #1 reason AI presentations look amateur is **not just color or fonts** — i
 ### Color, Typography & Clutter Giveaways
 - Purple-to-blue gradients (`#6366F1` -> `#8B5CF6`), neon-on-black glow, or glassmorphism KPI boxes.
 - Default fonts (`Inter`, `Arial`, `Calibri`, `Roboto`, `Space Grotesk`, `Geist`).
+- **Meaningless placeholder icons** (glowing brains, handshakes, rockets, targets-with-arrows floating beside text) — icons belong only in literal UI navigation or system diagrams; whitespace is superior.
+- **Vertical accent bars pasted next to every text box** or **italic serif flourishes** at the end of headings (classic AI/Gamma/template giveaways).
+- **Uniform-length parallel bullets** & empty corporate buzzwords — write in direct, concrete, skeptical executive/engineering prose.
 - Emojis on headings or bullets (`🚀`, `✨`, `💡`, `🎯`).
 
 ---

@@ -23,7 +23,7 @@ Before exporting any chart, **strip chart junk**:
 ### 4 Studio Chart Alternatives to Default Bars/Pies
 1. **Dot-Matrix / Waffle Grid (`10×4` or `10×10`):** Show percentages (`10%`, `63%`) as a crisp grid of circles where `K` circles are filled in bright brand accent and the remaining circles sit in muted charcoal/stone (`#262626` or `15%` opacity).
 2. **Axis-Free Bezier Milestone Curve:** Plot growth (`1k → 2.5k → 3.3k → 5.3k`) as a single smooth stroke with circular milestone dots and values placed directly above each dot — zero Y-axis, zero gridlines.
-3. **Direct-Labeled Horizontal Bars:** Put category names on the left, flat color-blocked bars across, and exact percentages/values directly inside or at the bar tip. Limit to `5–7` bars max per slide.
+3. **Direct-Labeled Horizontal Bars (Single-Focus Highlight):** Put category names on the left, flat color-blocked bars across, and exact values directly at the bar tip (`5–7` bars max). Paint **comparison bars in muted neutral gray** and **only the 1–2 crucial bars in your protagonist accent** so the takeaway jumps out in 0.5 seconds.
 4. **Node-and-Line Funnel / Timeline:** Plot sequential stages (`220 → 40 → 20 → 40`) along one `1px` horizontal hairline with clean accent nodes and 2-line captions underneath.
 
 ---
