@@ -1,14 +1,13 @@
 ---
-description: Anti-AI-Slop PPTX & Editorial PDF Design Engineering Rules (v5.0)
+description: Anti-AI-Slop Multi-Agent Orchestration & PPTX/PDF Design Engineering Rules (v16.0)
 globs: ["**/*.py", "**/*.ts", "**/*.js", "**/*.mjs", "**/*.tsx", "**/*.jsx", "**/*.html", "**/*.css"]
 alwaysApply: true
 ---
 
-# anti-slop-pptx-kit v5.0 Active Rules
+# anti-slop-pptx-kit v16.0 Active Rules
 
-1. **Must Import Studio Templates**: Never write raw `addShape` loops or custom `triangle`/`trapezoid` illustrations. Import `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py`, or `templates/editorial-pdf-studio.html`.
-2. **Zero Drop Shadows & Zero Vertical Accent Bars**: PowerPoint shapes must have shadows explicitly disabled; never paste vertical colored bars beside text blocks.
-3. **Zero Uppercase Eyebrows & Zero Repeated Footers**: No `ALL CAPS EYEBROW` above titles and no repeated `Company · Deck · 3 / 10` footer banners.
-4. **Word Budget & Separation**: 15–45 words per visible slide; put dense context into `speakerNotes`.
-5. **PDF Support**: Use `editorial-pdf-design/SKILL.md` and `@page` print CSS for crisp A4/Letter/16:9 PDFs.
-6. **Mandatory Gate**: Run `node scripts/audit-pptx-code.mjs .` (must exit `0`) before finishing.
+1. **Follow `agents/orchestrator.md` (6-Phase Pipeline):** Never skip Colorimetry/WCAG, Industry Typography, Real Photography, or Layout Organization.
+2. **Strict `13.333" × 7.5"` (`LAYOUT_WIDE`):** Initialize with `createDeck(PptxGenJS)`. Never use `LAYOUT_16x9` (`10" × 5.625"`).
+3. **Zero Overlaps & Zero `[X]` Icons:** Use `addTextBox()` (`valign: "top"`) and `renderSvgIconsToPng()` (never `data:image/svg+xml` in `addImage()`).
+4. **Mandatory Contrast & Real Visuals:** Verify every color pair with `assertContrast()` and include real industry photos (`sizing: { type: "cover" }`).
+5. **Mandatory Dual Gate:** Pass BOTH `node scripts/audit-pptx-code.mjs .` and `node scripts/validate-pptx.mjs <deck.pptx>` (`exit 0`).

@@ -122,9 +122,24 @@ for (const file of allFiles) {
       findings.dataviz.push(`${fileRel}:${lineNum} — Chart gridlines enabled`);
     }
   });
+
+  if (/from\s+["']pptxgenjs["']|require\(["']pptxgenjs["']\)/i.test(content)) {
+    if (!/assertContrast\s*\(/.test(content)) {
+      findings.critical.push(`${fileRel} — Missing assertContrast() WCAG verification on palette pairs`);
+    }
+    if (!/(createDeck\s*\(|LAYOUT_WIDE)/.test(content)) {
+      findings.critical.push(`${fileRel} — Missing createDeck() or LAYOUT_WIDE (13.333" x 7.5" canvas required)`);
+    }
+    if (!/\.addImage\s*\(/.test(content)) {
+      findings.critical.push(`${fileRel} — Zero images (addImage) in deck; include real photography/visuals and PNG icons`);
+    }
+    if (/(0A111E|0F172A)[\s\S]*?(059669|10B981)|(059669|10B981)[\s\S]*?(0A111E|0F172A)/i.test(content)) {
+      findings.design.push(`${fileRel} — Cliché AI dark-navy + emerald palette (#0A111E/#0F172A + #059669); craft an original industry palette`);
+    }
+  }
 }
 
-console.log(`\n=== anti-slop-pptx-kit v8.0 Audit Report (${rel(targetDir) || "."}) ===`);
+console.log(`\n=== anti-slop-pptx-kit v16.0 Audit Report (${rel(targetDir) || "."}) ===`);
 console.log(`Scanned ${allFiles.length} source files (card-grid loops found: ${totalRectLoops}).\n`);
 
 const printGroup = (title, items) => {

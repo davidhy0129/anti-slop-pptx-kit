@@ -48,3 +48,18 @@ Read `skills/creative-art-direction/SKILL.md` and `skills/domain-art-direction-r
 - `skills/anti-ai-slop-slides/SKILL.md`
 - `skills/pptx-code-architecture/SKILL.md`
 - `skills/editorial-pdf-design/SKILL.md`
+
+
+## Multi-Agent Specialist Roster (`agents/`)
+Execute via `agents/orchestrator.md` (`skills/orchestration-pipeline/SKILL.md`):
+- `agents/orchestrator.md` — Master 6-phase pipeline coordinator
+- `agents/deck-narrative-strategist.md` — Narrative arc, density & slide pacing
+- `agents/slide-art-director.md` — 3 visual metaphors, moodboard & zero-template art direction
+- `agents/color-contrast-specialist.md` — Color wheel harmony, chapter shifts & `assertContrast()` WCAG calculator
+- `agents/typography-spacing-specialist.md` — 2-font industry pairing, leading, tracking & padding scale
+- `agents/imagery-elements-specialist.md` — Real photography (`cover` crop), `renderSvgIconsToPng()` & translucent elements
+- `agents/layout-organizer.md` — 12-column grid, centering, whitespace & anti-overlap geometry
+- `agents/data-viz-specialist.md` — Native editable `addChart()` & hero metrics
+- `agents/pptx-code-builder.md` — Technical assembly with `helpers/pptx-primitives.mjs`
+- `agents/deck-auditor.md` — Mandatory dual-script release gate (`audit-pptx-code.mjs` + `validate-pptx.mjs`)
+- `agents/visual-slide-qa.md` — Visual inspection & 10-question quality filter
