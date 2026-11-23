@@ -51,10 +51,96 @@ export function addTranslucentAccent(slide, shapeType, { x, y, w, h, color, tran
   });
 }
 
-/** Build a crisp SVG icon data URI colored dynamically to any hex palette */
+/**
+ * @deprecated PowerPoint renders a broken red [X] box for `data:image/svg+xml` passed to `addImage`.
+ * Use `renderSvgIconsToPng(iconSpecs, outDir)` instead to emit real transparent PNGs.
+ */
 export function svgIconUri(pathsSvg, strokeHex, size = 64) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="#${strokeHex.replace("#", "")}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${pathsSvg}</svg>`;
   return "data:image/svg+xml;base64," + Buffer.from(svg).toString("base64");
+}
+
+/**
+ * Batch-render crisp transparent-background PNG icons from SVG path fragments via headless Edge/Chrome.
+ * PowerPoint does NOT render `data:image/svg+xml` in `addImage`; real `.png` files eliminate `[X]` broken-image boxes.
+ *
+ * @param {Array<{name: string, pathsSvg: string, strokeHex: string}>} iconSpecs
+ * @param {string} outDir Directory where `<name>.png` files will be written
+ * @param {number} [size=128] Pixel dimensions (width & height) for crisp Retina rendering
+ * @returns {Promise<Record<string, string>>} Map of `{ [name]: absolutePngPath }`
+ */
+export async function renderSvgIconsToPng(iconSpecs, outDir, size = 128) {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const { execFileSync } = await import("node:child_process");
+  const os = await import("node:os");
+
+  fs.mkdirSync(outDir, { recursive: true });
+  const browserCandidates = [
+    process.env.CHROME_PATH,
+    "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+    "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
+    "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+    "google-chrome",
+    "chromium",
+  ].filter(Boolean);
+
+  const browser = browserCandidates.find((p) => (p.includes("/") || p.includes("\\") ? fs.existsSync(p) : true));
+  if (!browser) throw new Error("No headless Chromium/Edge binary found for renderSvgIconsToPng");
+
+  const payload = iconSpecs.map((spec) => {
+    const hex = `#${spec.strokeHex.replace("#", "")}`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${hex}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${spec.pathsSvg}</svg>`;
+    return {
+      name: spec.name,
+      svgDataUri: "data:image/svg+xml;base64," + Buffer.from(svg).toString("base64"),
+    };
+  });
+
+  const tmpHtml = path.join(os.tmpdir(), `pptx-icons-${Date.now()}.html`);
+  const html = `<!doctype html><html><body><pre id="out"></pre><script>
+const specs = ${JSON.stringify(payload)};
+const size = ${size};
+Promise.all(specs.map(s => new Promise((resolve) => {
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, size, size);
+    resolve([s.name, c.toDataURL('image/png')]);
+  };
+  img.onerror = () => resolve([s.name, null]);
+  img.src = s.svgDataUri;
+}))).then(entries => {
+  document.getElementById('out').textContent = JSON.stringify(Object.fromEntries(entries));
+});
+</script></body></html>`;
+
+  fs.writeFileSync(tmpHtml, html, "utf8");
+  try {
+    const dom = execFileSync(
+      browser,
+      ["--headless=new", "--disable-gpu", "--no-sandbox", "--virtual-time-budget=2000", "--dump-dom", `file://${tmpHtml.replace(/\\/g, "/")}`],
+      { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+    );
+    const match = dom.match(/<pre id="out">([\s\S]*?)<\/pre>/);
+    if (!match) throw new Error("Failed to extract PNG icon data from headless browser");
+    const dataMap = JSON.parse(match[1]);
+    const outPaths = {};
+    for (const [name, dataUri] of Object.entries(dataMap)) {
+      if (!dataUri) throw new Error(`Failed to render SVG icon: ${name}`);
+      const base64 = dataUri.replace(/^data:image\/png;base64,/, "");
+      const outPath = path.join(outDir, `${name}.png`);
+      fs.writeFileSync(outPath, Buffer.from(base64, "base64"));
+      outPaths[name] = outPath;
+    }
+    return outPaths;
+  } finally {
+    try { fs.unlinkSync(tmpHtml); } catch {}
+  }
 }
 
 /** Clean defaults for native editable PowerPoint charts (zero gridlines, zero border clutter) */

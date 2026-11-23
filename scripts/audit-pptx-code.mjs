@@ -76,6 +76,10 @@ for (const file of allFiles) {
       findings.critical.push(`${fileRel}:${lineNum} — Negative x/y overhangs slide bounds in PowerPoint Online; keep 0 <= x, y`);
     }
 
+    if (/svgIconUri|data:image\/svg\+xml/i.test(line) && !/function\s+svgIconUri/.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — PowerPoint renders broken [X] for SVG data URIs (data:image/svg+xml); use renderSvgIconsToPng() for real PNGs`);
+    }
+
     if (DIY_POLYGON_RE.test(line)) {
       findings.critical.push(`${fileRel}:${lineNum} — Hand-drawn polygon illustration (triangle/trapezoid) forbidden`);
     }

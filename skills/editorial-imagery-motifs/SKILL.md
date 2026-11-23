@@ -36,3 +36,20 @@ Before keeping any photo, icon, vector, or animation:
 3. **`Merge Shapes` Typography Masking & Cutouts:** Mask high-res photography inside oversized display letters (`80–140 pt`), or let a background-removed subject cutout break slightly outside its card/ring border.
 4. **CAD / Figma Selection-Box Callouts & Concentric Target Rings:** Frame micro-tags (`[CONTEXT]`) with `1px` bounding boxes + `3–4px` corner handles, and connect nodes with `1px` hairlines ending in concentric circles instead of fat PowerPoint block arrows.
 5. **Motion & PDF-Fallback Restraint:** Use **Morph** (`Transformar`) for chapter spotlights or image-focus zooms, and prefer simple **Appear** animations when slides must also export cleanly to PDF.
+
+
+## 4. Image Cropping, Aspect Ratios & Focal-Point Rules
+- **Standardize Aspect Ratios per Component:** Never stretch or squish photos (`sizing: { type: "cover" }` or PowerPoint `Crop > Fill`). Use exact ratios intentionally:
+  - `16:9` for full-bleed hero covers and panoramic backgrounds.
+  - `4:3` for horizontal split-screen editorial panels.
+  - `1:1` for grid thumbnails, circle avatars, and square brand tiles.
+  - `3:4` or `4:5` for vertical portraits, menus, fashion, and hospitality interiors.
+- **Focal-Point Alignment Inside Shapes:** When placing a photo inside a circle (`rounding: true`) or rounded frame, verify the subject's center of interest sits in the center of the crop (`Crop > Fill` + pan), never letting heads, plates, or architectural arches get clipped at the edge.
+- **Consistent Corner & Border Discipline:**
+  - Pick **one** corner treatment per slide/deck (`8px`, `12px`, or `16px` — `0.10"–0.18"` in PPTX). Inner nested elements must have a **smaller** radius than their outer container (`innerRadius < outerRadius`).
+  - Do **not** mix sharp-cornered cards, pill buttons, and circle-cropped photos incoherently on the same grid without clear visual hierarchy.
+  - Keep card borders ultra-thin (`0.75–1.5 pt` max) and subtle; **never** stack thick border + heavy drop shadow + gradient + accent bar on the same card.
+
+## 5. Icons in PowerPoint (Zero Broken `[X]` Rule)
+- **Never** pass `data:image/svg+xml;base64,...` to `addImage()` — PowerPoint Desktop and PowerPoint Online do **not** render SVG data URIs and display a broken red `[X]` box.
+- Always batch-render custom SVG icons to real transparent `.png` files via `renderSvgIconsToPng(iconSpecs, outDir)` in `helpers/pptx-primitives.mjs` and pass `{ path: pngPath }` to `addImage()`.
