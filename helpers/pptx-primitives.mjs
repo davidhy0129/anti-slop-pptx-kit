@@ -6,6 +6,32 @@
 export const SLIDE = { w: 13.333, h: 7.5 };
 export const NO_SHADOW = { type: "none" };
 
+/** Compute W3C relative luminance and WCAG contrast ratio (L1 + 0.05) / (L2 + 0.05) */
+export function getRelativeLuminance(hex) {
+  const clean = hex.replace("#", "").trim();
+  const [r, g, b] = [0, 2, 4].map((i) => {
+    const c = parseInt(clean.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+export function contrastRatio(hex1, hex2) {
+  const l1 = getRelativeLuminance(hex1);
+  const l2 = getRelativeLuminance(hex2);
+  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+}
+
+/** Verify WCAG 2.1 AA contrast (>=4.5:1 normal text, >=3.0:1 large text/icons) */
+export function assertContrast(fgHex, bgHex, { large = false, label = "" } = {}) {
+  const ratio = contrastRatio(fgHex, bgHex);
+  const min = large ? 3.0 : 4.5;
+  if (ratio < min) {
+    throw new Error(`WCAG Contrast Fail${label ? ` (${label})` : ""}: #${fgHex} on #${bgHex} = ${ratio.toFixed(2)}:1 (min ${min}:1)`);
+  }
+  return ratio;
+}
+
 /** Add a flat shape with PowerPoint's default drop shadow explicitly disabled */
 export function addFlatShape(slide, shapeType, opts) {
   return slide.addShape(shapeType, { shadow: NO_SHADOW, ...opts });

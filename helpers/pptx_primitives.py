@@ -20,6 +20,28 @@ def rgb(hex_str: str) -> RGBColor:
     return RGBColor.from_string(hex_str.lstrip("#"))
 
 
+def relative_luminance(hex_str: str) -> float:
+    clean = hex_str.lstrip("#").strip()
+    channels = []
+    for i in (0, 2, 4):
+        c = int(clean[i:i + 2], 16) / 255.0
+        channels.append(c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4)
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
+
+
+def contrast_ratio(hex1: str, hex2: str) -> float:
+    l1, l2 = relative_luminance(hex1), relative_luminance(hex2)
+    return (max(l1, l2) + 0.05) / (min(l1, l2) + 0.05)
+
+
+def assert_contrast(fg_hex: str, bg_hex: str, large: bool = False, label: str = "") -> float:
+    ratio = contrast_ratio(fg_hex, bg_hex)
+    minimum = 3.0 if large else 4.5
+    if ratio < minimum:
+        raise ValueError(f"WCAG Contrast Fail ({label}): #{fg_hex} on #{bg_hex} = {ratio:.2f}:1 (min {minimum}:1)")
+    return ratio
+
+
 def add_flat_shape(slide, shape_type, x, y, w, h, fill_hex=None, line_hex=None, line_pt=1):
     shp = slide.shapes.add_shape(shape_type, x, y, w, h)
     shp.shadow.inherit = False

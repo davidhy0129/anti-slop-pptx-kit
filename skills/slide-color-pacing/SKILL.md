@@ -1,45 +1,39 @@
 ---
 name: slide-color-pacing
-description: Color Theory (Color Wheel, Complementary, Analogous, Triadic, Monochromatic), Hue/Saturation/Value contrast, WCAG Accessibility, Psychology of Color, 80/10/10 distribution, and dark/light slide rhythm.
+description: Google Design & Adobe Color Systems: Color Wheel (6 Harmonies), HSL, Material Tonal Scales, Dark Theme Elevation (no pure black/neon), WCAG 2.1 exact contrast (4.5:1 / 3:1 / 7:1), Photo-Overlay protection (G18/F83), and 60-30-10 pacing.
 ---
 
-# Color Theory, Harmonies & Slide Pacing
+# Color Theory, Systems & WCAG Accessibility (v13.0)
 
-Color is **not decoration**—it creates visual hierarchy, mood, contrast, and brand coherence.
+First **legibility**, then **identity**, then **emotion**, and last decoration.
 
-## 1. The Color Wheel & 4 Classic Harmonies
+## 1. HSL & The 3-Step Color Balancing System (Google Design)
 
-1. **Complementary (Opposites on the Wheel, e.g., Steel Blue + Signal Orange):** Maximum contrast and energy; ideal for highlighting one protagonist focal point against a calm base. Never place equal-intensity complementary hues side-by-side in text (causes visual vibration).
-2. **Analogous (Adjacent Hues, e.g., Navy + Teal + Slate):** Calm, unified, natural flow; designate **1 dominant hue** and use the other 2 sparingly so contrast doesn't flatten.
-3. **Triadic (3 Evenly Spaced Hues):** Vibrant and balanced; keep 2 hues muted/unsaturated so 1 accent leads.
-4. **Monochromatic (Tints, Shades & Tones of 1 Hue):** Ultra-clean, authoritative, zero visual noise; rely on **Value contrast** (deep dark vs crisp off-white) for legibility.
-
----
-
-## 2. Hue, Saturation, Value & Accessibility
-
-- **Hue:** The color family (Blue, Orange, Green).
-- **Saturation:** Purity/intensity. Use **low saturation** for backgrounds/surfaces and **high saturation** strictly for focal callouts.
-- **Value (Luminance) — The Secret to Readability:** Even two completely different hues become illegible if they share the same brightness/value. Always pair dark ink (`#0F172A`) on light bases (`#F8FAFC`) or crisp light ink (`#FFFFFF`) on dark bases (`#0F172A`).
-- **Accessibility Rules:**
-  - Meet WCAG AA (`>= 4.5:1`) contrast on all body text.
-  - Never place **red text on green** (or vice versa).
-  - Never convey meaning by color alone—pair color with labels, icons, or solid vs. dotted lines.
+- **Hue (Matiz):** Brand family; **Saturation:** Purity (keep low on large backgrounds, reserve high saturation for small accents); **Value / Luminance (Luminosidad):** Controls readability (`yellow ≈ white`, `purple ≈ black`).
+- **3-Step Balancing:** (1) *Balance Stimulation* (avoid equal-lightness vibrant pairs that vibrate); (2) *Relate* (unify via shared temperature or a muted bridge color); (3) *Complete* (add a complementary temperature/lightness accent in unequal `60-30-10` proportions).
+- **6 Wheel Harmonies:** Monochromatic, Analogous, Complementary, Split-Complementary, Triadic, Tetradic.
+- **Material Tonal Scale:** Anchor primary at `500`, darken to `700` for structural surfaces, lighten to `300` for secondary info; add 2 lighter + 2 darker variants per hue.
 
 ---
 
-## 3. Distribution & Color Psychology
+## 2. Dark Theme & Photo-Overlay Contrast Rules (W3C WCAG 2.1 + Google Design)
 
-- **80 / 10 / 10 (or 60 / 30 / 10) Budget:** ~80% dominant background canvas, ~10% structural surface/text neutrals, ~10% **single protagonist accent** reserved for the key takeaway.
-- **Color Mood by Industry:**
-  - *Blue / Navy:* Trust, engineering rigor, enterprise reliability.
-  - *Orange / Amber:* Industrial energy, urgency, decisive action.
-  - *Green / Emerald:* Financial growth, sustainability, approval.
-  - *Terracotta / Burgundy / Cream:* Warmth, hospitality, human craft.
-  - *Obsidian / Bone / Crimson:* Luxury, authority, editorial precision.
+- **No Pure `#000000` & No Neon:** Use deep charcoal/smoky gray (`#121212`–`#1E1E1E`) with subtle elevated steps (`#242424`) and **desaturated accents** (never glaring neon). Use crisp off-white (`#F3F1ED`) instead of blinding pure white on small dark-mode text to prevent pixel-bleed.
+- **Strict WCAG 2.1 Luminance Ratios (`(L1 + 0.05) / (L2 + 0.05)`):**
+  - **Normal text (`<18pt` or `<14pt` bold):** **`>= 4.5:1`** (`7.0:1` AAA).
+  - **Large text (`>=18pt` or `>=14pt` bold) & UI/Chart elements (`SC 1.4.11`):** **`>= 3.0:1`**.
+  - Use `assertContrast(fg, bg)` in `helpers/pptx-primitives.mjs` (or `assert_contrast` in Python) to verify every color pair mathematically!
+- **Photo-Overlay Protection (`WCAG G18 / F83`):** Foreground text over photos is **NOT** exempt. Never put colored/amber text (`12–15pt`) directly over a busy or warm photo with a weak transparent overlay! Always use an opaque or `>= 90%` solid local scrim/panel behind text (`4.5:1` against worst-case photo pixels).
 
 ---
 
-## 4. Visual Rhythm Across the Deck
+## 3. 11 Amateur Color Mistakes to Ban
 
-Alternate **deep matte dark slides** (covers, hero metrics, feature grids) with **clean light/warm off-white slides** (charts, tables, comparisons, timelines) so the audience stays visually engaged from Slide 1 to Slide 10.
+1. Exceeding 3–5 core colors (plus 2–3 optional functional status colors: green/amber/red).
+2. Using saturated colors across large background areas.
+3. Placing vibrant contrasting hues of **equal lightness** side-by-side (visual vibration).
+4. **Red on dark/black** (invisible to protanopia).
+5. Using color alone to convey meaning (`WCAG 1.4.1`) — always pair with labels, icons, or patterns.
+6. White text on yellow, light cyan, or light orange.
+7. Failing to test in **grayscale** and color-blind simulation before finalizing.
+8. Choosing trend colors over audience/brand fit.
