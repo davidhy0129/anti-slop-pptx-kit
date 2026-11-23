@@ -68,7 +68,11 @@ for (let i = 0; i < slideCount; i++) {
   const slideUrl = `${fileUrl}?slide=${i + 1}`;
   const tmpHtml = path.join(os.tmpdir(), `qa-slide-${Date.now()}-${i}.html`);
   // Inject CSS so only slide (i+1) is visible at 1280x720 viewport
+  const baseHref = `file://${path.dirname(htmlPath).replace(/\\/g, "/")}/`;
   const injected = rawHtml.replace(
+    "<head>",
+    `<head><base href="${baseHref}">`
+  ).replace(
     "</head>",
     `<style>
       html, body { margin: 0 !important; padding: 0 !important; overflow: hidden !important; background: #000 !important; }
