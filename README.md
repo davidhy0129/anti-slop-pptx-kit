@@ -1,31 +1,28 @@
-# `anti-slop-pptx-kit` (v8.0 — Zero-Template Creative Art Direction Kit)
+# `anti-slop-pptx-kit` (v17.0 — Multi-Agent Art Direction, HTML/PDF & PPTX Studio)
 
-> **Sistema universal de dirección de arte, diseño gráfico, narrativa ejecutiva e ingeniería PPTX/PDF para que cualquier IA cree presentaciones y PDFs únicos, vivos y personalizados al prompt — sin plantillas repetitivas ni estética genérica de IA.**
+> **Sistema multi-agente de dirección de arte, colorimetría WCAG, tipografía por industria, fotografía real y validación geométrica para que cualquier IA cree presentaciones únicas, vivas y libres de errores — entregando siempre `.pdf` editorial + `.pptx` editable.**
 
-Compatible desde el minuto cero con **Antigravity**, **Claude Code**, **OpenAI Codex**, **Cursor**, **Windsurf** y **Gemini CLI**.
-
----
-
-## Filosofía v8.0: Cero Plantillas Fijas, 100% Diseño a Medida
-
-Las presentaciones de IA se ven iguales cuando el código usa funciones de plantilla fijas para todo. **`anti-slop-pptx-kit` no impone plantillas**: le entrega a la IA las leyes reales del diseño gráfico, teoría del color, tipografía, composición, visualización de datos y herramientas técnicas para que **construya una propuesta visual distinta para cada tema**:
-
-- **Ranking Corporativo / Economía** (ej. *Top 5 Empresas de Colombia*): Estética editorial financiera (*Financial Times / The Economist*), tipografía con carácter, gráficos nativos comparativos, tablas limpias y aire asimétrico.
-- **Gastronomía / Restaurantes**: Fotografía protagonista a sangre, armonía cálida, tipografía editorial *serif + sans*, recortes y bloques de color orgánicos.
-- **Moda / Lanzamiento de Marca**: Lookbook minimalista de alto contraste, espacio negativo dramático, asimetría y titulares de gran escala.
-- **Ingeniería / SaaS / Industria**: Retícula suiza precisa, diagramas de arquitectura, datos limpios y contraste técnico.
+Compatible con **Antigravity** (descubrimiento automático vía `.agents/rules/` + `.agents/skills/`), **Claude Code**, **OpenAI Codex**, **Cursor** y **Gemini CLI**.
 
 ---
 
-## Estructura (Los 7 Pilares del Diseño)
+## Cómo funciona el flujo `v17.0` (Orquestador en 6 Fases)
 
-1. **`skills/domain-art-direction-router/`** — Paso 0: lee el prompt del usuario y define un *Creative Brief* único (paleta, tipografías, estrategia de fotos/íconos/diagramas y ritmo de láminas).
-2. **`skills/graphic-design-fundamentals/`** — Jerarquía, Contraste, Alineación, Proximidad (contiguidad espacial), Repetición, Balance simétrico/asimétrico, Peso Visual y diferenciación de los 6 recursos visuales (Foto, Ilustración, Icono, Diagrama, Gráfico, Captura).
-3. **`skills/slide-color-pacing/`** — Círculo cromático (complementarios, análogos, tríadas, monocromáticos), Matiz/Saturación/Valor, accesibilidad WCAG/APCA y psicología del color.
-4. **`skills/slide-grid-typography/`** — Retícula modular (Suiza / Tercios 3×3), *Serif vs. Sans-Serif*, máximo 2 familias, tamaños legibles en sala (`14–16pt+` cuerpo, `28–44pt` títulos), interlineado, tracking y ancho de línea.
-5. **`skills/editorial-imagery-motifs/` & `skills/data-viz-hero-metrics/`** — Fotos a sangre sin *efecto pegote*, B&N + acento, recorte/superposición controlada, gráficos nativos editables de PowerPoint y regla `<2 segundos`.
-6. **`skills/narrative-storytelling-decks/` & `skills/anti-ai-slop-slides/`** — SCQA, Pirámide de Minto, *Action Titles*, Regla 5×5 / 6×6, `speakerNotes` y purga total de clichés IA.
-7. **`skills/pptx-code-architecture/` & `skills/editorial-pdf-design/`** — Primitivas técnicas sin sombras (`helpers/`), PDFs editoriales (`@page` print CSS) y auditor estático (`scripts/audit-pptx-code.mjs`).
+Cuando pides una presentación, el repositorio activa **`agents/orchestrator.md`** y coordina a los especialistas antes de escribir código:
+
+1. **Narrativa y Densidad (`agents/deck-narrative-strategist.md`):** Define 8–14 diapositivas con 1 idea fuerte por lámina y cero repetición de layouts consecutivos.
+2. **Dirección de Arte, Colorimetría y Tipografía:**
+   - `agents/slide-art-director.md`: 3 metáforas visuales + moodboard propio (cero plantillas).
+   - `agents/color-contrast-specialist.md`: armonía 60-30-10, cambio de color por capítulo y cálculo matemático obligatorio con `assertContrast()` (`>= 4.5:1` texto, `>= 3.0:1` títulos grandes).
+   - `agents/typography-spacing-specialist.md`: máximo 2 fuentes reales por industria, interlineado (`1.4–1.6` cuerpo, `1.05–1.25` títulos), tracking y escala de padding (`4/8/16/24/32/48 px`).
+3. **Imágenes, Iconos PNG y Elementos (`agents/imagery-elements-specialist.md`):** Fotografías reales sin estirar (`sizing: { type: "cover" }` / CSS `object-fit: cover`), iconos PNG vía `renderSvgIconsToPng()` (cero `[X]`) y capas translúcidas (`82–92%`).
+4. **Organización Espacial (`agents/layout-organizer.md`):** Grilla de 12 columnas en `13.333" × 7.5"` (`LAYOUT_WIDE`), cero tarjetas con bordes ("cuadritos"), cero líneas `1px` repetitivas y cero solapamientos.
+5. **Entrega Dual (`PDF` + `PPTX`):**
+   - `deck.html` -> **`<Deck>.pdf`** + **`qa-slides/*.png`** vía `node scripts/render-deck-pdf-and-pngs.mjs`.
+   - **`<Deck>.pptx`** vía `createDeck()`, `addTextBox()`, `addFlatShape()`, `assertContrast()`, `renderSvgIconsToPng()` y `cleanChartOptions()`.
+6. **Doble Gate Bloqueante (`agents/deck-auditor.md`):**
+   - `node scripts/audit-pptx-code.mjs .` (`exit 0`)
+   - `node scripts/validate-pptx.mjs <Deck>.pptx` (`exit 0` — valida lienzo `13.333" × 7.5"`, límites, solapamientos y proporción de imágenes)
 
 ---
 
@@ -36,6 +33,7 @@ Las presentaciones de IA se ven iguales cuando el código usa funciones de plant
 Remove-Item -Recurse -Force "$env:TEMP\anti-slop-pptx-kit" -ErrorAction SilentlyContinue
 git clone https://github.com/davidhy0129/anti-slop-pptx-kit.git "$env:TEMP\anti-slop-pptx-kit"
 powershell -ExecutionPolicy Bypass -File "$env:TEMP\anti-slop-pptx-kit\scripts\install.ps1" -Target all -Scope project -Force
+npm install
 ```
 
 ### macOS / Linux (Bash)
@@ -43,4 +41,5 @@ powershell -ExecutionPolicy Bypass -File "$env:TEMP\anti-slop-pptx-kit\scripts\i
 rm -rf /tmp/anti-slop-pptx-kit
 git clone https://github.com/davidhy0129/anti-slop-pptx-kit.git /tmp/anti-slop-pptx-kit
 bash /tmp/anti-slop-pptx-kit/scripts/install.sh --target all --scope project --force
+npm install
 ```

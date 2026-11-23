@@ -1,28 +1,31 @@
-# Workflow: Create a Studio-Grade PPTX Deck from Scratch
+# Workflow: Create a Studio-Grade Presentation (`PDF` + `PPTX`) from Scratch (`v17.0`)
 
-Usa este flujo cuando vayas a crear una presentación nueva desde cero (en código `PptxGenJS` / `python-pptx` o diseñando el guion visual slide a slide).
+Follow `agents/orchestrator.md` strictly in 6 phases. Never jump directly to coding.
 
-## Paso 1 — Narrativa y Títulos de Acción (`deck-narrative-strategist`)
-Lee `skills/narrative-storytelling-decks/SKILL.md`:
-1. Define el objetivo del deck (Pitch, Board Review, Propuesta Comercial, Keynote) y el total de slides (`8–12`).
-2. Redacta el **Action Title** de cada slide (una conclusión real, nunca una etiqueta vaga).
-3. Marca qué 1–2 palabras de cada titular llevan resaltado de acento (*inline turn highlight*).
-4. Limita el texto por bloque a `1–2` líneas (`8–15` palabras). Cero muros de viñetas.
+## Phase 1 — Narrative & Density (`agents/deck-narrative-strategist.md`)
+- Define 8–14 slides tailored to the user's prompt density.
+- Assign 1 clear takeaway + 1 distinct layout archetype per slide (never repeat the same layout on adjacent slides).
 
-## Paso 2 — Dirección de Arte y Sistema Visual (`slide-art-director`)
-Lee `skills/anti-ai-slop-slides/SKILL.md`, `skills/slide-grid-typography/SKILL.md` y `skills/slide-color-pacing/SKILL.md`:
-1. Elige **1 par tipográfico** fuera de la lista prohibida (ej. `Switzer` + `IBM Plex Mono` micro-tags, o `Archivo Black` + `Montserrat`).
-2. Elige **1 paleta 60-30-10** (máximo 2–3 colores + rampa de opacidad `100%/60%/30%/10%`), cero degradados morado-azul ni neón.
-3. Traza el **ritmo oscuro/claro** de las slides (Portada oscura -> Agenda Morph -> Contexto claro -> Métrica Hero oscura -> Datos claros -> Cita/Respiro -> Cierre minimalista).
-4. Asegura `35–55%` de espacio negativo y cero píldoras `●` ni emojis encima de los títulos.
+## Phase 2 — Art Direction, Colorimetry & Typography
+- **`agents/slide-art-director.md`:** Write 3 visual metaphors and pick 1 bespoke moodboard.
+- **`agents/color-contrast-specialist.md`:** Build a 60-30-10 + chapter-shift palette and verify every pair with `assertContrast()` (`>= 4.5:1` body, `>= 3.0:1` large display).
+- **`agents/typography-spacing-specialist.md`:** Choose 2 harmonious industry fonts (never `Inter`/`Arial`/`Calibri`/`Roboto`/`Space Grotesk`), leading (`1.4–1.6` body, `1.05–1.25` display), and `4/8/16/24/32/48 px` padding.
 
-## Paso 3 — Datos y Visualización (`data-viz-specialist`)
-Lee `skills/data-viz-hero-metrics/SKILL.md`:
-1. Convierte métricas clave en slides de **1 cifra gigante** (`100–190 px`).
-2. Sustituye gráficos por defecto con ejes/cuadrículas por **Dot-Matrix (`10×4`)**, curvas Bezier con hitos, barras horizontales con etiqueta directa o líneas de tiempo nodales.
+## Phase 3 — Real Photography, PNG Icons & Visual Elements (`agents/imagery-elements-specialist.md`)
+- Include real industry photography (`sizing: { type: "cover" }` / CSS `object-fit: cover`, `16:9`, `4:3`, `1:1`, `3:4`, `4:5`) — never stretch images and never deliver a 100% text-only deck.
+- Render custom vector icons to `.png` via `renderSvgIconsToPng()`.
 
-## Paso 4 — Generación Modular y QA Visual (`pptx-code-builder` + `visual-slide-qa`)
-Lee `skills/pptx-code-architecture/SKILL.md` (y `skills/editorial-pdf-design/SKILL.md` si el entregable es PDF):
-1. **Importa obligatoriamente** `templates/pptxgenjs-studio-kit.mjs`, `templates/python_pptx_studio.py` o `templates/editorial-pdf-studio.html` (prohibido dibujar polígonos `triangle`/`trapezoid`, barras verticales con sombra o tarjetas manuales).
-2. Mueve el detalle denso a `speakerNotes` / `speaker_notes`, dejando 15–45 palabras visibles por slide.
-3. Ejecuta `node scripts/audit-pptx-code.mjs .` (**debe salir en `exit 0`**) y renderiza vista previa (`workflows/visual-qa-render-loop.md`) para confirmar cero solapamientos.
+## Phase 4 — Layout Organization (`agents/layout-organizer.md`)
+- Use `LAYOUT_WIDE` (`13.333" × 7.5"`), borderless tonal blocks (`line: { width: 0 }` / `border: none`), translucent background shapes (`82–92%` transparency), and zero overlapping text boxes.
+
+## Phase 5 — Dual Build (`HTML -> PDF + PNGs` and `PPTX`)
+1. Write `deck.html` (`@page { size: 13.333in 7.5in; margin: 0; }`) and run:
+   ```bash
+   node scripts/render-deck-pdf-and-pngs.mjs deck.html <Deck>.pdf qa-slides
+   ```
+2. Write the PPTX builder importing `createDeck`, `addTextBox`, `addFlatShape`, `addTranslucentAccent`, `assertContrast`, `renderSvgIconsToPng`, and `cleanChartOptions` from `./helpers/pptx-primitives.mjs`, and generate `<Deck>.pptx`.
+
+## Phase 6 — Audit & Visual QA Gate (`agents/deck-auditor.md`)
+1. Run `node scripts/audit-pptx-code.mjs .` (`exit 0`).
+2. Run `node scripts/validate-pptx.mjs <Deck>.pptx` (`exit 0`).
+3. Visually inspect `qa-slides/slide-*.png` to confirm zero overlaps, zero stretched images, and crisp typography before delivering **both** `<Deck>.pdf` and `<Deck>.pptx`.

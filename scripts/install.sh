@@ -45,7 +45,8 @@ if [[ "$SCOPE" == "global" ]]; then
   if [[ "$TARGET" == "all" || "$TARGET" == "antigravity" ]]; then
     copy_dir "$KIT_ROOT/skills" "$HOME/.agents/skills"
     copy_dir "$KIT_ROOT/skills" "$HOME/.gemini/antigravity/skills"
-    echo "  [ok]   Antigravity global PPTX skills installed"
+    copy_dir "$KIT_ROOT/.agents/rules" "$HOME/.gemini/antigravity/rules"
+    echo "  [ok]   Antigravity global rules & skills installed"
   fi
   if [[ "$TARGET" == "all" || "$TARGET" == "claude" ]]; then
     copy_dir "$KIT_ROOT/skills" "$HOME/.claude/skills"
@@ -67,6 +68,7 @@ fi
 
 if [[ "$TARGET" == "all" || "$TARGET" == "antigravity" || "$TARGET" == "codex" ]]; then
   copy_dir "$KIT_ROOT/skills" "$DEST/.agents/skills"
+  copy_dir "$KIT_ROOT/.agents/rules" "$DEST/.agents/rules"
   copy_file_safe "$KIT_ROOT/AGENTS.md" "$DEST/AGENTS.md"
 fi
 
@@ -95,7 +97,10 @@ copy_dir "$KIT_ROOT/helpers" "$DEST/helpers"
 copy_dir "$KIT_ROOT/references" "$DEST/references"
 mkdir -p "$DEST/scripts"
 cp "$KIT_ROOT/scripts/audit-pptx-code.mjs" "$DEST/scripts/audit-pptx-code.mjs"
+cp "$KIT_ROOT/scripts/validate-pptx.mjs" "$DEST/scripts/validate-pptx.mjs"
+cp "$KIT_ROOT/scripts/render-deck-pdf-and-pngs.mjs" "$DEST/scripts/render-deck-pdf-and-pngs.mjs"
 cp "$KIT_ROOT/scripts/render-html-slides.mjs" "$DEST/scripts/render-html-slides.mjs"
+copy_file_safe "$KIT_ROOT/package.json" "$DEST/package.json"
 
 echo ""
-echo "Done! Run 'node scripts/audit-pptx-code.mjs .' in $DEST"
+echo "Done! Run 'npm install' then 'node scripts/audit-pptx-code.mjs .' and 'node scripts/validate-pptx.mjs <deck.pptx>' in $DEST"

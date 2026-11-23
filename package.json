@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/davidhy0129/anti-slop-pptx-kit#readme",
   "dependencies": {
+    "jszip": "^3.10.2",
     "pptxgenjs": "^4.0.1"
   }
 }

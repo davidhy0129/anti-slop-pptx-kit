@@ -88,6 +88,10 @@ for (const file of allFiles) {
       findings.critical.push(`${fileRel}:${lineNum} — Hand-drawn polygon illustration (triangle/trapezoid) forbidden`);
     }
 
+    if (/(addShape|addFlatShape|add_shape|add_flat_shape)/.test(line) && /line\s*:\s*\{[^}]*width\s*:\s*[1-9]/.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — Bordered card/shape (line.width >= 1) detected; use borderless tonal surfaces (width: 0)`);
+    }
+
     if (/(addShape|addFlatShape|add_shape|add_flat_shape)/.test(line) && /w\s*:\s*0\.0[1-9]|Inches\(\s*0\.0[1-9]\s*\)/.test(line) && /h\s*:\s*[0-9]|Inches\(\s*[0-9]/.test(line)) {
       findings.critical.push(`${fileRel}:${lineNum} — Vertical accent bar next to text detected`);
     }

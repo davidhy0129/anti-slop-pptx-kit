@@ -44,7 +44,14 @@ if ($Scope -eq "global") {
     if ($Target -in @("all", "antigravity")) {
         Copy-DirContents (Join-Path $KitRoot "skills") (Join-Path $HomeDir ".agents\skills")
         Copy-DirContents (Join-Path $KitRoot "skills") (Join-Path $HomeDir ".gemini\antigravity\skills")
-        Write-Host "  [ok]   Antigravity global PPTX skills installed" -ForegroundColor Green
+        Copy-DirContents (Join-Path $KitRoot ".agents\rules") (Join-Path $HomeDir ".gemini\antigravity\rules")
+        $GlobalKit = Join-Path $HomeDir ".gemini\antigravity\anti-slop-pptx-kit"
+        Copy-DirContents (Join-Path $KitRoot "helpers") (Join-Path $GlobalKit "helpers")
+        Copy-DirContents (Join-Path $KitRoot "scripts") (Join-Path $GlobalKit "scripts")
+        Copy-DirContents (Join-Path $KitRoot "agents") (Join-Path $GlobalKit "agents")
+        Copy-DirContents (Join-Path $KitRoot "templates") (Join-Path $GlobalKit "templates")
+        Copy-FileSafe (Join-Path $KitRoot "package.json") (Join-Path $GlobalKit "package.json") -Overwrite:$Force
+        Write-Host "  [ok]   Antigravity global rules, skills, agents, helpers & scripts installed" -ForegroundColor Green
     }
     if ($Target -in @("all", "claude")) {
         Copy-DirContents (Join-Path $KitRoot "skills") (Join-Path $HomeDir ".claude\skills")
@@ -67,8 +74,9 @@ $DestRoot = (Resolve-Path $Destination).Path
 
 if ($Target -in @("all", "antigravity", "codex")) {
     Copy-DirContents (Join-Path $KitRoot "skills") (Join-Path $DestRoot ".agents\skills")
+    Copy-DirContents (Join-Path $KitRoot ".agents\rules") (Join-Path $DestRoot ".agents\rules")
     Copy-FileSafe (Join-Path $KitRoot "AGENTS.md") (Join-Path $DestRoot "AGENTS.md") -Overwrite:$Force
-    Write-Host "  [ok]   .agents/skills & AGENTS.md ready" -ForegroundColor Green
+    Write-Host "  [ok]   .agents/rules, .agents/skills & AGENTS.md ready" -ForegroundColor Green
 }
 
 if ($Target -in @("all", "claude")) {
@@ -94,6 +102,9 @@ Copy-DirContents (Join-Path $KitRoot "templates") (Join-Path $DestRoot "template
 Copy-DirContents (Join-Path $KitRoot "helpers") (Join-Path $DestRoot "helpers")
 Copy-DirContents (Join-Path $KitRoot "references") (Join-Path $DestRoot "references")
 Copy-FileSafe (Join-Path $KitRoot "scripts\audit-pptx-code.mjs") (Join-Path $DestRoot "scripts\audit-pptx-code.mjs") -Overwrite:$true
+Copy-FileSafe (Join-Path $KitRoot "scripts\validate-pptx.mjs") (Join-Path $DestRoot "scripts\validate-pptx.mjs") -Overwrite:$true
+Copy-FileSafe (Join-Path $KitRoot "scripts\render-deck-pdf-and-pngs.mjs") (Join-Path $DestRoot "scripts\render-deck-pdf-and-pngs.mjs") -Overwrite:$true
 Copy-FileSafe (Join-Path $KitRoot "scripts\render-html-slides.mjs") (Join-Path $DestRoot "scripts\render-html-slides.mjs") -Overwrite:$true
+Copy-FileSafe (Join-Path $KitRoot "package.json") (Join-Path $DestRoot "package.json") -Overwrite:$Force
 
-Write-Host "`nDone! Run 'node scripts/audit-pptx-code.mjs .' in $DestRoot`n" -ForegroundColor Cyan
+Write-Host "`nDone! Run 'npm install' then 'node scripts/audit-pptx-code.mjs .' and 'node scripts/validate-pptx.mjs <deck.pptx>' in $DestRoot`n" -ForegroundColor Cyan
