@@ -6,6 +6,37 @@
 export const SLIDE = { w: 13.333, h: 7.5 };
 export const NO_SHADOW = { type: "none" };
 
+/** Initialize a PptxGenJS deck locked to 13.333" x 7.5" (LAYOUT_WIDE) so coordinates never clip at 10"x5.625". */
+export function createDeck(PptxGenJS, { title = "", author = "", company = "" } = {}) {
+  const pptx = new PptxGenJS();
+  pptx.layout = "LAYOUT_WIDE";
+  if (title) pptx.title = title;
+  if (author) pptx.author = author;
+  if (company) pptx.company = company;
+  return pptx;
+}
+
+/** Fail fast at build time if an element overflows the 13.333" x 7.5" canvas. */
+export function assertSlideBounds({ x = 0, y = 0, w = 0, h = 0, allowBleed = false }, label = "element") {
+  if (allowBleed) return;
+  if (x < -0.01 || y < -0.01 || x + w > SLIDE.w + 0.02 || y + h > SLIDE.h + 0.02) {
+    throw new Error(
+      `Slide Bounds Overflow (${label}): x=${x}, y=${y}, w=${w}, h=${h} exceeds ${SLIDE.w}"x${SLIDE.h}" canvas`
+    );
+  }
+}
+
+/** Add a text box with safe defaults (valign: "top", wrap: true, margin: 0) and canvas-bounds check. */
+export function addTextBox(slide, text, opts = {}) {
+  assertSlideBounds(opts, typeof text === "string" ? text.slice(0, 32) : "rich-text");
+  return slide.addText(text, {
+    valign: "top",
+    wrap: true,
+    margin: 0,
+    ...opts,
+  });
+}
+
 /** Compute W3C relative luminance and WCAG contrast ratio (L1 + 0.05) / (L2 + 0.05) */
 export function getRelativeLuminance(hex) {
   const clean = hex.replace("#", "").trim();

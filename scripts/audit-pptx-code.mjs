@@ -72,6 +72,10 @@ for (const file of allFiles) {
       findings.critical.push(`${fileRel}:${lineNum} — Narrow width (w < 1) on rotated text wraps awkwardly; use w >= 3.0 before rotating`);
     }
 
+    if (/layout\s*=\s*['"`]LAYOUT_16x9['"`]/i.test(line)) {
+      findings.critical.push(`${fileRel}:${lineNum} — LAYOUT_16x9 is 10x5.625" and clips 13.333x7.5" coordinates; use createDeck() or LAYOUT_WIDE`);
+    }
+
     if (/(addShape|addFlatShape|addTranslucentAccent|addImage)/.test(line) && /(x\s*:\s*-0\.|y\s*:\s*-0\.)/.test(line)) {
       findings.critical.push(`${fileRel}:${lineNum} — Negative x/y overhangs slide bounds in PowerPoint Online; keep 0 <= x, y`);
     }

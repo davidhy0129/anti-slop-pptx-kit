@@ -1,0 +1,27 @@
+{
+  "name": "anti-slop-pptx-kit",
+  "version": "1.0.0",
+  "description": "> **Sistema universal de dirección de arte, diseño gráfico, narrativa ejecutiva e ingeniería PPTX/PDF para que cualquier IA cree presentaciones y PDFs únicos, vivos y personalizados al prompt — sin plantillas repetitivas ni estética genérica de IA.**",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidhy0129/anti-slop-pptx-kit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/davidhy0129/anti-slop-pptx-kit/issues"
+  },
+  "homepage": "https://github.com/davidhy0129/anti-slop-pptx-kit#readme",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
